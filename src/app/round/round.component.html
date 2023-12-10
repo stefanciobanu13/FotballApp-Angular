@@ -1,20 +1,14 @@
 
-    <nav class="navbar bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-          
-        </div>
-
-    </nav>
+    <script src="/assets/scripts/script.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        inteGrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="/assets/scripts/app2.js" type="module"></script>
+    <script src="/assets/scripts/postRequests.js" type="module"></script>
 
     <div class="informatii-editie">
         <h1>Informatii editie</h1>
-        <form class="form-grup" id="myForm" action="/editie_edit.php" method="post">
             <div class="row">
                 <div class="col-auto">
                     <label for="data_editie">Data editie</label>
@@ -28,8 +22,6 @@
                     <button type="submit" id="introduEditie" class="btn btn-primary">Submit</button>
                 </div>
             </div>
-        </form>
-
     </div>
 
     <br><br>
@@ -37,10 +29,10 @@
 
     <h1>Prezenta</h1>
     <div class="autocomplete">
-        <input id="input_selectPlayer" name="myCountry" placeholder="Player Name" list="playersList">
+        <input id="input_selectPlayer" name="myCountry" placeholder="Player Name"  [(ngModel)]="selectedPlayer" list="playersList">
         <datalist class="dropDown" id="playersList">
         </datalist>
-        <button type="submit" id="button_selectPlayer" class="btn btn-primary">Introdu</button>
+        <button type="submit" id="button_selectPlayer" class="btn btn-primary" (click)="attendPlayer()">Introdu</button>
     </div>
 
     <br><br>
@@ -48,8 +40,8 @@
     <br><br>
 
     <button id="getDataButton">Submit</button>
-    <table id="teams">
-        <tr>
+    <table id="teams" (click)="trashIconDelete($event)">
+        <tr *ngFor="let player of selectedPlayers">
             <th>Portocaliu</th>
             <th>Verde</th>
             <th>Albastru</th>
@@ -655,3 +647,4 @@
     <br>
     <br>
     <br>
+  

@@ -34,10 +34,12 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
+            "styles": [            
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+               "src/assets/script.js"
+            ]
           },
           "configurations": {
             "production": {
