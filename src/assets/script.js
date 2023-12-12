@@ -1,5 +1,5 @@
 
- function addEventListenersInp(number) {
+function addEventListenersInp(number) {
  const inputBtn = document.getElementById(`introdu${number}`);
  inputBtn.addEventListener("click", () => {
   addValueToList(number)
@@ -37,7 +37,7 @@ submitButton.addEventListener("click", function () {
 
 
 // Function to measure the length of non-null <li> elements within a <ul> element
- function countNonNullLi(ulElement) {
+export function countNonNullLi(ulElement) {
  const liElements = ulElement.querySelectorAll('li');
  let count = 0;
 
@@ -50,7 +50,7 @@ submitButton.addEventListener("click", function () {
  return count;
 }
 
- var clasament = [
+export var clasament = [
  {
   'culoare': 'Verde', 'meciuri_jucate': 0, 'victorii': 0, 'egaluri': 0, 'infrangeri': 0, 'goluri_date': 0, 'goluri_primite': 0, 'golaveraj': 0, 'punctaj': 0,
  },
@@ -377,6 +377,7 @@ function addFinalsTeam(clasament) {
  addedDivs.push(ulEchipaDreaptaFinalaMare);
 }
 
+
 addFinalsTeam(clasament);
 const finale = document.querySelectorAll('.finala');
 finale.forEach(finala => {
@@ -428,7 +429,7 @@ table.addEventListener('click', function (event) {
 
 
 //screen the table data 
- const dataPlayer = [];
+export const dataPlayer = [];
 const getDataButton = document.getElementById('getDataButton');
 getDataButton.addEventListener('click', function () {
  const rows = table.getElementsByTagName('tr');

@@ -75,29 +75,27 @@
    margin: 12px auto;
    background: #8ccdf5;
   }
+        .clickable-element {
+          padding: 10px;
+          background-color: #3498db;
+          color: #fff;
+          text-decoration: none;
+          display: inline-block;
+          border-radius: 5px;
+          transition: background-color 0.3s ease;
+        }
 
   .match-info strong {
-
    color: #fff;
-
    position: absolute;
-
    right: 50%;
-
    text-align: center;
-
    z-index: 1;
-
    border-radius: 5px;
-
    height: 36px;
-
    line-height: 36px;
-
    top: 30px;
-
    width: 60px;
-
    margin-right: -30px
   }
 
