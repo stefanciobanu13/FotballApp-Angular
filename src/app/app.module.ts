@@ -5,11 +5,15 @@ import { AppComponent } from './app.component';
 import { RoundComponent } from './round/round.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ScorerDirective } from './scorer.directive';
+import { UpdateScoreDirective } from './update-score.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoundComponent
+    RoundComponent,
+    ScorerDirective,
+    UpdateScoreDirective
   ],
   imports: [
     BrowserModule,

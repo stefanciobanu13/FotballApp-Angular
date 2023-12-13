@@ -1,4 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  Renderer2,
+  ElementRef,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgModel } from '@angular/forms';
 import { concat } from 'rxjs';
@@ -15,7 +21,7 @@ interface Player {
   styleUrls: ['./round.component.css'],
 })
 export class RoundComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private renderer: Renderer2) {}
 
   selectedPlayer: string = '';
   selectedPlayers: string[] = [];
@@ -24,6 +30,7 @@ export class RoundComponent implements OnInit {
   teamGreen: string[] = [];
   teamBlue: string[] = [];
   teamGray: string[] = [];
+  scorer: string = '';
   table: any;
 
   ngOnInit(): void {
@@ -83,6 +90,7 @@ export class RoundComponent implements OnInit {
   }
 
   submitTeams() {
+    this.removeDeleteButtons();
     const table = document.getElementById('teams');
     if (table) {
       const rows = table.getElementsByTagName('tr');
@@ -93,37 +101,54 @@ export class RoundComponent implements OnInit {
             this.players.push(cellContent);
           } else {
             alert('There are players missing');
-            this.players.forEach((element) => {
-              console.log(element);
-            });
-         //   this.players = [];    DECOMENT THIS IS THE FURURE
+            //   this.players = [];    DECOMENT THIS IS THE FURURE
             return;
           }
         }
       }
     }
-    this.createTeam();
-    this.configureInputLists();
+    this.createTeams();
   }
 
-  createTeam(){
-     const rows = this.table.getElementsByTagName('tr');
-     let cellContent;
-         for (let j = 0; j < rows[0].cells.length; j++) {
-           for (let i = 0; i < rows.length; i++) {
-           cellContent = rows[i].cells[j].innerText;
-           switch(j){
-            case 0 : this.teamOrange.push(cellContent)
+  createTeams() {
+    const rows = this.table.getElementsByTagName('tr');
+    let cellContent;
+    for (let j = 0; j < rows[0].cells.length; j++) {
+      for (let i = 0; i < rows.length; i++) {
+        cellContent = rows[i].cells[j].innerText;
+        switch (j) {
+          case 0:
+            this.teamOrange.push(cellContent);
             break;
-            case 1: this.teamGreen.push(cellContent)
-             break;
-            case 2: this.teamBlue.push(cellContent)
-             break;
-            case 3: this.teamGray.push(cellContent)
-           }
-           }
-         }
+          case 1:
+            this.teamGreen.push(cellContent);
+            break;
+          case 2:
+            this.teamBlue.push(cellContent);
+            break;
+          case 3:
+            this.teamGray.push(cellContent);
+        }
+      }
+    }
   }
-  configureInputLists(){
+
+  removeDeleteButtons() {
+    const rows = this.table.getElementsByTagName('tr');
+    for (let i = 0; i < rows.length; i++) {
+      const cells = rows[i].getElementsByTagName('td');
+      for (let j = 0; j < cells.length; j++) {
+        const deleteButton = cells[j].querySelector('.delete-button');
+        if (deleteButton) {
+          deleteButton.remove();
+        }
+      }
+    }
+  }
+
+  addScorer(event: Event) {
+    const targetElement = event.target as HTMLElement;
+    const value = this.renderer.selectRootElement('#searchInput1');
+    this.scorer = value;
   }
 }

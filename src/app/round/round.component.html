@@ -11,33 +11,36 @@
     <div class="row">
         <div class="col-auto">
             <label for="data_editie">Data editie</label>
-            <input type="date" class="form-control" id="data_editie" name="data_editie">
+            <input type="date" class="form-control" id="data_editie" name="data_editie" />
         </div>
         <div class="col-auto">
             <label for="numar_editie">Numarul editie</label>
-            <input type="number" class="form-control" id="numar_editie" name="numar_editie">
+            <input type="number" class="form-control" id="numar_editie" name="numar_editie" />
         </div>
         <div class="col-auto">
-            <button type="submit" id="introduEditie" class="btn btn-primary">Submit</button>
+            <button type="submit" id="introduEditie" class="btn btn-primary">
+                Submit
+            </button>
         </div>
     </div>
 </div>
 
-<br><br>
-<br><br>
+<br /><br />
+<br /><br />
 
 <h1>Prezenta</h1>
 <div class="autocomplete">
     <input id="input_selectPlayer" name="myCountry" placeholder="Player Name" [(ngModel)]="selectedPlayer"
-        list="playersList">
-    <datalist class="dropDown" id="playersList">
-    </datalist>
-    <button type="submit" id="button_selectPlayer" class="btn btn-primary" (click)="attendPlayer()">Introdu</button>
+        list="playersList" />
+    <datalist class="dropDown" id="playersList"> </datalist>
+    <button type="submit" id="button_selectPlayer" class="btn btn-primary" (click)="attendPlayer()">
+        Introdu
+    </button>
 </div>
 
-<br><br>
-<br><br>
-<br><br>
+<br /><br />
+<br /><br />
+<br /><br />
 
 <button id="getDataButton" (click)="submitTeams()">Submit</button>
 <table id="teams" (click)="trashIconDelete($event)">
@@ -49,59 +52,58 @@
     </tr>
     <tr>
         <td class="orange"></td>
-        <td class="green"> </td>
-        <td class="blue"> </td>
-        <td class="grey"> </td>
+        <td class="green"></td>
+        <td class="blue"></td>
+        <td class="grey"></td>
     </tr>
     <tr>
         <td class="orange"></td>
-        <td class="green"> </td>
-        <td class="blue"> </td>
-        <td class="grey"> </td>
+        <td class="green"></td>
+        <td class="blue"></td>
+        <td class="grey"></td>
     </tr>
     <tr>
-        <td class="orange"> </td>
-        <td class="green"> </td>
-        <td class="blue"> </td>
-        <td class="grey"> </td>
+        <td class="orange"></td>
+        <td class="green"></td>
+        <td class="blue"></td>
+        <td class="grey"></td>
     </tr>
     <tr>
-        <td class="orange"> </td>
-        <td class="green"> </td>
-        <td class="blue"> </td>
-        <td class="grey"> </td>
+        <td class="orange"></td>
+        <td class="green"></td>
+        <td class="blue"></td>
+        <td class="grey"></td>
     </tr>
     <tr>
-        <td class="orange"> </td>
-        <td class="green"> </td>
-        <td class="blue"> </td>
-        <td class="grey"> </td>
+        <td class="orange"></td>
+        <td class="green"></td>
+        <td class="blue"></td>
+        <td class="grey"></td>
     </tr>
     <tr>
-        <td class="orange"> </td>
-        <td class="green"> </td>
-        <td class="blue"> </td>
-        <td class="grey"> </td>
+        <td class="orange"></td>
+        <td class="green"></td>
+        <td class="blue"></td>
+        <td class="grey"></td>
     </tr>
 </table>
-<br><br>
-<br><br>
-<br><br>
+<br /><br />
+<br /><br />
+<br /><br />
 
 <div id="turneu">
     <h2>Tur</h2>
 
     <div class="editie etapa" id="etapa1">
-
         <h3>Etapa 1</h3>
 
-        <input type="text" id="searchInput1" placeholder="Introduceți o valoare" list="players">
+        <input type="text" id="searchInput1" class="inputs" placeholder="Introduceți o valoare" list="players" />
         <datalist class="dropDown" id="players">
             <option *ngFor="let player of players" [value]="player"></option>
         </datalist>
-        <button id="introdu1">Introdu</button>
+        <button id="introdu1" appScorer>Introdu</button>
         <ul id="recomandari1" class="recomandari"></ul>
-        <br>
+        <br />
         <select id="selectare8" class="selectare">
             <option value="Verde">Verde</option>
             <option value="Albastru">Albastru</option>
@@ -110,74 +112,55 @@
         </select>
         <ul id="recomandari8" class="recomandari"></ul>
 
-
-        <div class="match" id="match1">
+        <div class="match" id="match1" appUpdateScore>
             <div class="match-info">
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Verde">
-                            Verde
-                        </div>
+                        <div class="Verde">Verde</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Verde">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Verde"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor"> </strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Portocaliu">
-                            Portocaliu
-                        </div>
+                        <div class="Portocaliu">Portocaliu</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Portocaliu">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Portocaliu"></ul>
                 </div>
-
             </div>
         </div>
 
-        <div class="match" id="match2">
+        <div class="match" id="match2" appUpdateScore>
             <div class="match-info">
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Albastru">
-                            Albastru
-                        </div>
+                        <div class="Albastru">Albastru</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Albastru">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Albastru"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor"> </strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Gri">
-                            Gri
-                        </div>
+                        <div class="Gri">Gri</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Gri">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Gri"></ul>
                 </div>
-
             </div>
         </div>
     </div>
     <div class="etapa" id="etapa2">
         <h3>Etapa 2</h3>
-        <input type="text" id="searchInput2" placeholder="Introduceți o valoare" list="players">
+        <input type="text" id="searchInput2" class="inputs" placeholder="Introduceți o valoare" list="players" />
         <datalist class="dropDown" id="players">
             <option *ngFor="let player of players" [value]="player"></option>
         </datalist>
-        <button id="introdu2">Introdu</button>
+        <button id="introdu2" appScorer>Introdu</button>
         <ul id="recomandari2" class="recomandari"></ul>
-        <br>
+        <br />
         <select id="selectare9" class="selectare">
             <option value="Verde">Verde</option>
             <option value="Albastru">Albastru</option>
@@ -186,77 +169,56 @@
         </select>
         <ul id="recomandari9" class="recomandari"></ul>
 
-        <div class="match" id="match3">
+        <div class="match" id="match3" appUpdateScore>
             <div class="match-info">
-
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Portocaliu">
-                            Portocaliu
-                        </div>
+                        <div class="Portocaliu">Portocaliu</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Portocaliu">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Portocaliu"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Albastru">
-                            Albastru
-                        </div>
+                        <div class="Albastru">Albastru</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Albastru">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Albastru"></ul>
                 </div>
-
             </div>
         </div>
 
-        <div class="match" id="match4">
+        <div class="match" id="match4" appUpdateScore>
             <div class="match-info">
-
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Gri">
-                            Gri
-                        </div>
+                        <div class="Gri">Gri</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Gri">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Gri"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Verde">
-                            Verde
-                        </div>
+                        <div class="Verde">Verde</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Verde">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Verde"></ul>
                 </div>
-
             </div>
         </div>
     </div>
 
-
     <div class="etapa" id="etapa3">
         <h3>Etapa 3</h3>
-        <input type="text" id="searchInput3" placeholder="Introduceți o valoare" list="players">
+        <input type="text" id="searchInput3" class="inputs" placeholder="Introduceți o valoare" list="players" />
         <datalist class="dropDown" id="players">
             <option *ngFor="let player of players" [value]="player"></option>
         </datalist>
-        <button id="introdu3">Introdu</button>
+        <button id="introdu3" appScorer>Introdu</button>
         <ul id="recomandari3" class="recomandari"></ul>
-        <br>
+        <br />
         <select id="selectare10" class="selectare">
             <option value="Verde">Verde</option>
             <option value="Albastru">Albastru</option>
@@ -265,76 +227,56 @@
         </select>
         <ul id="recomandari10" class="recomandari"></ul>
 
-        <div class="match" id="match5">
+        <div class="match" id="match5" appUpdateScore>
             <div class="match-info">
-
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Verde">
-                            Verde
-                        </div>
+                        <div class="Verde">Verde</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Verde">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Verde"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Albastru">
-                            Albastru
-                        </div>
+                        <div class="Albastru">Albastru</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Albastru">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Albastru"></ul>
                 </div>
-
             </div>
         </div>
 
-        <div class="match" id="match6">
+        <div class="match" id="match6" appUpdateScore>
             <div class="match-info">
-
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Portocaliu">
-                            Portocaliu
-                        </div>
+                        <div class="Portocaliu">Portocaliu</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Portocaliu">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Portocaliu"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Gri">
-                            Gri
-                        </div>
+                        <div class="Gri">Gri</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Gri">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Gri"></ul>
                 </div>
-
             </div>
         </div>
     </div>
     <h2>Retur</h2>
     <div class="etapa" id="etapa4">
         <h3>Etapa 4</h3>
-        <input type="text" id="searchInput4" placeholder="Introduceți o valoare" list="players">
+        <input type="text" id="searchInput4"  class="inputs"  placeholder="Introduceți o valoare" list="players" />
         <datalist class="dropDown" id="players">
             <option *ngFor="let player of players" [value]="player"></option>
         </datalist>
-        <button id="introdu4">Introdu</button>
+        <button id="introdu4" appScorer>Introdu</button>
         <ul id="recomandari4" class="recomandari"></ul>
-        <br>
+        <br />
         <select id="selectare11" class="selectare">
             <option value="Verde">Verde</option>
             <option value="Albastru">Albastru</option>
@@ -343,77 +285,56 @@
         </select>
         <ul id="recomandari11" class="recomandari"></ul>
 
-        <div class="match" id="match7">
+        <div class="match" id="match7" appUpdateScore>
             <div class="match-info">
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Albastru">
-                            Albastru
-                        </div>
+                        <div class="Albastru">Albastru</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Albastru">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Albastru"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Verde">
-                            Verde
-                        </div>
+                        <div class="Verde">Verde</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Verde">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Verde"></ul>
                 </div>
-
             </div>
         </div>
 
-
-        <div class="match" id="match8">
+        <div class="match" id="match8" appUpdateScore>
             <div class="match-info">
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Gri">
-                            Gri
-                        </div>
+                        <div class="Gri">Gri</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Gri">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Gri"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Portocaliu">
-                            Portocaliu
-                        </div>
+                        <div class="Portocaliu">Portocaliu</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Portocaliu">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Portocaliu"></ul>
                 </div>
-
             </div>
-
-
         </div>
     </div>
 
     <div class="etapa" id="etapa5">
         <h3>Etapa 5</h3>
-        <input type="text" id="searchInput5" placeholder="Introduceți o valoare" list="players">
+        <input type="text" id="searchInput5" placeholder="Introduceți o valoare" class="inputs" list="players" />
         <datalist class="dropDown" id="players">
             <option *ngFor="let player of players" [value]="player"></option>
         </datalist>
-        <button id="introdu5">Introdu</button>
+        <button id="introdu5" appScorer>Introdu</button>
         <ul id="recomandari5" class="recomandari"></ul>
-        <br>
+        <br />
         <select id="selectare12" class="selectare">
             <option value="Verde">Verde</option>
             <option value="Albastru">Albastru</option>
@@ -422,77 +343,56 @@
         </select>
         <ul id="recomandari12" class="recomandari"></ul>
 
-        <div class="match" id="match9">
+        <div class="match" id="match9" appUpdateScore>
             <div class="match-info">
-
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Verde">
-                            Verde
-                        </div>
+                        <div class="Verde">Verde</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Verde">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Verde"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Gri">
-                            Gri
-                        </div>
+                        <div class="Gri">Gri</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Gri">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Gri"></ul>
                 </div>
-
             </div>
         </div>
 
-        <div class="match" id="match10">
+        <div class="match" id="match10" appUpdateScore>
             <div class="match-info">
-
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Albastru">
-                            Albastru
-                        </div>
+                        <div class="Albastru">Albastru</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Albastru">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Albastru"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Portocaliu">
-                            Portocaliu
-                        </div>
+                        <div class="Portocaliu">Portocaliu</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Portocaliu">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Portocaliu"></ul>
                 </div>
-
             </div>
         </div>
     </div>
 
-
     <div class="etapa" id="etapa6">
         <h3>Etapa 6</h3>
-        <input type="text" id="searchInput6" placeholder="Introduceți o valoare" list="players">
+        <input type="text" id="searchInput6" placeholder="Introduceți o valoare" class="inputs" list="players" />
         <datalist class="dropDown" id="players">
             <option *ngFor="let player of players" [value]="player"></option>
         </datalist>
-        <button id="introdu6">Introdu</button>
+        <button id="introdu6" appScorer>Introdu</button>
         <ul id="recomandari6" class="recomandari"></ul>
-        <br>
+        <br />
         <select id="selectare13" class="selectare">
             <option value="Verde">Verde</option>
             <option value="Albastru">Albastru</option>
@@ -501,71 +401,50 @@
         </select>
         <ul id="recomandari13" class="recomandari"></ul>
 
-        <div class="match" id="match11">
+        <div class="match" id="match11" appUpdateScore>
             <div class="match-info">
-
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Verde">
-                            Verde
-                        </div>
+                        <div class="Verde">Verde</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Verde">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Verde"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Portocaliu">
-                            Portocaliu
-                        </div>
+                        <div class="Portocaliu">Portocaliu</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Portocaliu">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Portocaliu"></ul>
                 </div>
-
             </div>
         </div>
 
-        <div class="match" id="match12">
+        <div class="match" id="match12" appUpdateScore>
             <div class="match-info">
-
                 <div class="left-team-info">
                     <div class="team-name">
-                        <div class="Gri">
-                            Gri
-                        </div>
+                        <div class="Gri">Gri</div>
                     </div>
-                    <ul id="marcatori-stanga" class="list-Gri">
-
-                    </ul>
+                    <ul id="marcatori-stanga" class="list-Gri"></ul>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
                     <div class="team-name">
-                        <div class="Albastru">
-                            Albastru
-                        </div>
+                        <div class="Albastru">Albastru</div>
                     </div>
-                    <ul id="marcatori-dreapta" class="list-Albastru">
-
-                    </ul>
+                    <ul id="marcatori-dreapta" class="list-Albastru"></ul>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <br>
+    <br />
 
-
-    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" />
 
     <div class="ptable">
         <h1 class="headin">Clasament</h1>
@@ -581,16 +460,15 @@
                 <th>G+/-</th>
                 <th>Punctaj</th>
             </tr>
-            <tbody id="clasamentBody">
-            </tbody>
+            <tbody id="clasamentBody"></tbody>
         </table>
     </div>
 
     <div class="finala" id="etapa7">
-        <input type="text" id="searchInput7" placeholder="Introduceți o valoare">
-        <button id="introdu7">Introdu</button>
+        <input type="text" id="searchInput7" placeholder="Introduceți o valoare" />
+        <button id="introdu7" appScorer>Introdu</button>
         <ul id="recomandari7" class="recomandari"></ul>
-        <br>
+        <br />
         <select id="selectare14" class="selectare">
             <option value="Verde">Verde</option>
             <option value="Albastru">Albastru</option>
@@ -602,44 +480,29 @@
         <h3>Finala Mica</h3>
         <div class="finala" id="finala-mica">
             <div class="match-info">
-
                 <div class="left-team-info">
-                    <div class="team-name">
-
-                    </div>
-
+                    <div class="team-name"></div>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
-                    <div class="team-name">
-                    </div>
-
+                    <div class="team-name"></div>
                 </div>
-
             </div>
         </div>
         <h3>Finala Mare</h3>
         <div class="finala" id="finala-mare">
             <div class="match-info">
-
                 <div class="left-team-info">
-                    <div class="team-name">
-
-                    </div>
-
+                    <div class="team-name"></div>
                 </div>
 
-                <strong class="scor"></strong>
+                <strong class="scor">0 - 0</strong>
 
                 <div class="right-team-info">
-                    <div class="team-name">
-
-                    </div>
-
+                    <div class="team-name"></div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -653,15 +516,16 @@
                 <th>Goluri Finala</th>
                 <th>Total</th>
             </tr>
-            <tbody id="golgheteryBody">
-            </tbody>
+            <tbody id="golgheteryBody"></tbody>
         </table>
     </div>
 </div>
-<br>
-<br>
-<br>
-<button type="submit" id="salveazaEditie" class="btn btn-primary">Salveaza Editie</button>
-<br>
-<br>
-<br>
+<br />
+<br />
+<br />
+<button type="submit" id="salveazaEditie" class="btn btn-primary">
+    Salveaza Editie
+</button>
+<br />
+<br />
+<br />
