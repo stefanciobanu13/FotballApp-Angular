@@ -1,3 +1,11 @@
+<script src="/assets/scripts/script.js" type="module"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    inteGrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+<script src="/assets/scripts/app2.js" type="module"></script>
+<script src="/assets/scripts/postRequests.js" type="module"></script>
+
 <form [formGroup]="footballForm" (ngSubmit)="onSubmit()">
 
     <div class="informatii-editie">
@@ -24,10 +32,10 @@
 
     <h1>Prezenta</h1>
     <div class="autocomplete">
-        <input id="input_selectPlayer" name="myCountry" placeholder="Player Name" [(ngModel)]="selectedPlayer"
-            [ngModelOptions]="{standalone: true}" list="playersList" />
+        <input id="input_selectPlayer" name="myCountry" placeholder="Player Name" [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="selectedPlayer" list="playersList" />
         <datalist class="dropDown" id="playersList"> </datalist>
-        <button type="button" id="button_selectPlayer" class="btn btn-primary" (click)="attendPlayer()">
+        <button type="submit" id="button_selectPlayer" class="btn btn-primary" (click)="attendPlayer()">
             Introdu
         </button>
     </div>
@@ -36,7 +44,7 @@
     <br /><br />
     <br /><br />
 
-    <button id="getDataButton" type="button" (click)="submitTeams()">Submit</button>
+    <button id="getDataButton" (click)="submitTeams()">Submit</button>
     <table id="teams" (click)="trashIconDelete($event)">
         <tr *ngFor="let player of selectedPlayers">
             <th>Portocaliu</th>
@@ -95,8 +103,9 @@
             <datalist class="dropDown" id="players">
                 <option *ngFor="let player of players" [value]="player"></option>
             </datalist>
-            <button id="introdu1" type="button" (click)="addItemToFormArray('game1.scorersLeftTeam')">Introdu</button>
-            <button id="introdu23" type="submit">submit</button>
+            <button id="introdu1" (click)="adaugaMarcator()">Introdu</button>
+            <button id="introdu23" type="submit">SUBMIT</button>
+
             <ul id="recomandari1" class="recomandari"></ul>
             <br />
             <select id="selectare8" class="selectare">
@@ -113,14 +122,10 @@
                         <div class="team-name">
                             <div class="Verde">Verde</div>
                         </div>
-                        <div formArrayName="game1.scorersLeftTeam" class="match-info">
-                            <div *ngFor="let scorer of getFormArray('game1.scorersLeftTeam').controls; let i = index"
-                                (click)="trashIconDelete($event)">
-                                <input type="text" [formControlName]="i" list="players" />
-                                <datalist class="dropDown" id="players">
-                                    <option *ngFor="let player of players" [value]="player"></option>
-                                </datalist>
-                                <i class="fas fa-trash-alt delete-button"></i>
+                        <div formArrayName="scorers">
+                            <div *ngFor="let scorer of scorers.controls; let i = index">
+                                <input type="text" [formControlName]="i" class="scorers" list="players" />
+                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i)"></i>
                             </div>
                         </div>
                     </div>
@@ -142,17 +147,7 @@
                         <div class="team-name">
                             <div class="Albastru">Albastru</div>
                         </div>
-                        <div formArrayName="game1.scorersRightTeam" class="match-info">
-                            <div *ngFor="let scorer of getFormArray('game1.scorersRightTeam').controls let i = index"
-                                (click)="trashIconDelete($event)">
-                                <input type="text" [formControlName]="i" list="players"
-                                    class="game1.scorersRightTeam" />
-                                <datalist class="dropDown" id="players">
-                                    <option *ngFor="let player of players" [value]="player"></option>
-                                </datalist>
-                                <i class="fas fa-trash-alt delete-button"></i>
-                            </div>
-                        </div>
+                        <ul id="marcatori-stanga" class="list-Albastru"></ul>
                     </div>
 
                     <strong class="scor"> </strong>
