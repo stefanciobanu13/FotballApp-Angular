@@ -4,24 +4,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RoundComponent } from './round/round.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { ScorerDirective } from './scorer.directive';
 import { UpdateScoreDirective } from './update-score.directive';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RoundComponent,
     ScorerDirective,
-    UpdateScoreDirective
+    UpdateScoreDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [RoundComponent]
+  bootstrap: [RoundComponent],
 })
-export class AppModule { }
+export class AppModule {}

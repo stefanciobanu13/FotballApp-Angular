@@ -25,7 +25,6 @@ export class UpdateScoreDirective implements OnInit {
   }
 
   updateScore() {
-    console.log('inside the update score directive');
     const leftList = this.el.nativeElement.querySelector('#marcatori-stanga');
     const rightList = this.el.nativeElement.querySelector('#marcatori-dreapta');
     const scoreElement = this.el.nativeElement.querySelector('.scor');
@@ -33,8 +32,6 @@ export class UpdateScoreDirective implements OnInit {
     if (leftList && rightList && scoreElement) {
       const leftCount = leftList.children.length;
       const rightCount = rightList.children.length;
-      console.log('the left team score  is ' + `${leftCount}`);
-      console.log('the right team score  is ' + `${rightCount}`);
       const scoreText = `${leftCount} - ${rightCount}`;
       this.renderer.setProperty(scoreElement, 'innerText', scoreText);
     }

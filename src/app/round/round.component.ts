@@ -1,12 +1,19 @@
 import {
   Component,
   OnInit,
-  AfterViewInit,
   Renderer2,
   ElementRef,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NgModel } from '@angular/forms';
+import {
+  NgModel,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  Validators,
+  FormGroup,
+  AbstractControl,
+} from '@angular/forms';
 import { concat } from 'rxjs';
 
 interface Player {
@@ -21,8 +28,13 @@ interface Player {
   styleUrls: ['./round.component.css'],
 })
 export class RoundComponent implements OnInit {
-  constructor(private http: HttpClient, private renderer: Renderer2) {}
+  constructor(
+    private http: HttpClient,
+    private renderer: Renderer2,
+    private fb: FormBuilder
+  ) {}
 
+  footballForm: FormGroup;
   selectedPlayer: string = '';
   selectedPlayers: string[] = [];
   players: string[] = [];
@@ -33,7 +45,67 @@ export class RoundComponent implements OnInit {
   scorer: string = '';
   table: any;
 
+
   ngOnInit(): void {
+    this.footballForm = this.fb.group({
+      game1: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game2: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game3: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game4: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game5: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game6: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game7: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game8: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game9: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game10: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game11: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      game12: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      smallFinal: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+      bigFinal: this.fb.group({
+        scorersLeftTeam: this.fb.array([]),
+        scorersRightTeam: this.fb.array([]),
+      }),
+    });
+
     this.http
       .get<Player[]>('http://localhost:8080/players')
       .subscribe((response) => {
@@ -150,5 +222,34 @@ export class RoundComponent implements OnInit {
     const targetElement = event.target as HTMLElement;
     const value = this.renderer.selectRootElement('#searchInput1');
     this.scorer = value;
+  }
+
+  getFormControl(path: string): AbstractControl {
+    return this.footballForm.get(path);
+  }
+
+  getFormArray(path: string): FormArray {
+    console.log('inside get form array');
+    return this.footballForm.get(path) as FormArray;
+  }
+
+  addItemToFormArray(path: string) {
+    const formArray = this.footballForm.get(path) as FormArray;
+    formArray.push(this.fb.control(''));
+    let counter = 0;
+    for (let scorer of this.getFormArray('game1.scorersLeftTeam').controls) {
+      console.log(scorer.value);
+    }
+  }
+
+  removeScorer(i: number) {
+    //  this.game1ScorersLeftTeam.removeAt(i);
+  }
+
+  onSubmit() {
+    // let counter = 0;
+    // for (let scorer of this.getFormArray('game1.scorersLeftTeam').controls) {
+    //   console.log(scorer.value);
+    // }
   }
 }
