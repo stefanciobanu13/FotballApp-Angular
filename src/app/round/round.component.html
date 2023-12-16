@@ -103,7 +103,7 @@
             <datalist class="dropDown" id="players">
                 <option *ngFor="let player of players" [value]="player"></option>
             </datalist>
-            <button id="introdu1" (click)="adaugaMarcator()">Introdu</button>
+            <button id="introdu1" (click)="adaugaMarcator($event)">Introdu</button>
             <button id="introdu23" type="submit">SUBMIT</button>
 
             <ul id="recomandari1" class="recomandari"></ul>
@@ -116,7 +116,7 @@
             </select>
             <ul id="recomandari8" class="recomandari"></ul>
 
-            <div class="match" id="match1">
+            <div class="match" id="match1" appUpdateScore>
                 <div class="match-info">
                     <div class="left-team-info">
                         <div class="team-name">
@@ -136,7 +136,12 @@
                         <div class="team-name">
                             <div class="Portocaliu">Portocaliu</div>
                         </div>
-                        <ul id="marcatori-dreapta" class="list-Portocaliu"></ul>
+                        <div formArrayName="scorers2">
+                            <div *ngFor="let scorer of scorers2.controls; let i = index">
+                                <input type="text" [formControlName]="i" class="scorers" list="players" />
+                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i)"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

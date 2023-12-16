@@ -1,4 +1,10 @@
-import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   NgModel,
@@ -43,6 +49,7 @@ export class RoundComponent implements OnInit {
   ngOnInit(): void {
     this.footballForm = this.fb.group({
       scorers: this.fb.array([]),
+      scorers2: this.fb.array([]),
     });
 
     this.http
@@ -176,6 +183,10 @@ export class RoundComponent implements OnInit {
     return this.footballForm.get('scorers') as FormArray;
   }
 
+  get scorers2() {
+    return this.footballForm.get('scorers2') as FormArray;
+  }
+
   // addItemToFormArray(path: string) {
   //   const formArray = this.footballForm.get(path) as FormArray;
   //   formArray.push(this.fb.control(''));
@@ -184,19 +195,38 @@ export class RoundComponent implements OnInit {
   //     console.log(scorer.value);
   //   }
   // }
+  @ViewChild('introdu1Btn') introdu1Btn: HTMLElement;
 
-  adaugaMarcator() {
-    this.scorers.push(this.fb.control(''));
+  adaugaMarcator(event: Event) {
+    const button = event.target as HTMLElement;
+    const selectElement = button.parentNode.querySelector(
+      '.selectare'
+    ) as HTMLSelectElement;
+    const gameNr = button.parentNode.querySelector('h3').innerHTML;
+    const selectValue = selectElement.value;
+    switch (selectValue) {
+      case 'Verde':
+        console.log('inside the green case');
+        this.scorers.push(this.fb.control(''));
+        break;
+      case 'Portocaliu':
+        console.log('inside the orange case');
+        this.scorers2.push(this.fb.control(''));
+        break;
+    }
   }
 
   removeScorer(i: number) {
-      this.scorers.removeAt(i);
+    this.scorers.removeAt(i);
   }
 
   onSubmit() {
     let counter = 0;
     for (let scorer of this.scorers.controls) {
-      console.log(scorer.value);
+      console.log('elements of scorers' + " " + scorer.value);
+    }
+    for (let scorerT of this.scorers2.controls) {
+      console.log('elements of scorers2' +" " + scorerT.value);
     }
   }
 }

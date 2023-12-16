@@ -15,23 +15,26 @@ export class UpdateScoreDirective implements OnInit {
       this.updateScore();
     };
 
-    const leftList = this.el.nativeElement.querySelector('#marcatori-stanga');
-    const rightList = this.el.nativeElement.querySelector('#marcatori-dreapta');
+    const leftList = this.el.nativeElement.querySelector('.left-team-info');
+    const rightList = this.el.nativeElement.querySelector('.right-team-info');
     this.mutationObserver = new MutationObserver(callback);
     this.mutationObserver.observe(leftList, { childList: true, subtree: true });
-    this.mutationObserver.observe(rightList, { childList: true, subtree: true });
+    this.mutationObserver.observe(rightList, {
+      childList: true,
+      subtree: true,
+    });
 
     this.updateScore();
   }
 
   updateScore() {
-    const leftList = this.el.nativeElement.querySelector('#marcatori-stanga');
-    const rightList = this.el.nativeElement.querySelector('#marcatori-dreapta');
+    const leftList = this.el.nativeElement.querySelector('.left-team-info');
+    const rightList = this.el.nativeElement.querySelector('.right-team-info');
     const scoreElement = this.el.nativeElement.querySelector('.scor');
 
     if (leftList && rightList && scoreElement) {
-      const leftCount = leftList.children.length;
-      const rightCount = rightList.children.length;
+      const leftCount = leftList.querySelectorAll('input').length;
+      const rightCount = rightList.querySelectorAll('input').length;
       const scoreText = `${leftCount} - ${rightCount}`;
       this.renderer.setProperty(scoreElement, 'innerText', scoreText);
     }
@@ -40,4 +43,5 @@ export class UpdateScoreDirective implements OnInit {
     if (this.mutationObserver) {
       this.mutationObserver.disconnect();
     }
-  }}
+  }
+}
