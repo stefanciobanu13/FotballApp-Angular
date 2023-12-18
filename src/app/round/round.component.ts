@@ -50,6 +50,8 @@ export class RoundComponent implements OnInit {
     this.footballForm = this.fb.group({
       scorers: this.fb.array([]),
       scorers2: this.fb.array([]),
+      scorers3: this.fb.array([]),
+      scorers4: this.fb.array([]),
     });
 
     this.http
@@ -103,6 +105,7 @@ export class RoundComponent implements OnInit {
       const cell = targetElement.parentNode as HTMLElement;
       if (cell) {
         cell.innerHTML = '';
+        cell.remove;
       }
     }
   }
@@ -119,7 +122,7 @@ export class RoundComponent implements OnInit {
             this.players.push(cellContent);
           } else {
             alert('There are players missing');
-            //   this.players = [];    DECOMENT THIS IS THE FURURE
+            //   this.players = [];    DECOMMENT THIS IS THE FURURE
             return;
           }
         }
@@ -187,14 +190,14 @@ export class RoundComponent implements OnInit {
     return this.footballForm.get('scorers2') as FormArray;
   }
 
-  // addItemToFormArray(path: string) {
-  //   const formArray = this.footballForm.get(path) as FormArray;
-  //   formArray.push(this.fb.control(''));
-  //   let counter = 0;
-  //   for (let scorer of this.getFormArray('game1.scorersLeftTeam').controls) {
-  //     console.log(scorer.value);
-  //   }
-  // }
+  get scorers3() {
+    return this.footballForm.get('scorers3') as FormArray;
+  }
+
+  get scorers4() {
+    return this.footballForm.get('scorers4') as FormArray;
+  }
+
   @ViewChild('introdu1Btn') introdu1Btn: HTMLElement;
 
   adaugaMarcator(event: Event) {
@@ -206,27 +209,32 @@ export class RoundComponent implements OnInit {
     const selectValue = selectElement.value;
     switch (selectValue) {
       case 'Verde':
-        console.log('inside the green case');
         this.scorers.push(this.fb.control(''));
         break;
       case 'Portocaliu':
-        console.log('inside the orange case');
         this.scorers2.push(this.fb.control(''));
+        break;
+      case 'Albastru':
+        this.scorers3.push(this.fb.control(''));
+        break;
+      case 'Gri':
+        this.scorers4.push(this.fb.control(''));
         break;
     }
   }
 
-  removeScorer(i: number) {
-    this.scorers.removeAt(i);
+  removeScorer(i: number, theFormArray: FormArray) {
+    const array = theFormArray;
+    theFormArray.removeAt(i);
   }
 
   onSubmit() {
     let counter = 0;
     for (let scorer of this.scorers.controls) {
-      console.log('elements of scorers' + " " + scorer.value);
+      console.log('elements of scorers' + ' ' + scorer.value);
     }
     for (let scorerT of this.scorers2.controls) {
-      console.log('elements of scorers2' +" " + scorerT.value);
+      console.log('elements of scorers2' + ' ' + scorerT.value);
     }
   }
 }

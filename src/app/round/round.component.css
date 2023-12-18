@@ -103,7 +103,7 @@ body {
   .match-info {
    position: relative;
    height: 160px;
-   line-height: 50px
+   line-height: 50px;
   }
 
   .right-team-info {
@@ -213,9 +213,13 @@ body {
 
      .scorers {
        height: 21px;
-       padding: 0;
+       padding: 0!important;
+       margin-left: 130px;
        width: 200px!important;
        background-color: #ffffff !important;
+       margin-top: 0!important;
+       margin-bottom: 0!important;
+       box-sizing: border-box;
      }
 
   .recomandari {

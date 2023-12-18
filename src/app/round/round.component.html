@@ -123,10 +123,10 @@
                             <div class="Verde">Verde</div>
                         </div>
                         <div formArrayName="scorers">
-                            <div *ngFor="let scorer of scorers.controls; let i = index">
+                            <ng-container *ngFor="let scorer of scorers.controls; let i = index">
                                 <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i)"></i>
-                            </div>
+                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers)"></i>
+                            </ng-container>
                         </div>
                     </div>
 
@@ -139,20 +139,25 @@
                         <div formArrayName="scorers2">
                             <div *ngFor="let scorer of scorers2.controls; let i = index">
                                 <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i)"></i>
+                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers2)"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="match" id="match2">
-                <div class="match-info">
-                    <div class="left-team-info">
+            <div class="match" id="match2" appUpdateScore>
+                <div class="match-info" (click)="trashIconDelete($event)">
+                    <div class=" left-team-info">
                         <div class="team-name">
                             <div class="Albastru">Albastru</div>
                         </div>
-                        <ul id="marcatori-stanga" class="list-Albastru"></ul>
+                        <div formArrayName="scorers3">
+                            <div *ngFor="let scorer of scorers3.controls; let i = index">
+                                <input type="text" [formControlName]="i" class="scorers" list="players" />
+                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers3)"></i>
+                            </div>
+                        </div>
                     </div>
 
                     <strong class="scor"> </strong>
@@ -161,7 +166,12 @@
                         <div class="team-name">
                             <div class="Gri">Gri</div>
                         </div>
-                        <ul id="marcatori-dreapta" class="list-Gri"></ul>
+                        <div formArrayName="scorers4">
+                            <div *ngFor="let scorer of scorers4.controls; let i = index">
+                                <input type="text" [formControlName]="i" class="scorers" list="players" />
+                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers4)"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
