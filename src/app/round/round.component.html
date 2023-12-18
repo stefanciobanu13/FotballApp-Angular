@@ -152,12 +152,12 @@
                         <div class="team-name">
                             <div class="Albastru">Albastru</div>
                         </div>
-                        <div formArrayName="scorers3">
+                        <ng-container formArrayName="scorers3">
                             <div *ngFor="let scorer of scorers3.controls; let i = index">
                                 <input type="text" [formControlName]="i" class="scorers" list="players" />
                                 <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers3)"></i>
                             </div>
-                        </div>
+                        </ng-container>
                     </div>
 
                     <strong class="scor"> </strong>
