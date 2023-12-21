@@ -20,7 +20,7 @@
                 <input type="number" class="form-control" id="numar_editie" name="numar_editie" />
             </div>
             <div class="col-auto">
-                <button type="submit" id="introduEditie" class="btn btn-primary">
+                <button type="button" id="introduEditie" class="btn btn-primary">
                     Submit
                 </button>
             </div>
@@ -35,7 +35,7 @@
         <input id="input_selectPlayer" name="myCountry" placeholder="Player Name" [ngModelOptions]="{standalone: true}"
             [(ngModel)]="selectedPlayer" list="playersList" />
         <datalist class="dropDown" id="playersList"> </datalist>
-        <button type="submit" id="button_selectPlayer" class="btn btn-primary" (click)="attendPlayer()">
+        <button type="button" id="button_selectPlayer" class="btn btn-primary" (click)="attendPlayer()">
             Introdu
         </button>
     </div>
@@ -44,7 +44,7 @@
     <br /><br />
     <br /><br />
 
-    <button id="getDataButton" (click)="submitTeams()">Submit</button>
+    <button id="getDataButton" type="button" (click)="submitTeams()">Submit</button>
     <table id="teams" (click)="trashIconDelete($event)">
         <tr *ngFor="let player of selectedPlayers">
             <th>Portocaliu</th>
@@ -103,11 +103,10 @@
             <datalist class="dropDown" id="players">
                 <option *ngFor="let player of players" [value]="player"></option>
             </datalist>
-            <button id="introdu1" (click)="adaugaMarcator($event)">Introdu</button>
+            <button id="introdu1" type="button" (click)="adaugaMarcator($event)">Introdu</button>
             <button id="introdu23" type="submit">SUBMIT</button>
-
             <ul id="recomandari1" class="recomandari"></ul>
-            <br />
+            <br>
             <select id="selectare8" class="selectare">
                 <option value="Verde">Verde</option>
                 <option value="Albastru">Albastru</option>
@@ -116,60 +115,70 @@
             </select>
             <ul id="recomandari8" class="recomandari"></ul>
 
-            <div class="match" id="match1" appUpdateScore>
-                <div class="match-info">
-                    <div class="left-team-info">
-                        <div class="team-name">
-                            <div class="Verde">Verde</div>
-                        </div>
-                        <div formArrayName="scorers">
-                            <ng-container *ngFor="let scorer of scorers.controls; let i = index">
-                                <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers)"></i>
-                            </ng-container>
-                        </div>
-                    </div>
+            <div formGroupName="game1">
+                <div class="match" id="match1" appUpdateScore>
+                    <div class="match-info">
 
-                    <strong class="scor"> </strong>
-
-                    <div class="right-team-info">
-                        <div class="team-name">
-                            <div class="Portocaliu">Portocaliu</div>
-                        </div>
-                        <div formArrayName="scorers2">
-                            <div *ngFor="let scorer of scorers2.controls; let i = index">
-                                <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers2)"></i>
+                        <div class="left-team-info">
+                            <div class="team-name">
+                                <div class="Verde">Verde</div>
+                            </div>
+                            <div formArrayName="scorers1">
+                                <ng-container *ngFor="let scorer of scorers1.controls; let i = index">
+                                    <input type="text" [formControlName]="i" class="scorers" list="players" />
+                                    <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers1)"></i>
+                                </ng-container>
                             </div>
                         </div>
+
+                        <strong class="scor"></strong>
+
+                        <div class="right-team-info">
+                            <div class="team-name">
+                                <div class="Portocaliu">
+                                    Portocaliu
+                                </div>
+                            </div>
+                            <div formArrayName="scorers2">
+                                <ng-container *ngFor="let scorer of scorers2.controls; let i = index">
+                                    <input type="text" [formControlName]="i" class="scorers" list="players" />
+                                    <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers2)"></i>
+                                </ng-container>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
 
-            <div class="match" id="match2" appUpdateScore>
-                <div class="match-info" (click)="trashIconDelete($event)">
-                    <div class=" left-team-info">
-                        <div class="team-name">
-                            <div class="Albastru">Albastru</div>
-                        </div>
-                        <ng-container formArrayName="scorers3">
-                            <div *ngFor="let scorer of scorers3.controls; let i = index">
-                                <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers3)"></i>
+                <div class="match" id="match2" appUpdateScore>
+                    <div class="match-info">
+                        <div class="left-team-info">
+                            <div class="team-name">
+                                <div class="Albastru">
+                                    Albastru
+                                </div>
                             </div>
-                        </ng-container>
-                    </div>
-
-                    <strong class="scor"> </strong>
-
-                    <div class="right-team-info">
-                        <div class="team-name">
-                            <div class="Gri">Gri</div>
+                            <div formArrayName="scorers3">
+                                <ng-container *ngFor="let scorer of scorers3.controls; let i = index">
+                                    <input type="text" [formControlName]="i" class="scorers" list="players" />
+                                    <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers3)"></i>
+                                </ng-container>
+                            </div>
                         </div>
-                        <div formArrayName="scorers4">
-                            <div *ngFor="let scorer of scorers4.controls; let i = index">
-                                <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers4)"></i>
+
+                        <strong class="scor"></strong>
+
+                        <div class="right-team-info">
+                            <div class="team-name">
+                                <div class="Gri">
+                                    Gri
+                                </div>
+                            </div>
+                            <div formArrayName="scorers4">
+                                <ng-container *ngFor="let scorer of scorers4.controls; let i = index">
+                                    <input type="text" [formControlName]="i" class="scorers" list="players" />
+                                    <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers4)"></i>
+                                </ng-container>
                             </div>
                         </div>
                     </div>

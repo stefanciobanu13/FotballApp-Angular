@@ -48,10 +48,12 @@ export class RoundComponent implements OnInit {
 
   ngOnInit(): void {
     this.footballForm = this.fb.group({
-      scorers: this.fb.array([]),
-      scorers2: this.fb.array([]),
-      scorers3: this.fb.array([]),
-      scorers4: this.fb.array([]),
+      game1: this.fb.group({
+        scorers1: this.fb.array([]),
+        scorers2: this.fb.array([]),
+        scorers3: this.fb.array([]),
+        scorers4: this.fb.array([]),
+      }),
     });
 
     this.http
@@ -166,60 +168,55 @@ export class RoundComponent implements OnInit {
       }
     }
   }
-
-  addScorer(event: Event) {
-    const targetElement = event.target as HTMLElement;
-    const value = this.renderer.selectRootElement('#searchInput1');
-    this.scorer = value;
+  get scorers1(): FormArray {
+    return this.footballForm.get('game1').get('scorers1') as FormArray;
   }
 
-  getFormControl(path: string): AbstractControl {
-    return this.footballForm.get(path);
+  get scorers2(): FormArray {
+    return this.footballForm.get('game1').get('scorers2') as FormArray;
   }
 
-  getFormArray(path: string) {
-    console.log('inside get form array');
-    return this.footballForm.get(path) as FormArray;
+  get scorers3(): FormArray {
+    return this.footballForm.get('game1').get('scorers3') as FormArray;
   }
 
-  get scorers() {
-    return this.footballForm.get('scorers') as FormArray;
-  }
-
-  get scorers2() {
-    return this.footballForm.get('scorers2') as FormArray;
-  }
-
-  get scorers3() {
-    return this.footballForm.get('scorers3') as FormArray;
-  }
-
-  get scorers4() {
-    return this.footballForm.get('scorers4') as FormArray;
+  get scorers4(): FormArray {
+    return this.footballForm.get('game1').get('scorers4') as FormArray;
   }
 
   @ViewChild('introdu1Btn') introdu1Btn: HTMLElement;
 
   adaugaMarcator(event: Event) {
+    console.log('inside adauga marcator');
     const button = event.target as HTMLElement;
     const selectElement = button.parentNode.querySelector(
       '.selectare'
     ) as HTMLSelectElement;
     const gameNr = button.parentNode.querySelector('h3').innerHTML;
     const selectValue = selectElement.value;
+
+    let selectedScorers: FormArray;
+
     switch (selectValue) {
       case 'Verde':
-        this.scorers.push(this.fb.control(''));
+        selectedScorers = this.scorers1;
         break;
       case 'Portocaliu':
-        this.scorers2.push(this.fb.control(''));
+        selectedScorers = this.scorers2;
         break;
       case 'Albastru':
-        this.scorers3.push(this.fb.control(''));
+        selectedScorers = this.scorers3;
         break;
       case 'Gri':
-        this.scorers4.push(this.fb.control(''));
+        selectedScorers = this.scorers4;
         break;
+    }
+    //selectedScorers.push(this.fb.control(''));
+
+    if (selectedScorers) {
+      selectedScorers.push(this.fb.control(''));
+    } else {
+      console.error('Selected Scorers is null or undefined.');
     }
   }
 
@@ -229,12 +226,6 @@ export class RoundComponent implements OnInit {
   }
 
   onSubmit() {
-    let counter = 0;
-    for (let scorer of this.scorers.controls) {
-      console.log('elements of scorers' + ' ' + scorer.value);
-    }
-    for (let scorerT of this.scorers2.controls) {
-      console.log('elements of scorers2' + ' ' + scorerT.value);
-    }
+    console.log(this.footballForm);
   }
 }
