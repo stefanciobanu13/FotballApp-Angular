@@ -200,10 +200,11 @@ li {
 }
 
 .delete-button {
-  display: inline-block; 
-  font-size: 16px;
+  display: flex; 
+  font-size: 110%;
+  padding: 0%;
   color: red;
-  margin-left:340px;
+  margin-left:72%;
   cursor: pointer;
 }
 
@@ -216,28 +217,20 @@ input[type="text"] {
 }
 
 .scorers {
-  display: flex !important;
-  margin-left: 130px;
-  height: 21px;
+  display:flex!important;
+  margin-left: 30%;
+  height: 21%;
   padding: 0 !important;
-  width: 200px !important;
+  width: 40% !important;
   background-color: #ffffff !important;
-  margin-top: -22px !important;
-  margin-bottom: -22px !important;
-  box-sizing: border-box !important;
-  writing-mode: horizontal-tb !important;
-  padding-block: 0px !important;
-  padding-inline: 0px !important;
-  border-width: 0 !important;
-  line-height: 0 !important;
+  margin-top: -10px !important;
+  margin-bottom: -4px !important;
+  font-weight:bolder
 }
 
 .block-element {
   display: block;
-  /* Add any additional styling as needed */
   margin-bottom: 10px;
-  /* Optional: Add some spacing between elements */
-  /* Optional: Add some spacing between elements */
 }
 
 .recomandari {

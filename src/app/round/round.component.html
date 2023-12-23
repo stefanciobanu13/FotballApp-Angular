@@ -6,7 +6,7 @@
 <script src="/assets/scripts/app2.js" type="module"></script>
 <script src="/assets/scripts/postRequests.js" type="module"></script>
 
-<form [formGroup]="footballForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="form.footballForm" (ngSubmit)="form.onSubmit()">
 
     <div class="informatii-editie">
         <h1>Informatii editie</h1>
@@ -93,6 +93,7 @@
     <br /><br />
     <br /><br />
 
+    <!--
     <div id="turneu">
         <h2>Tur</h2>
 
@@ -103,7 +104,7 @@
             <datalist class="dropDown" id="players">
                 <option *ngFor="let player of players" [value]="player"></option>
             </datalist>
-            <button id="introdu1" type="button" (click)="adaugaMarcator($event)">Introdu</button>
+            <button id="introdu1" type="button" (click)="form.adaugaMarcator($event)">Introdu</button>
             <button id="introdu23" type="submit">SUBMIT</button>
             <ul id="recomandari1" class="recomandari"></ul>
             <br>
@@ -124,9 +125,10 @@
                                 <div class="Verde">Verde</div>
                             </div>
                             <div formArrayName="scorers1">
-                                <ng-container *ngFor="let scorer of scorers1.controls; let i = index">
+                                <ng-container *ngFor="let scorer of form.scorers1.controls; let i = index">
                                     <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                    <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers1)"></i>
+                                    <i class="fas fa-trash-alt delete-button"
+                                        (click)="form.removeScorer(i,form.scorers1)"></i>
                                 </ng-container>
                             </div>
                         </div>
@@ -140,9 +142,10 @@
                                 </div>
                             </div>
                             <div formArrayName="scorers2">
-                                <ng-container *ngFor="let scorer of scorers2.controls; let i = index">
+                                <ng-container *ngFor="let scorer of form.scorers2.controls; let i = index">
                                     <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                    <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers2)"></i>
+                                    <i class="fas fa-trash-alt delete-button"
+                                        (click)="form.removeScorer(i,form.scorers2)"></i>
                                 </ng-container>
                             </div>
                         </div>
@@ -159,9 +162,10 @@
                                 </div>
                             </div>
                             <div formArrayName="scorers3">
-                                <ng-container *ngFor="let scorer of scorers3.controls; let i = index">
+                                <ng-container *ngFor="let scorer of form.scorers3.controls; let i = index">
                                     <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                    <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers3)"></i>
+                                    <i class="fas fa-trash-alt delete-button"
+                                        (click)="form.removeScorer(i,form.scorers3)"></i>
                                 </ng-container>
                             </div>
                         </div>
@@ -175,9 +179,10 @@
                                 </div>
                             </div>
                             <div formArrayName="scorers4">
-                                <ng-container *ngFor="let scorer of scorers4.controls; let i = index">
+                                <ng-container *ngFor="let scorer of form.scorers4.controls; let i = index">
                                     <input type="text" [formControlName]="i" class="scorers" list="players" />
-                                    <i class="fas fa-trash-alt delete-button" (click)="removeScorer(i,scorers4)"></i>
+                                    <i class="fas fa-trash-alt delete-button"
+                                        (click)="form.removeScorer(i,form.scorers4)"></i>
                                 </ng-container>
                             </div>
                         </div>
@@ -208,7 +213,6 @@
                         <div class="team-name">
                             <div class="Portocaliu">Portocaliu</div>
                         </div>
-                        <ul id="marcatori-stanga" class="list-Portocaliu"></ul>
                     </div>
 
                     <strong class="scor">0 - 0</strong>
@@ -479,80 +483,83 @@
 
         <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" />
 
-        <div class="ptable">
-            <h1 class="headin">Clasament</h1>
-            <table class="table table-striped">
-                <tr class="bg info">
-                    <th>Locul</th>
-                    <th>Echipa</th>
-                    <th>V</th>
-                    <th>E</th>
-                    <th>I</th>
-                    <th>GD</th>
-                    <th>GP</th>
-                    <th>G+/-</th>
-                    <th>Punctaj</th>
-                </tr>
-                <tbody id="clasamentBody"></tbody>
-            </table>
-        </div>
+    -->
+    <app-games [players]="players" [selectedPlayers]="selectedPlayers"></app-games>
 
-        <div class="finala" id="etapa7">
-            <input type="text" id="searchInput7" placeholder="Introduceți o valoare" />
-            <button id="introdu7" appScorer>Introdu</button>
-            <ul id="recomandari7" class="recomandari"></ul>
-            <br />
-            <select id="selectare14" class="selectare">
-                <option value="Verde">Verde</option>
-                <option value="Albastru">Albastru</option>
-                <option value="Portocaliu">Portocaliu</option>
-                <option value="Gri">Gri</option>
-            </select>
-            <ul id="recomandari14" class="recomandari"></ul>
+    <div class="ptable">
+        <h1 class="headin">Clasament</h1>
+        <table class="table table-striped">
+            <tr class="bg info">
+                <th>Locul</th>
+                <th>Echipa</th>
+                <th>V</th>
+                <th>E</th>
+                <th>I</th>
+                <th>GD</th>
+                <th>GP</th>
+                <th>G+/-</th>
+                <th>Punctaj</th>
+            </tr>
+            <tbody id="clasamentBody"></tbody>
+        </table>
+    </div>
 
-            <h3>Finala Mica</h3>
-            <div class="finala" id="finala-mica">
-                <div class="match-info">
-                    <div class="left-team-info">
-                        <div class="team-name"></div>
-                    </div>
+    <div class="finala" id="etapa7">
+        <input type="text" id="searchInput7" placeholder="Introduceți o valoare" />
+        <button id="introdu7" appScorer>Introdu</button>
+        <ul id="recomandari7" class="recomandari"></ul>
+        <br />
+        <select id="selectare14" class="selectare">
+            <option value="Verde">Verde</option>
+            <option value="Albastru">Albastru</option>
+            <option value="Portocaliu">Portocaliu</option>
+            <option value="Gri">Gri</option>
+        </select>
+        <ul id="recomandari14" class="recomandari"></ul>
 
-                    <strong class="scor">0 - 0</strong>
-
-                    <div class="right-team-info">
-                        <div class="team-name"></div>
-                    </div>
+        <h3>Finala Mica</h3>
+        <div class="finala" id="finala-mica">
+            <div class="match-info">
+                <div class="left-team-info">
+                    <div class="team-name"></div>
                 </div>
-            </div>
-            <h3>Finala Mare</h3>
-            <div class="finala" id="finala-mare">
-                <div class="match-info">
-                    <div class="left-team-info">
-                        <div class="team-name"></div>
-                    </div>
 
-                    <strong class="scor">0 - 0</strong>
+                <strong class="scor">0 - 0</strong>
 
-                    <div class="right-team-info">
-                        <div class="team-name"></div>
-                    </div>
+                <div class="right-team-info">
+                    <div class="team-name"></div>
                 </div>
             </div>
         </div>
+        <h3>Finala Mare</h3>
+        <div class="finala" id="finala-mare">
+            <div class="match-info">
+                <div class="left-team-info">
+                    <div class="team-name"></div>
+                </div>
 
-        <div class="ptable">
-            <h1 class="headin">Golgheteri</h1>
-            <table class="table table-striped">
-                <tr class="bg info">
-                    <th>Locul</th>
-                    <th>Nume</th>
-                    <th>Goluri Finala</th>
-                    <th>Total</th>
-                </tr>
-                <tbody id="golgheteryBody"></tbody>
-            </table>
+                <strong class="scor">0 - 0</strong>
+
+                <div class="right-team-info">
+                    <div class="team-name"></div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="ptable">
+        <h1 class="headin">Golgheteri</h1>
+        <table class="table table-striped">
+            <tr class="bg info">
+                <th>Locul</th>
+                <th>Nume</th>
+                <th>Goluri Finala</th>
+                <th>Total</th>
+            </tr>
+            <tbody id="golgheteryBody"></tbody>
+        </table>
+    </div>
+
     <br />
     <br />
     <br />
@@ -562,4 +569,5 @@
     <br />
     <br />
     <br />
+
 </form>
