@@ -8,13 +8,7 @@ import {
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
-  NgModel,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  Validators,
-  FormGroup,
-  AbstractControl,
+  NgModel
 } from '@angular/forms';
 import { concat } from 'rxjs';
 import { FormService } from '../form.service';
@@ -34,12 +28,9 @@ interface Player {
 export class RoundComponent implements OnInit {
   constructor(
     private http: HttpClient,
-    private renderer: Renderer2,
-    private fb: FormBuilder,
     public form: FormService
   ) {}
 
-  // footballForm: FormGroup;
   selectedPlayer: string = '';
   @Output() selectedPlayers: string[] = [];
   @Output() players: string[] = [];
@@ -51,14 +42,6 @@ export class RoundComponent implements OnInit {
   table: any;
 
   ngOnInit(): void {
-    // this.footballForm = this.fb.group({
-    //   game1: this.fb.group({
-    //     scorers1: this.fb.array([]),
-    //     scorers2: this.fb.array([]),
-    //     scorers3: this.fb.array([]),
-    //     scorers4: this.fb.array([]),
-    //   }),
-    // });
 
     this.http
       .get<Player[]>('http://localhost:8080/players')
@@ -172,65 +155,4 @@ export class RoundComponent implements OnInit {
       }
     }
   }
-
-  @ViewChild('introdu1') introdu1Btn: HTMLElement;
-
-  // get scorers1(): FormArray {
-  //   console.log('get scorers1');
-  //   return this.footballForm.get('game1').get('scorers1') as FormArray;
-  // }
-
-  // get scorers2(): FormArray {
-  //   console.log('get scorers2');
-  //   return this.footballForm.get('game1').get('scorers2') as FormArray;
-  // }
-
-  // get scorers3(): FormArray {
-  //   console.log('get scorers3');
-  //   return this.footballForm.get('game1').get('scorers3') as FormArray;
-  // }
-
-  // get scorers4(): FormArray {
-  //   console.log('get scorers4');
-  //   return this.footballForm.get('game1').get('scorers4') as FormArray;
-  // }
-
-  // adaugaMarcator(event: Event) {
-  //   const button = event.target as HTMLElement;
-  //   const selectElement = button.parentNode.querySelector(
-  //     '.selectare'
-  //   ) as HTMLSelectElement;
-  //   const inputListElement = button.parentNode.querySelector(
-  //     '.inputs'
-  //   ) as HTMLInputElement;
-  //   const scorerName = inputListElement.value;
-  //   const gameNr = button.parentNode.querySelector('h3').innerHTML;
-  //   const selectValue = selectElement.value;
-
-  //   let selectedScorers: FormArray;
-
-  //   switch (selectValue) {
-  //     case 'Verde':
-  //       selectedScorers = this.scorers1;
-  //       break;
-  //     case 'Portocaliu':
-  //       selectedScorers = this.scorers2;
-  //       break;
-  //     case 'Albastru':
-  //       selectedScorers = this.scorers3;
-  //       break;
-  //     case 'Gri':
-  //       selectedScorers = this.scorers4;
-  //       break;
-  //   }
-  //   selectedScorers.push(this.fb.control(`${scorerName}`));
-  // }
-
-  // removeScorer(i: number, theFormArray: FormArray) {
-  //   theFormArray.removeAt(i);
-  // }
-
-  // onSubmit() {
-  //   console.log(this.footballForm);
-  // }
 }

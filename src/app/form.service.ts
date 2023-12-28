@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray} from '@angular/forms';
+import { Observable, of,shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,38 +10,52 @@ export class FormService {
   constructor(private fb: FormBuilder) {
     this.footballForm = this.fb.group({
       game1: this.fb.group({
-        scorers1: this.fb.array([]),
-        scorers2: this.fb.array([]),
-        scorers3: this.fb.array([]),
-        scorers4: this.fb.array([]),
+        teamOrange: this.fb.array([]),
+        teamGreen: this.fb.array([]),
+        teamBlue: this.fb.array([]),
+        teamGray: this.fb.array([]),
+      }),
+      game2: this.fb.group({
+        teamOrange: this.fb.array([]),
+        teamGreen: this.fb.array([]),
+        teamBlue: this.fb.array([]),
+        teamGray: this.fb.array([]),
+      }),
+      game3: this.fb.group({
+        teamOrange: this.fb.array([]),
+        teamGreen: this.fb.array([]),
+        teamBlue: this.fb.array([]),
+        teamGray: this.fb.array([]),
+      }),
+      game4: this.fb.group({
+        teamOrange: this.fb.array([]),
+        teamGreen: this.fb.array([]),
+        teamBlue: this.fb.array([]),
+        teamGray: this.fb.array([]),
+      }),
+      game5: this.fb.group({
+        teamOrange: this.fb.array([]),
+        teamGreen: this.fb.array([]),
+        teamBlue: this.fb.array([]),
+        teamGray: this.fb.array([]),
+      }),
+      game6: this.fb.group({
+        teamOrange: this.fb.array([]),
+        teamGreen: this.fb.array([]),
+        teamBlue: this.fb.array([]),
+        teamGray: this.fb.array([]),
       }),
     });
   }
 
-  public arrayPlayers: string[] = ['messi', 'ronaldo', 'curtois'];
-
-  get foptballForm() {
-    return this.footballForm;
+  getTeamArray(gameNr: string, teamName: string): FormArray {
+    console.log('inside get formArray function'+ `${teamName}`);
+    return this.footballForm.get(`${gameNr}`).get(`${teamName}`) as FormArray;
   }
 
-  get scorers1(): FormArray {
-    console.log('get scorers1');
-    return this.footballForm.get('game1').get('scorers1') as FormArray;
-  }
-
-  get scorers2(): FormArray {
-    console.log('get scorers2');
-    return this.footballForm.get('game1').get('scorers2') as FormArray;
-  }
-
-  get scorers3(): FormArray {
-    console.log('get scorers3');
-    return this.footballForm.get('game1').get('scorers3') as FormArray;
-  }
-
-  get scorers4(): FormArray {
-    console.log('get scorers4');
-    return this.footballForm.get('game1').get('scorers4') as FormArray;
+  getScorerArrayObs(gameNr: string, teamName: string): Observable<FormArray> {
+    const formArray = this.getTeamArray(gameNr, teamName) as FormArray;
+    return of(formArray).pipe(shareReplay(1));;
   }
 
   adaugaMarcator(event: Event) {
@@ -54,21 +69,33 @@ export class FormService {
     const scorerName = inputListElement.value;
     const gameNr = button.parentNode.querySelector('h3').innerHTML;
     const selectValue = selectElement.value;
-
     let selectedScorers: FormArray;
-
     switch (selectValue) {
       case 'Verde':
-        selectedScorers = this.scorers1;
+        selectedScorers = this.getTeamArray(
+          `game${gameNr.charAt(gameNr.length - 1)}`,
+          'teamGreen'
+        );
         break;
       case 'Portocaliu':
-        selectedScorers = this.scorers2;
+        selectedScorers = selectedScorers = this.getTeamArray(
+          `game${gameNr.charAt(gameNr.length - 1)}`,
+          'teamOrange'
+        );
         break;
       case 'Albastru':
-        selectedScorers = this.scorers3;
+        selectedScorers = selectedScorers = this.getTeamArray(
+          `game${gameNr.charAt(gameNr.length - 1)}`,
+          'teamBlue'
+        );
+
         break;
       case 'Gri':
-        selectedScorers = this.scorers4;
+        selectedScorers = selectedScorers = this.getTeamArray(
+          `game${gameNr.charAt(gameNr.length - 1)}`,
+          'teamGray'
+        );
+
         break;
     }
     selectedScorers.push(this.fb.control(`${scorerName}`));
