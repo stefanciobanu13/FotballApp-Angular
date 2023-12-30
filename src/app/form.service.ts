@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray} from '@angular/forms';
-import { Observable, of,shareReplay } from 'rxjs';
+import { FormBuilder, FormGroup, FormArray, Form } from '@angular/forms';
+import { Observable, of, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FormService {
+export class FormService  {
   public footballForm: FormGroup;
   constructor(private fb: FormBuilder) {
     this.footballForm = this.fb.group({
@@ -47,15 +47,20 @@ export class FormService {
       }),
     });
   }
+  getTeamOrangeGame1() {
+    console.log('inside THE GET');
+
+    return this.footballForm.get('game1').get('teamOrange') as FormArray;
+  }
 
   getTeamArray(gameNr: string, teamName: string): FormArray {
-    console.log('inside get formArray function'+ `${teamName}`);
+    console.log('inside get formArray function' + `${teamName}`);
     return this.footballForm.get(`${gameNr}`).get(`${teamName}`) as FormArray;
   }
 
   getScorerArrayObs(gameNr: string, teamName: string): Observable<FormArray> {
     const formArray = this.getTeamArray(gameNr, teamName) as FormArray;
-    return of(formArray).pipe(shareReplay(1));;
+    return of(formArray).pipe(shareReplay(1));
   }
 
   adaugaMarcator(event: Event) {
@@ -78,17 +83,17 @@ export class FormService {
         );
         break;
       case 'Portocaliu':
-        selectedScorers = selectedScorers = this.getTeamArray(
+          selectedScorers = this.getTeamArray(
           `game${gameNr.charAt(gameNr.length - 1)}`,
           'teamOrange'
         );
         break;
       case 'Albastru':
-        selectedScorers = selectedScorers = this.getTeamArray(
+         selectedScorers = this.getTeamArray(
           `game${gameNr.charAt(gameNr.length - 1)}`,
-          'teamBlue'
+          'teamBlue' 
         );
-
+console.log(`'inside case blue, the array is:' + ${selectedScorers}`);
         break;
       case 'Gri':
         selectedScorers = selectedScorers = this.getTeamArray(

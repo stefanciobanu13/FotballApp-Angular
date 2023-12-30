@@ -18,19 +18,58 @@ import { FormArray, AbstractControl } from '@angular/forms';
 export class GamesComponent implements OnInit {
   @Input() players: string[];
   @Input() selectedPlayers: string[] = [];
-  formArrayData: Observable<FormArray>;
-  formArrayData2: Observable<FormArray>;
-  formArrayData3: Observable<FormArray>;
-  formArrayData4: Observable<FormArray>;
+  teamOrangeG1: Observable<FormArray>;
+  teamGreenG1: Observable<FormArray>;
+  teamBlueG1: Observable<FormArray>;
+  teamGrayG1: Observable<FormArray>;
+  teamOrangeG2: Observable<FormArray>;
+  teamGreenG2: Observable<FormArray>;
+  teamBlueG2: Observable<FormArray>;
+  teamGrayG2: Observable<FormArray>;
+  teamOrangeG3: Observable<FormArray>;
+  teamGreenG3: Observable<FormArray>;
+  teamBlueG3: Observable<FormArray>;
+  teamGrayG3: Observable<FormArray>;
+  teamOrangeG4: Observable<FormArray>;
+  teamGreenG4: Observable<FormArray>;
+  teamBlueG4: Observable<FormArray>;
+  teamGrayG4: Observable<FormArray>;
+  teamOrangeG5: Observable<FormArray>;
+  teamGreenG5: Observable<FormArray>;
+  teamBlueG5: Observable<FormArray>;
+  teamGrayG5: Observable<FormArray>;
+  teamOrangeG6: Observable<FormArray>;
+  teamGreenG6: Observable<FormArray>;
+  teamBlueG6: Observable<FormArray>;
+  teamGrayG6: Observable<FormArray>;
 
   constructor(public form: FormService) {}
 
   ngOnInit(): void {
-    this.formArrayData = this.form.getScorerArrayObs('game1', 'teamOrange');
-    this.formArrayData2 = this.form.getScorerArrayObs('game1', 'teamGreen');
-    this.formArrayData3 = this.form.getScorerArrayObs('game1', 'teamBlue');
-    this.formArrayData4 = this.form.getScorerArrayObs('game1', 'teamGray');
-
+    this.teamOrangeG1 = this.form.getScorerArrayObs('game1', 'teamOrange');
+    this.teamGreenG1 = this.form.getScorerArrayObs('game1', 'teamGreen');
+    this.teamBlueG1 = this.form.getScorerArrayObs('game1', 'teamBlue');
+    this.teamGrayG1 = this.form.getScorerArrayObs('game1', 'teamGray');
+     this.teamOrangeG2 = this.form.getScorerArrayObs('game2', 'teamOrange');
+     this.teamGreenG2= this.form.getScorerArrayObs('game2', 'teamGreen');
+     this.teamBlueG2= this.form.getScorerArrayObs('game2', 'teamBlue');
+    this.teamGrayG2= this.form.getScorerArrayObs('game2', 'teamGray');
+    this.teamOrangeG3= this.form.getScorerArrayObs('game3', 'teamOrange');
+     this.teamGreenG3= this.form.getScorerArrayObs('game3', 'teamGreen');
+     this.teamBlueG3= this.form.getScorerArrayObs('game3', 'teamBlue');
+     this.teamGrayG3= this.form.getScorerArrayObs('game3', 'teamGray');
+    this.teamOrangeG4= this.form.getScorerArrayObs('game4', 'teamOrange');
+    this.teamGreenG4= this.form.getScorerArrayObs('game4', 'teamGreen');
+    this.teamBlueG4= this.form.getScorerArrayObs('game4', 'teamBlue');
+     this.teamGrayG4= this.form.getScorerArrayObs('game4', 'teamGray');
+    this.teamOrangeG5= this.form.getScorerArrayObs('game5', 'teamOrange');
+    this.teamGreenG5= this.form.getScorerArrayObs('game5', 'teamGreen');
+    this.teamBlueG5= this.form.getScorerArrayObs('game5', 'teamBlue');
+    this.teamGrayG5= this.form.getScorerArrayObs('game5', 'teamGray');
+   this.teamOrangeG6= this.form.getScorerArrayObs('game6', 'teamOrange');
+   this.teamGreenG6= this.form.getScorerArrayObs('game6', 'teamGreen');
+   this.teamBlueG6= this.form.getScorerArrayObs('game6', 'teamBlue');
+   this.teamGrayG6 = this.form.getScorerArrayObs('game6', 'teamGray');
   }
 
   getFormArrayData(gameNr: string, teamName: string): Observable<FormArray> {

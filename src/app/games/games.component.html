@@ -30,8 +30,7 @@
                 <div class="Verde">Verde</div>
               </div>
               <div formArrayName="teamGreen">
-                <ng-container
-                  *ngFor="let scorer of (formArrayData2 | async)?.controls;; let i = index;">
+                <ng-container *ngFor="let scorer of (teamGreenG1 | async)?.controls; let i = index;">
                   <input type="text" [formControlName]="i" class="scorers" list="players" />
                   <i class="fas fa-trash-alt delete-button"
                     (click)="form.removeScorer(i,form.getTeamArray('game1','teamGreen'))"></i>
@@ -48,8 +47,7 @@
                 </div>
               </div>
               <div formArrayName="teamOrange">
-                <ng-container
-                  *ngFor="let scorer of (formArrayData | async)?.controls;; let i = index;">
+                <ng-container *ngFor="let scorer of (teamOrangeG1 | async)?.controls; let i = index;">
                   <input type="text" [formControlName]="i" class="scorers" list="players" />
                   <i class="fas fa-trash-alt delete-button"
                     (click)="form.removeScorer(i,form.getTeamArray('game1','teamOrange'))"></i>
@@ -69,8 +67,7 @@
                 </div>
               </div>
               <div formArrayName="teamBlue">
-                <ng-container
-                  *ngFor="let scorer of (formArrayData3 | async)?.controls;; let i = index;">
+                <ng-container *ngFor="let scorer of (teamBlueG1 | async)?.controls; let i = index;">
                   <input type="text" [formControlName]="i" class="scorers" list="players" />
                   <i class="fas fa-trash-alt delete-button"
                     (click)="form.removeScorer(i,form.getTeamArray('game1','teamBlue'))"></i>
@@ -87,8 +84,7 @@
                 </div>
               </div>
               <div formArrayName="teamGray">
-                <ng-container
-                  *ngFor="let scorer of (formArrayData4 | async)?.controls;; let i = index;">
+                <ng-container *ngFor="let scorer of (teamGrayG1 | async)?.controls;; let i = index;">
                   <input type="text" [formControlName]="i" class="scorers" list="players" />
                   <i class="fas fa-trash-alt delete-button"
                     (click)="form.removeScorer(i,form.getTeamArray('game1','teamGray'))"></i>
@@ -105,7 +101,7 @@
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
-      <button id="introdu2" appScorer>Introdu</button>
+      <button id="introdu2" type="button" (click)="form.adaugaMarcator($event)">Introdu</button>
       <ul id="recomandari2" class="recomandari"></ul>
       <br />
       <select id="selectare9" class="selectare">
@@ -115,54 +111,77 @@
         <option value="Gri">Gri</option>
       </select>
       <ul id="recomandari9" class="recomandari"></ul>
-
-      <div class="match" id="match3" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Portocaliu">Portocaliu</div>
+      <div formGroupName="game2">
+        <div class="match" id="match3" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Portocaliu">Portocaliu</div>
+              </div>
+              <div formArrayName="teamOrange">
+                <ng-container *ngFor="let scorer of (teamOrangeG2 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game2','teamOrange'))"></i>
+                </ng-container>
+              </div>
             </div>
-          </div>
+            <strong class="scor">0 - 0</strong>
 
-          <strong class="scor">0 - 0</strong>
-
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Albastru">Albastru</div>
+            <div class="right-team-info">
+              <div class="team-name">
+                <div class="Albastru">Albastru</div>
+              </div>
+              <div formArrayName="teamBlue">
+                <ng-container *ngFor="let scorer of (teamBlueG2 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game2','teamBlue'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-dreapta" class="list-Albastru"></ul>
           </div>
         </div>
-      </div>
-
-      <div class="match" id="match4" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Gri">Gri</div>
+        <div class="match" id="match4" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Gri">Gri</div>
+              </div>
+              <div formArrayName="teamGray">
+                <ng-container *ngFor="let scorer of (teamGrayG2 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game2','teamGray'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-stanga" class="list-Gri"></ul>
-          </div>
 
-          <strong class="scor">0 - 0</strong>
+            <strong class="scor">0 - 0</strong>
 
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Verde">Verde</div>
+            <div class="right-team-info">
+              <div class="team-name">
+                <div class="Verde">Verde</div>
+              </div>
+              <div formArrayName="teamGreen">
+                <ng-container *ngFor="let scorer of (teamGreenG2 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game2','teamGreen'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-dreapta" class="list-Verde"></ul>
           </div>
         </div>
       </div>
     </div>
-
     <div class="etapa" id="etapa3">
       <h3>Etapa 3</h3>
       <input type="text" id="searchInput3" class="inputs" placeholder="Introduceți o valoare" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
-      <button id="introdu3" appScorer>Introdu</button>
+      <button id="introdu3" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
       <ul id="recomandari3" class="recomandari"></ul>
       <br />
       <select id="selectare10" class="selectare">
@@ -172,43 +191,68 @@
         <option value="Gri">Gri</option>
       </select>
       <ul id="recomandari10" class="recomandari"></ul>
-
-      <div class="match" id="match5" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Verde">Verde</div>
+      <div formGroupName="game3">
+        <div class="match" id="match5" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Verde">Verde</div>
+              </div>
+              <div formArrayName="teamGreen">
+                <ng-container *ngFor="let scorer of (teamGreenG3 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game3','teamGreen'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-stanga" class="list-Verde"></ul>
-          </div>
 
-          <strong class="scor">0 - 0</strong>
+            <strong class="scor">0 - 0</strong>
 
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Albastru">Albastru</div>
+            <div class="right-team-info">
+              <div class="team-name">
+                <div class="Albastru">Albastru</div>
+              </div>
+              <div formArrayName="teamBlue">
+                <ng-container *ngFor="let scorer of (teamBlueG3 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game3','teamBlue'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-dreapta" class="list-Albastru"></ul>
           </div>
         </div>
-      </div>
 
-      <div class="match" id="match6" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Portocaliu">Portocaliu</div>
+        <div class="match" id="match6" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Portocaliu">Portocaliu</div>
+              </div>
+              <div formArrayName="teamOrange">
+                <ng-container *ngFor="let scorer of (teamOrangeG3 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game3','teamOrange'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-stanga" class="list-Portocaliu"></ul>
-          </div>
 
-          <strong class="scor">0 - 0</strong>
+            <strong class="scor">0 - 0</strong>
 
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Gri">Gri</div>
+            <div class="right-team-info">
+              <div class="team-name">
+                <div formArrayName="teamGray">
+                  <ng-container *ngFor="let scorer of (teamGrayG3 | async)?.controls;; let i = index;">
+                    <input type="text" [formControlName]="i" class="scorers" list="players" />
+                    <i class="fas fa-trash-alt delete-button"
+                      (click)="form.removeScorer(i,form.getTeamArray('game3','teamGray'))"></i>
+                  </ng-container>
+                </div>
+              </div>
+              <ul id="marcatori-dreapta" class="list-Gri"></ul>
             </div>
-            <ul id="marcatori-dreapta" class="list-Gri"></ul>
           </div>
         </div>
       </div>
@@ -220,7 +264,7 @@
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
-      <button id="introdu4" appScorer>Introdu</button>
+      <button id="introdu4" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
       <ul id="recomandari4" class="recomandari"></ul>
       <br />
       <select id="selectare11" class="selectare">
@@ -230,55 +274,79 @@
         <option value="Gri">Gri</option>
       </select>
       <ul id="recomandari11" class="recomandari"></ul>
-
-      <div class="match" id="match7" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Albastru">Albastru</div>
+      <div formGroupName="game4">
+        <div class="match" id="match7" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Albastru">Albastru</div>
+              </div>
+              <div formArrayName="teamBlue">
+                <ng-container *ngFor="let scorer of (teamBlueG4 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game4','teamBlue'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-stanga" class="list-Albastru"></ul>
-          </div>
 
-          <strong class="scor">0 - 0</strong>
+            <strong class="scor">0 - 0</strong>
 
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Verde">Verde</div>
+            <div class="right-team-info">
+              <div class="team-name">
+                <div class="Verde">Verde</div>
+              </div>
+              <div formArrayName="teamGreen">
+                <ng-container *ngFor="let scorer of (teamGreenG4 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game4','teamGreen'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-dreapta" class="list-Verde"></ul>
           </div>
         </div>
-      </div>
 
-      <div class="match" id="match8" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Gri">Gri</div>
+        <div class="match" id="match8" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Gri">Gri</div>
+              </div>
+              <div formArrayName="teamGray">
+                <ng-container *ngFor="let scorer of (teamGrayG4 | async)?.controls;; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game4','teamGray'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-stanga" class="list-Gri"></ul>
-          </div>
 
-          <strong class="scor">0 - 0</strong>
+            <strong class="scor">0 - 0</strong>
 
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Portocaliu">Portocaliu</div>
+            <div class="right-team-info">
+              <div class="team-name">
+                <div class="Portocaliu">Portocaliu</div>
+              </div>
+              <div formArrayName="teamOrange">
+                <ng-container *ngFor="let scorer of (teamOrangeG4 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game4','teamOrange'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-dreapta" class="list-Portocaliu"></ul>
           </div>
         </div>
       </div>
     </div>
-
     <div class="etapa" id="etapa5">
       <h3>Etapa 5</h3>
       <input type="text" id="searchInput5" placeholder="Introduceți o valoare" class="inputs" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
-      <button id="introdu5" appScorer>Introdu</button>
+      <button id="introdu5" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
       <ul id="recomandari5" class="recomandari"></ul>
       <br />
       <select id="selectare12" class="selectare">
@@ -288,55 +356,79 @@
         <option value="Gri">Gri</option>
       </select>
       <ul id="recomandari12" class="recomandari"></ul>
-
-      <div class="match" id="match9" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Verde">Verde</div>
+      <div formGroupName="game5">
+        <div class="match" id="match9" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Verde">Verde</div>
+              </div>
+              <div formArrayName="teamGreen">
+                <ng-container *ngFor="let scorer of (teamGreenG5 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game5','teamGreen'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-stanga" class="list-Verde"></ul>
-          </div>
 
-          <strong class="scor">0 - 0</strong>
+            <strong class="scor">0 - 0</strong>
 
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Gri">Gri</div>
+            <div class="right-team-info">
+              <div class="team-name">
+                <div class="Gri">Gri</div>
+              </div>
+              <div formArrayName="teamGray">
+                <ng-container *ngFor="let scorer of (teamGrayG5 | async)?.controls;; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game5','teamGray'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-dreapta" class="list-Gri"></ul>
           </div>
         </div>
-      </div>
 
-      <div class="match" id="match10" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Albastru">Albastru</div>
+        <div class="match" id="match10" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Albastru">Albastru</div>
+              </div>
+              <div formArrayName="teamBlue">
+                <ng-container *ngFor="let scorer of (teamBlueG5 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game5','teamBlue'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-stanga" class="list-Albastru"></ul>
-          </div>
 
-          <strong class="scor">0 - 0</strong>
+            <strong class="scor">0 - 0</strong>
 
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Portocaliu">Portocaliu</div>
+            <div class="right-team-info">
+              <div class="team-name">
+                <div class="Portocaliu">Portocaliu</div>
+              </div>
+              <div formArrayName="teamOrange">
+                <ng-container *ngFor="let scorer of (teamOrangeG5 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game5','teamOrange'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-dreapta" class="list-Portocaliu"></ul>
           </div>
         </div>
       </div>
     </div>
-
     <div class="etapa" id="etapa6">
       <h3>Etapa 6</h3>
       <input type="text" id="searchInput6" placeholder="Introduceți o valoare" class="inputs" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
-      <button id="introdu6" appScorer>Introdu</button>
+      <button id="introdu6" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
       <ul id="recomandari6" class="recomandari"></ul>
       <br />
       <select id="selectare13" class="selectare">
@@ -346,47 +438,71 @@
         <option value="Gri">Gri</option>
       </select>
       <ul id="recomandari13" class="recomandari"></ul>
-
-      <div class="match" id="match11" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Verde">Verde</div>
+      <div formGroupName="game6">
+        <div class="match" id="match11" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Verde">Verde</div>
+              </div>
+              <div formArrayName="teamGreen">
+                <ng-container *ngFor="let scorer of (teamGreenG6 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game6','teamGreen'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-stanga" class="list-Verde"></ul>
+
+            <strong class="scor">0 - 0</strong>
+
+            <div class="right-team-info">
+              <div class="team-name">
+                <div class="Portocaliu">Portocaliu</div>
+              </div>
+              <div formArrayName="teamOrange">
+                <ng-container *ngFor="let scorer of (teamOrangeG6| async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game6','teamOrange'))"></i>
+                </ng-container>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <strong class="scor">0 - 0</strong>
-
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Portocaliu">Portocaliu</div>
+        <div class="match" id="match12" appUpdateScore>
+          <div class="match-info">
+            <div class="left-team-info">
+              <div class="team-name">
+                <div class="Gri">Gri</div>
+              </div>
+              <div formArrayName="teamGray">
+                <ng-container *ngFor="let scorer of (teamGrayG6 | async)?.controls;; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game6','teamGray'))"></i>
+                </ng-container>
+              </div>
             </div>
-            <ul id="marcatori-dreapta" class="list-Portocaliu"></ul>
+
+            <strong class="scor">0 - 0</strong>
+
+            <div class="right-team-info">
+              <div class="team-name">
+                <div class="Albastru">Albastru</div>
+              </div>
+              <div formArrayName="teamBlue">
+                <ng-container *ngFor="let scorer of (teamBlueG6 | async)?.controls; let i = index;">
+                  <input type="text" [formControlName]="i" class="scorers" list="players" />
+                  <i class="fas fa-trash-alt delete-button"
+                    (click)="form.removeScorer(i,form.getTeamArray('game6','teamBlue'))"></i>
+                </ng-container>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="match" id="match12" appUpdateScore>
-        <div class="match-info">
-          <div class="left-team-info">
-            <div class="team-name">
-              <div class="Gri">Gri</div>
-            </div>
-            <ul id="marcatori-stanga" class="list-Gri"></ul>
-          </div>
-
-          <strong class="scor">0 - 0</strong>
-
-          <div class="right-team-info">
-            <div class="team-name">
-              <div class="Albastru">Albastru</div>
-            </div>
-            <ul id="marcatori-dreapta" class="list-Albastru"></ul>
-          </div>
-        </div>
-      </div>
-
 
       <br />
       <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" />

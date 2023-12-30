@@ -110,7 +110,7 @@ export class RoundComponent implements OnInit {
           if (cellContent !== '') {
             this.players.push(cellContent);
           } else {
-            alert('There are players missing');
+            alert('The number of players should be 24');
             //   this.players = [];    DECOMMENT THIS IS THE FURURE
             return;
           }
