@@ -75,8 +75,6 @@ function getMatchInformations(match) {
  return [leftTeamName, rightTeamName, score];
 }
 
-
-
 function updateClasament(match) {
 
  const matchInformations = getMatchInformations(match);
@@ -172,8 +170,6 @@ function getBetterTeamByDirectMatch(team1, team2) {
    }
   }
  }, this)
-
-
 }
 
 function getTeam(color) {

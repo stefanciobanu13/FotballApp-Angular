@@ -1,13 +1,27 @@
-import { Directive, ElementRef, Renderer2, OnInit } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Renderer2,
+  OnInit,
+  Output,
+  EventEmitter,
+  AfterContentInit,
+} from '@angular/core';
+import { RankingService } from './ranking.service';
 
 @Directive({
   selector: '[appUpdateScore]',
 })
-export class UpdateScoreDirective implements OnInit {
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+export class UpdateScoreDirective implements AfterContentInit {
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+    private ranking: RankingService
+  ) {}
   private mutationObserver!: MutationObserver;
+  @Output() directiveExecuted: EventEmitter<void> = new EventEmitter<void>();
 
-  ngOnInit(): void {
+  ngAfterContentInit(): void {
     this.observeListChanges();
   }
   private observeListChanges() {
@@ -23,7 +37,6 @@ export class UpdateScoreDirective implements OnInit {
       childList: true,
       subtree: true,
     });
-
     this.updateScore();
   }
 
@@ -38,7 +51,9 @@ export class UpdateScoreDirective implements OnInit {
       const scoreText = `${leftCount} - ${rightCount}`;
       this.renderer.setProperty(scoreElement, 'innerText', scoreText);
     }
+    this.directiveExecuted.emit();
   }
+
   ngOnDestroy(): void {
     if (this.mutationObserver) {
       this.mutationObserver.disconnect();

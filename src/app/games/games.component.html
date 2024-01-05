@@ -9,8 +9,8 @@
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
-      <button id="introdu1" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
-      <button id="introdu23" type="submit">SUBMIT</button>
+      <button id="introdu1" type="button" (click)="form.adaugaMarcator($event)">Introdu</button>
+      <button id="introdu23" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari1" class="recomandari"></ul>
       <br>
       <select id="selectare8" class="selectare">
@@ -22,7 +22,7 @@
       <ul id="recomandari8" class="recomandari"></ul>
 
       <div formGroupName="game1">
-        <div class="match" id="match1" appUpdateScore>
+        <div #matchRef class="match" id="match1" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
 
             <div class="left-team-info">
@@ -38,7 +38,7 @@
               </div>
             </div>
 
-            <strong class="scor"></strong>
+            <strong class="scor">0 - 0 </strong>
 
             <div class="right-team-info">
               <div class="team-name">
@@ -58,7 +58,7 @@
           </div>
         </div>
 
-        <div class="match" id="match2" appUpdateScore>
+        <div #matchRef class="match" id="match2" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -75,7 +75,7 @@
               </div>
             </div>
 
-            <strong class="scor"></strong>
+            <strong class="scor"> 0 - 0</strong>
 
             <div class="right-team-info">
               <div class="team-name">
@@ -102,6 +102,7 @@
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu2" type="button" (click)="form.adaugaMarcator($event)">Introdu</button>
+      <button id="introdu24" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari2" class="recomandari"></ul>
       <br />
       <select id="selectare9" class="selectare">
@@ -112,7 +113,7 @@
       </select>
       <ul id="recomandari9" class="recomandari"></ul>
       <div formGroupName="game2">
-        <div class="match" id="match3" appUpdateScore>
+        <div #matchRef class="match" id="match3" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -126,7 +127,7 @@
                 </ng-container>
               </div>
             </div>
-            <strong class="scor">0 - 0</strong>
+            <strong class="scor">0 - 0 </strong>
 
             <div class="right-team-info">
               <div class="team-name">
@@ -142,7 +143,7 @@
             </div>
           </div>
         </div>
-        <div class="match" id="match4" appUpdateScore>
+        <div #matchRef class="match" id="match4" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -182,6 +183,7 @@
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu3" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
+      <button id="introdu25" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari3" class="recomandari"></ul>
       <br />
       <select id="selectare10" class="selectare">
@@ -192,7 +194,7 @@
       </select>
       <ul id="recomandari10" class="recomandari"></ul>
       <div formGroupName="game3">
-        <div class="match" id="match5" appUpdateScore>
+        <div #matchRef class="match" id="match5" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -224,7 +226,7 @@
           </div>
         </div>
 
-        <div class="match" id="match6" appUpdateScore>
+        <div #matchRef class="match" id="match6" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -243,6 +245,7 @@
 
             <div class="right-team-info">
               <div class="team-name">
+                <div class="Gri">Gri</div>
                 <div formArrayName="teamGray">
                   <ng-container *ngFor="let scorer of (teamGrayG3 | async)?.controls;; let i = index;">
                     <input type="text" [formControlName]="i" class="scorers" list="players" />
@@ -265,6 +268,7 @@
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu4" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
+      <button id="introdu26" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari4" class="recomandari"></ul>
       <br />
       <select id="selectare11" class="selectare">
@@ -275,7 +279,7 @@
       </select>
       <ul id="recomandari11" class="recomandari"></ul>
       <div formGroupName="game4">
-        <div class="match" id="match7" appUpdateScore>
+        <div #matchRef class="match" id="match7" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -307,7 +311,7 @@
           </div>
         </div>
 
-        <div class="match" id="match8" appUpdateScore>
+        <div #matchRef class="match" id="match8" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -347,6 +351,7 @@
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu5" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
+      <button id="introdu27" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari5" class="recomandari"></ul>
       <br />
       <select id="selectare12" class="selectare">
@@ -357,7 +362,7 @@
       </select>
       <ul id="recomandari12" class="recomandari"></ul>
       <div formGroupName="game5">
-        <div class="match" id="match9" appUpdateScore>
+        <div #matchRef class="match" id="match9" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -389,7 +394,7 @@
           </div>
         </div>
 
-        <div class="match" id="match10" appUpdateScore>
+        <div #matchRef class="match" id="match10" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -429,6 +434,7 @@
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu6" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
+      <button id="introdu28" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari6" class="recomandari"></ul>
       <br />
       <select id="selectare13" class="selectare">
@@ -439,7 +445,7 @@
       </select>
       <ul id="recomandari13" class="recomandari"></ul>
       <div formGroupName="game6">
-        <div class="match" id="match11" appUpdateScore>
+        <div #matchRef class="match" id="match11" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -471,7 +477,7 @@
           </div>
         </div>
 
-        <div class="match" id="match12" appUpdateScore>
+        <div #matchRef class="match" id="match12" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
@@ -503,9 +509,58 @@
           </div>
         </div>
       </div>
-
       <br />
       <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" />
     </div>
   </div>
+  <div class="ptable">
+    <button id="introdu23" type="button" (click)="triggerUpdate()">Update Clasament</button>
+
+    <h1 class="headin">Clasament</h1>
+    <table class="table table-striped">
+      <tr class="bg info">
+        <th>Locul</th>
+        <th>Echipa</th>
+        <th>V</th>
+        <th>E</th>
+        <th>I</th>
+        <th>GP</th>
+        <th>GD</th>
+        <th>G+/-</th>
+        <th>Punctaj</th>
+      </tr>
+
+      <tbody id="clasamentBody"></tbody>
+      <tr *ngFor="let echipa of this.ranking.clasament; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ echipa.culoare }}</td>
+        <td>{{ echipa.victorii }}</td>
+        <td>{{ echipa.egaluri }}</td>
+        <td>{{ echipa.infrangeri }}</td>
+        <td>{{ echipa.goluri_primite }}</td>
+        <td>{{ echipa.goluri_date }}</td>
+        <td>{{ echipa.golaveraj }}</td>
+        <td>{{ echipa.punctaj }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="ptable">
+    <h1 class="headin">Golgheteri</h1>
+    <table class="table table-striped">
+      <tr class="bg info">
+        <th>Locul</th>
+        <th>Nume</th>
+        <th>Goluri Finala</th>
+        <th>Total</th>
+      </tr>
+      <tbody id="golgheteryBody"></tbody>
+    </table>
+  </div>
+  <br />
+  <br />
+  <br />
+  <button type="submit" id="salveazaEditie" class="btn btn-primary">
+    Salveaza Editie
+  </button>
 </form>

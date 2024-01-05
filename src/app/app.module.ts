@@ -5,18 +5,18 @@ import { AppComponent } from './app.component';
 import { RoundComponent } from './round/round.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScorerDirective } from './scorer.directive';
 import { UpdateScoreDirective } from './update-score.directive';
 import { GamesComponent } from './games/games.component';
 import { FormService } from './form.service';
+import { RankingComponent } from './ranking/ranking.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoundComponent,
-    ScorerDirective,
     UpdateScoreDirective,
     GamesComponent,
+    RankingComponent,
   ],
   imports: [
     BrowserModule,

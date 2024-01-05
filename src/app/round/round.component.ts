@@ -28,7 +28,7 @@ interface Player {
 export class RoundComponent implements OnInit {
   constructor(
     private http: HttpClient,
-    public form: FormService
+    public form: FormService,
   ) {}
 
   selectedPlayer: string = '';
@@ -42,7 +42,6 @@ export class RoundComponent implements OnInit {
   table: any;
 
   ngOnInit(): void {
-
     this.http
       .get<Player[]>('http://localhost:8080/players')
       .subscribe((response) => {

@@ -6,6 +6,7 @@
 <script src="/assets/scripts/app2.js" type="module"></script>
 <script src="/assets/scripts/postRequests.js" type="module"></script>
 
+
 <form [formGroup]="form.footballForm" (ngSubmit)="form.onSubmit()">
 
     <div class="informatii-editie">
@@ -485,28 +486,10 @@
 
     -->
     <app-games [players]="players" [selectedPlayers]="selectedPlayers"></app-games>
-
-    <div class="ptable">
-        <h1 class="headin">Clasament</h1>
-        <table class="table table-striped">
-            <tr class="bg info">
-                <th>Locul</th>
-                <th>Echipa</th>
-                <th>V</th>
-                <th>E</th>
-                <th>I</th>
-                <th>GD</th>
-                <th>GP</th>
-                <th>G+/-</th>
-                <th>Punctaj</th>
-            </tr>
-            <tbody id="clasamentBody"></tbody>
-        </table>
-    </div>
-
+   
     <div class="finala" id="etapa7">
         <input type="text" id="searchInput7" placeholder="Introduceți o valoare" />
-        <button id="introdu7" appScorer>Introdu</button>
+        <button id="introdu7" >Introdu</button>
         <ul id="recomandari7" class="recomandari"></ul>
         <br />
         <select id="selectare14" class="selectare">
@@ -546,28 +529,5 @@
             </div>
         </div>
     </div>
-
-    <div class="ptable">
-        <h1 class="headin">Golgheteri</h1>
-        <table class="table table-striped">
-            <tr class="bg info">
-                <th>Locul</th>
-                <th>Nume</th>
-                <th>Goluri Finala</th>
-                <th>Total</th>
-            </tr>
-            <tbody id="golgheteryBody"></tbody>
-        </table>
-    </div>
-
-    <br />
-    <br />
-    <br />
-    <button type="submit" id="salveazaEditie" class="btn btn-primary">
-        Salveaza Editie
-    </button>
-    <br />
-    <br />
-    <br />
 
 </form>
