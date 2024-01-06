@@ -449,13 +449,13 @@
           <div class="match-info">
             <div class="left-team-info">
               <div class="team-name">
-                <div class="Verde">Verde</div>
+                <div class="Portocaliu">Portocaliu</div>
               </div>
-              <div formArrayName="teamGreen">
-                <ng-container *ngFor="let scorer of (teamGreenG6 | async)?.controls; let i = index;">
+              <div formArrayName="teamOrange">
+                <ng-container *ngFor="let scorer of (teamOrangeG6| async)?.controls; let i = index;">
                   <input type="text" [formControlName]="i" class="scorers" list="players" />
                   <i class="fas fa-trash-alt delete-button"
-                    (click)="form.removeScorer(i,form.getTeamArray('game6','teamGreen'))"></i>
+                    (click)="form.removeScorer(i,form.getTeamArray('game6','teamOrange'))"></i>
                 </ng-container>
               </div>
             </div>
@@ -464,13 +464,13 @@
 
             <div class="right-team-info">
               <div class="team-name">
-                <div class="Portocaliu">Portocaliu</div>
+                <div class="Verde">Verde</div>
               </div>
-              <div formArrayName="teamOrange">
-                <ng-container *ngFor="let scorer of (teamOrangeG6| async)?.controls; let i = index;">
+              <div formArrayName="teamGreen">
+                <ng-container *ngFor="let scorer of (teamGreenG6 | async)?.controls; let i = index;">
                   <input type="text" [formControlName]="i" class="scorers" list="players" />
                   <i class="fas fa-trash-alt delete-button"
-                    (click)="form.removeScorer(i,form.getTeamArray('game6','teamOrange'))"></i>
+                    (click)="form.removeScorer(i,form.getTeamArray('game6','teamGreen'))"></i>
                 </ng-container>
               </div>
             </div>
@@ -531,7 +531,7 @@
       </tr>
 
       <tbody id="clasamentBody"></tbody>
-      <tr *ngFor="let echipa of this.ranking.clasament; let i = index">
+      <tr *ngFor="let echipa of this.ranking.clasament | teamSort:this.ranking.teamComparator;; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ echipa.culoare }}</td>
         <td>{{ echipa.victorii }}</td>

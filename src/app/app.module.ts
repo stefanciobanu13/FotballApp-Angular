@@ -9,6 +9,7 @@ import { UpdateScoreDirective } from './update-score.directive';
 import { GamesComponent } from './games/games.component';
 import { FormService } from './form.service';
 import { RankingComponent } from './ranking/ranking.component';
+import { TeamSortPipe } from './team-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import { RankingComponent } from './ranking/ranking.component';
     UpdateScoreDirective,
     GamesComponent,
     RankingComponent,
+    TeamSortPipe,
+
   ],
   imports: [
     BrowserModule,

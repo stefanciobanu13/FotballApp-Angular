@@ -26,21 +26,7 @@ export class GamesComponent implements OnInit, AfterViewInit {
   @Input() players: string[];
   @Input() selectedPlayers: string[] = [];
   @ViewChildren('matchRef') matchRefs: QueryList<ElementRef>;
-  @ViewChildren(UpdateScoreDirective)
-  updateScoreDirectives: QueryList<UpdateScoreDirective>;
-
-  @ViewChild('matchRef1') match1: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef2') match2: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef3') match3: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef4') match4: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef5') match5: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef6') match6: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef7') match7: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef8') match8: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef9') match9: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef10') match10: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef11') match11: ElementRef<HTMLInputElement>;
-  @ViewChild('matchRef12') match12: ElementRef<HTMLInputElement>;
+  @ViewChildren(UpdateScoreDirective)updateScoreDirectives: QueryList<UpdateScoreDirective>;
 
   clasament: Observable<any[]>;
   teamOrangeG1: Observable<FormArray>;

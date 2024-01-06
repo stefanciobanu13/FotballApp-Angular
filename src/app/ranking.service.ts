@@ -55,6 +55,12 @@ export class RankingService {
   ];
 
   private clasamentTemplate = Object.assign(this.clasament);
+  private clasamentSelectiv = [
+    { culoare: 'Verde', vs_Portocaliu: 0, vs_Albastru: 0, vs_Gri: 0 },
+    { culoare: 'Portocaliu', vs_Verde: 0, vs_Albastru: 0, vs_Gri: 0 },
+    { culoare: 'Gri', vs_Portocaliu: 0, vs_Albastru: 0, vs_Verde: 0 },
+    { culoare: 'Albastru', vs_Portocaliu: 0, vs_Verde: 0, vs_Gri: 0 },
+  ];
 
   public get clasament() {
     return this._clasament;
@@ -68,7 +74,7 @@ export class RankingService {
     return of(clasament).pipe(shareReplay(1));
   }
 
-  getMatchInformations(match: HTMLElement) {
+  getMatchInformations(match: Element) {
     const leftTeamName =
       match.children[0].children[0].children[0].textContent.trim();
     const rightTeamName =
@@ -89,6 +95,8 @@ export class RankingService {
   async updateClasament(match: HTMLElement) {
     await this.resetRaking();
     const matchInformations = this.getMatchInformations(match);
+    console.log(`the updated match is ${matchInformations} `);
+
     const leftTeamName = matchInformations[0];
     const rightTeamName = matchInformations[1];
     const score = matchInformations[2];
@@ -123,6 +131,142 @@ export class RankingService {
     rightTeam.meciuri_jucate++;
     this.clasament = this.clasamentTemplate;
   }
+
+  updateClasamentSelectiv() {
+    console.log('executing update clasament selectiv');
+    this.resetClasamentSelectiv();
+    // const updatedTeams = [];
+    const matches = document.querySelectorAll('.match');
+    matches.forEach((match) => {
+      const matchInformations = this.getMatchInformations(match);
+      const leftTeamName = matchInformations[0];
+      const rightTeamName = matchInformations[1];
+      const score = matchInformations[2];
+      const scoreInt = score.split('-');
+      const leftTeamGoals = parseInt(scoreInt[0]);
+      const rightTeamGoals = parseInt(scoreInt[1]);
+      const leftTeam = this.clasamentSelectiv.find(
+        (team) => team.culoare === leftTeamName
+      );
+      const rightTeam = this.clasamentSelectiv.find(
+        (team) => team.culoare === rightTeamName
+      );
+      if (leftTeam && rightTeam) {
+        leftTeam[`vs_${rightTeamName}`] += leftTeamGoals - rightTeamGoals;
+        rightTeam[`vs_${leftTeamName}`] += rightTeamGoals - leftTeamGoals;
+        // updatedTeams.push({ leftTeam, rightTeam });
+      }
+    });
+    //  return updatedTeams;
+  }
+  sortClasament() {
+    this.clasament.sort(function (team1, team2) {
+      if (team1.punctaj == team2.punctaj) {
+        //console.log(team1,team2,getBetterTeamByDirectMatch(team1,team2));
+
+        if (this.getBetterTeamByDirectMatch(team1, team2) == 0) {
+          if (team1.golaveraj == team2.golaveraj) {
+            if (team1.goluri_date == team2.goluri_date) {
+              // change table loc with the name PENALTY
+              var clasament1 = document.getElementById('clasamentBody');
+              var rows = clasament1.querySelectorAll('tr');
+              rows.forEach((row) => {
+                const teamName = row.children[1].textContent.trim();
+                if (teamName === team1.culoare) {
+                  row.children[0].textContent = 'PENALTY';
+                  // row.children[0].style.color = 'red';
+                } else if (teamName === team2.culoare) {
+                  row.children[0].textContent = 'PENALTY';
+                  //  row.children[0].style.color = 'red';
+                }
+              }, this);
+              return 0;
+            } else if (team1.goluri_date > team2.goluri_date) {
+              return -1;
+            } else {
+              return 1;
+            }
+          } else if (team1.golaveraj > team2.golaveraj) {
+            return -1;
+          } else {
+            return 1;
+          }
+        } else {
+          return this.getBetterTeamByDirectMatch(team1, team2);
+        }
+      } else if (team1.punctaj > team2.punctaj) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+  }
+
+  getBetterTeamByDirectMatch(team1, team2) {
+    console.log('inside get better team');
+    console.log(team1);
+    console.log(team2);
+
+    const matches = document.querySelectorAll('.match');
+    const matchesArray = Array.from(matches);
+    for (const match of matchesArray) {
+      const matchInformations = this.getMatchInformations(match);
+      const leftTeamName = matchInformations[0];
+      const rightTeamName = matchInformations[1];
+      const score = matchInformations[2];
+
+      const scoreInt = score.split('-');
+      const leftTeamGoals = parseInt(scoreInt[0]);
+      const rightTeamGoals = parseInt(scoreInt[1]);
+
+      const leftTeam = this.clasamentSelectiv.find(
+        (team) => team.culoare === leftTeamName
+      );
+      const rightTeam = this.clasamentSelectiv.find(
+        (team) => team.culoare === rightTeamName
+      );
+
+      if (leftTeam && rightTeam) {
+        leftTeam[`vs_${rightTeamName}`] += leftTeamGoals - rightTeamGoals;
+        rightTeam[`vs_${leftTeamName}`] += rightTeamGoals - leftTeamGoals;
+      }
+
+      if (leftTeam && rightTeam) {
+        if (leftTeam[`vs_${rightTeamName}`] > rightTeam[`vs_${leftTeamName}`]) {
+          return -1;
+        } else if (
+          leftTeam[`vs_${rightTeamName}`] < rightTeam[`vs_${leftTeamName}`]
+        ) {
+          return 1;
+        } else {
+          continue;
+        }
+      }
+    }
+    return 0;
+  }
+
+  teamComparator = (team1, team2) => {
+    if (team1.punctaj > team2.punctaj) {
+      return -1;
+    } else if (team1.punctaj < team2.punctaj) {
+      return 1;
+    } else if ((team1.punctaj = team2.punctaj)) {
+      this.updateClasamentSelectiv.bind(this)();
+      return this.getBetterTeamByDirectMatch(team1, team2);
+    }
+    if (team1.golaveraj > team2.golaveraj) {
+      return -1;
+    } else if (team1.golaveraj < team2.golaveraj) {
+      return 1;
+    }
+    if (team1.goluri_date > team2.goluri_date) {
+      return -1;
+    } else if (team1.goluri_date < team2.goluri_date) {
+      return 1;
+    }
+    return 0;
+  };
 
   resetRaking(): Promise<void> {
     this.clasamentTemplate = [
@@ -170,6 +314,18 @@ export class RankingService {
         golaveraj: 0,
         punctaj: 0,
       },
+    ];
+    return Promise.resolve();
+  }
+
+  resetClasamentSelectiv(): Promise<void> {
+    console.log('reset clasament selectiv and the clas is');
+
+    this.clasamentSelectiv = [
+      { culoare: 'Verde', vs_Portocaliu: 0, vs_Albastru: 0, vs_Gri: 0 },
+      { culoare: 'Portocaliu', vs_Verde: 0, vs_Albastru: 0, vs_Gri: 0 },
+      { culoare: 'Gri', vs_Portocaliu: 0, vs_Albastru: 0, vs_Verde: 0 },
+      { culoare: 'Albastru', vs_Portocaliu: 0, vs_Verde: 0, vs_Gri: 0 },
     ];
     return Promise.resolve();
   }
