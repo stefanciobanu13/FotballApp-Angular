@@ -53,7 +53,6 @@ export class RankingService {
       punctaj: 0,
     },
   ];
-
   private clasamentTemplate = Object.assign(this.clasament);
   private clasamentSelectiv = [
     { culoare: 'Verde', vs_Portocaliu: 0, vs_Albastru: 0, vs_Gri: 0 },
@@ -132,7 +131,6 @@ export class RankingService {
 
   updateClasamentSelectiv() {
     this.resetClasamentSelectiv();
-    // const updatedTeams = [];
     const matches = document.querySelectorAll('.match');
     matches.forEach((match) => {
       const matchInformations = this.getMatchInformations(match);
@@ -151,16 +149,13 @@ export class RankingService {
       if (leftTeam && rightTeam) {
         leftTeam[`vs_${rightTeamName}`] += leftTeamGoals - rightTeamGoals;
         rightTeam[`vs_${leftTeamName}`] += rightTeamGoals - leftTeamGoals;
-        // updatedTeams.push({ leftTeam, rightTeam });
       }
     });
-    //  return updatedTeams;
   }
   sortClasament() {
     this.clasament.sort(function (team1, team2) {
       if (team1.punctaj == team2.punctaj) {
         //console.log(team1,team2,getBetterTeamByDirectMatch(team1,team2));
-
         if (this.getBetterTeamByDirectMatch(team1, team2) == 0) {
           if (team1.golaveraj == team2.golaveraj) {
             if (team1.goluri_date == team2.goluri_date) {
@@ -200,9 +195,6 @@ export class RankingService {
   }
 
   getBetterTeamByDirectMatch(team1, team2) {
-    console.log('inside get better team');
-    console.log(team1);
-    console.log(team2);
     const leftTeam = this.clasamentSelectiv.find(
       (team) => team.culoare === team1.color
     );
@@ -211,17 +203,13 @@ export class RankingService {
     );
     if (leftTeam && rightTeam) {
       if (leftTeam[`vs_${team2.color}`] > rightTeam[`vs_${team1.color}`]) {
-        console.log('returned value is -1');
-
         return -1;
       } else if (
         leftTeam[`vs_${team2.color}`] < rightTeam[`vs_${team1.color}`]
       ) {
-        console.log('returned value is 1');
         return 1;
       }
     }
-    console.log('returned value is 0');
     return 0;
   }
 
@@ -255,7 +243,6 @@ export class RankingService {
         return 1;
       }
     }
-    console.log('returned value from comparator is 0');
     return 0;
   };
 

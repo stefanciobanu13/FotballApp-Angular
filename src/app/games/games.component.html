@@ -531,7 +531,7 @@
       </tr>
 
       <tbody id="clasamentBody"></tbody>
-      <tr *ngFor="let echipa of this.ranking.clasament | teamSort:this.ranking.teamComparator;; let i = index">
+      <tr *ngFor="let echipa of this.ranking.clasament | teamSort:this.ranking.teamComparator; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ echipa.culoare }}</td>
         <td>{{ echipa.victorii }}</td>
@@ -554,7 +554,13 @@
         <th>Goluri Finala</th>
         <th>Total</th>
       </tr>
-      <tbody id="golgheteryBody"></tbody>
+      <tbody id="golgheteryBody">
+        <tr *ngFor="let scorer of this.form.scorersList.sort(this.form.compareScorers); let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ scorer.name }}</td>
+          <td>{{ scorer.goluriFinala }}</td>
+          <td>{{ scorer.totalGoluri }}</td>
+      </tbody>
     </table>
   </div>
   <br />

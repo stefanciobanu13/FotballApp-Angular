@@ -8,12 +8,17 @@ import {
 import { FormBuilder, FormGroup, FormArray, Form } from '@angular/forms';
 import { Observable, of, shareReplay } from 'rxjs';
 import { RankingService } from './ranking.service';
+import { Scorer } from './model/scorer';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormService {
   public footballForm: FormGroup;
+  private _scorersList: Array<Scorer> = [];
+  public get scorersList() {
+    return this._scorersList;
+  }
 
   constructor(private fb: FormBuilder, private ranking: RankingService) {
     this.footballForm = this.fb.group({
@@ -76,6 +81,7 @@ export class FormService {
     const scorerName = inputListElement.value;
     const gameNr = button.parentNode.querySelector('h3').innerHTML;
     const gamesElements = button.parentElement.querySelectorAll('.match');
+    this.addScorerToTheList(scorerName);
     this.changeMatchStatus(gamesElements, selectElement.value);
     const selectValue = selectElement.value;
     let selectedScorers: FormArray;
@@ -108,6 +114,48 @@ export class FormService {
     selectedScorers.push(this.fb.control(`${scorerName}`));
   }
 
+  addScorerToTheList(name: string) {
+    const scorer = new Scorer(name);
+    let scorerExists = false;
+    this.scorersList.forEach((element) => {
+      if (element.name === scorer.name) {
+        scorerExists = true;
+        element.totalGoluri++;
+      }
+    });
+    if (!scorerExists) {
+      this.scorersList.push(scorer);
+    }
+  }
+
+  removeGoalFromScorer(index: number, formArray: FormArray) {
+    const playerNameToRemove = formArray.at(index)?.value;
+    for (let i = this.scorersList.length - 1; i >= 0; i--) {
+      const scorer = this.scorersList[i];
+      if (scorer.name === playerNameToRemove) {
+        if (scorer.totalGoluri === 1) {
+          this.scorersList.splice(i, 1); 
+        } else {
+          scorer.totalGoluri--;
+        }
+      }
+    }
+  }
+
+  compareScorers(scorer1: Scorer, scorer2: Scorer): number {
+    if (scorer1.totalGoluri > scorer2.totalGoluri) {
+      return -1;
+    } else if (scorer1.totalGoluri < scorer2.totalGoluri) {
+      return 1;
+    }
+
+    if (scorer1.goluriFinala > scorer2.goluriFinala) {
+      return -1;
+    } else if (scorer1.goluriFinala < scorer2.goluriFinala) {
+      return 1;
+    }
+    return 0;
+  }
   noGoalsDraw(event: Event) {
     const targetEl = event.target as HTMLElement;
     const selectElement = targetEl.parentNode.querySelector(
@@ -127,6 +175,7 @@ export class FormService {
   }
 
   removeScorer(i: number, theFormArray: FormArray) {
+    this.removeGoalFromScorer(i, theFormArray);
     theFormArray.removeAt(i);
   }
 
