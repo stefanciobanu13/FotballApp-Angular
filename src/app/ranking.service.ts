@@ -61,11 +61,36 @@ export class RankingService {
     { culoare: 'Albastru', vs_Portocaliu: 0, vs_Verde: 0, vs_Gri: 0 },
   ];
 
+  private _finals: Map<string, string> = new Map([
+    ['smallFinalLeftTeam', ''],
+    ['smallFinalRightTeam', ''],
+    ['bigFinalLeftTeam', ''],
+    ['bigFinalRightTeam', ''],
+  ]);
+  public get finals(): Map<string, string> {
+    return this._finals;
+  }
+
   public get clasament() {
     return this._clasament;
   }
   public set clasament(value) {
     this._clasament = value;
+  }
+
+  getTeamPosition(name: string) {
+    let teamPosition: string;
+    for (const [key, value] of this.finals.entries()) {
+      if (name === value) {
+        if (key.includes('Left')) {
+          teamPosition = 'leftTeam';
+        } else {
+          teamPosition = 'rightTeam';
+        }
+        break;
+      }
+    }
+    return teamPosition;
   }
 
   getClasamentObs(): Observable<any[]> {
@@ -109,7 +134,6 @@ export class RankingService {
     rightTeam.goluri_date += rightTeamGoals;
     rightTeam.goluri_primite += leftTeamGoals;
     rightTeam.golaveraj = rightTeam.goluri_date - rightTeam.goluri_primite;
-
     if (result == 0) {
       leftTeam.egaluri++;
       rightTeam.egaluri++;
@@ -127,6 +151,20 @@ export class RankingService {
     leftTeam.meciuri_jucate++;
     rightTeam.meciuri_jucate++;
     this.clasament = this.clasamentTemplate;
+    if (match.id == 'match12') {
+      await this.setTheFinals(match);
+    }
+  }
+
+  setTheFinals(match: HTMLElement): Promise<void> {
+    if (match.id == 'match12') {
+      this.clasament.sort(this.teamComparator);
+      this.finals.set('smallFinalLeftTeam', this.clasament.at(2).culoare);
+      this.finals.set('smallFinalRightTeam', this.clasament.at(3).culoare);
+      this.finals.set('bigFinalLeftTeam', this.clasament.at(0).culoare);
+      this.finals.set('bigFinalRightTeam', this.clasament.at(1).culoare);
+    }
+    return Promise.resolve();
   }
 
   updateClasamentSelectiv() {

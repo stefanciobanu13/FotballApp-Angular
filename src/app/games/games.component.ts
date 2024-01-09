@@ -26,7 +26,8 @@ export class GamesComponent implements OnInit, AfterViewInit {
   @Input() players: string[];
   @Input() selectedPlayers: string[] = [];
   @ViewChildren('matchRef') matchRefs: QueryList<ElementRef>;
-  @ViewChildren(UpdateScoreDirective)updateScoreDirectives: QueryList<UpdateScoreDirective>;
+  @ViewChildren(UpdateScoreDirective)
+  updateScoreDirectives: QueryList<UpdateScoreDirective>;
 
   clasament: Observable<any[]>;
   teamOrangeG1: Observable<FormArray>;
@@ -53,6 +54,11 @@ export class GamesComponent implements OnInit, AfterViewInit {
   teamGreenG6: Observable<FormArray>;
   teamBlueG6: Observable<FormArray>;
   teamGrayG6: Observable<FormArray>;
+  leftTeamSF: Observable<FormArray>;
+  righTeamSF: Observable<FormArray>;
+  leftTeamBF: Observable<FormArray>;
+  rightTeamBF: Observable<FormArray>;
+
   matchStatus1: string = 'unplayed match';
 
   constructor(
@@ -87,6 +93,10 @@ export class GamesComponent implements OnInit, AfterViewInit {
     this.teamBlueG6 = this.form.getScorerArrayObs('game6', 'teamBlue');
     this.teamGrayG6 = this.form.getScorerArrayObs('game6', 'teamGray');
     this.clasament = this.ranking.getClasamentObs();
+    this.leftTeamSF = this.form.getScorerArrayObs('smallFinal', 'leftTeam');
+    this.righTeamSF = this.form.getScorerArrayObs('smallFinal', 'rightTeam');
+    this.leftTeamBF = this.form.getScorerArrayObs('bigFinal', 'leftTeam');
+    this.rightTeamBF = this.form.getScorerArrayObs('bigFinal', 'rightTeam');
   }
 
   ngAfterViewInit(): void {

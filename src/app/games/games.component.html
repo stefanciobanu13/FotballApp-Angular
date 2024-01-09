@@ -513,9 +513,113 @@
       <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" />
     </div>
   </div>
-  <div class="ptable">
-    <button id="introdu23" type="button" (click)="triggerUpdate()">Update Clasament</button>
 
+  <div class="finala" id="finale">
+      <div formGroupName="smallFinal">
+    <h3>Finala mica</h3>
+    <input type="text" id="searchInput2" class="inputs" placeholder="Introduceți o valoare" list="players" />
+    <datalist class="dropDown" id="players">
+      <option *ngFor="let player of players" [value]="player"></option>
+    </datalist>
+    <button id="introdu2" type="button" (click)="form.adaugaMarcatorFinala($event)">Introdu</button>
+    <button id="introdu24" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
+    <br />
+    <select id="selectare13" class="selectare">
+      <option *ngFor="let key of ['smallFinalLeftTeam', 'smallFinalRightTeam']" [value]="ranking.finals.get(key)">
+        {{ ranking.finals.get(key) }}
+      </option>
+    </select>
+    <ul id="recomandari9" class="recomandari"></ul>
+ 
+      <div #smallFinal class="match" id="finalaMica" appUpdateScore [attr.match-status]="matchStatus1">
+        <div class="match-info">
+          <div class="left-team-info">
+            <div class="team-name">
+              <div [class]="this.ranking.finals.get('smallFinalLeftTeam')">
+                {{this.ranking.finals.get('smallFinalLeftTeam')}}
+              </div>
+            </div>
+            <div formArrayName="leftTeam">
+              <ng-container *ngFor="let scorer of (leftTeamSF | async)?.controls; let i = index;">
+                <input type="text" [formControlName]="i" class="scorers" list="players" />
+                <i class="fas fa-trash-alt delete-button"
+                  (click)="form.removeScorer(i,form.getTeamArray('smallFinal','leftTeam'))"></i>
+              </ng-container>
+            </div>
+          </div>
+          <strong class="scor">0 - 0 </strong>
+
+          <div class="right-team-info">
+            <div class="team-name">
+              <div [class]="this.ranking.finals.get('smallFinalRightTeam')">
+                {{this.ranking.finals.get('smallFinalRightTeam')}}
+              </div>
+            </div>
+            <div formArrayName="rightTeam">
+              <ng-container *ngFor="let scorer of (righTeamSF | async)?.controls; let i = index;">
+                <input type="text" [formControlName]="i" class="scorers" list="players" />
+                <i class="fas fa-trash-alt delete-button"
+                  (click)="form.removeScorer(i,form.getTeamArray('smallFinal','rightTeam'))"></i>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div formGroupName="bigFinal">
+      <h3>Finala mare</h3>
+      <input type="text" id="searchInput2" class="inputs" placeholder="Introduceți o valoare" list="players" />
+      <datalist class="dropDown" id="players">
+        <option *ngFor="let player of players" [value]="player"></option>
+      </datalist>
+      <button id="introdu3" type="button" (click)="form.adaugaMarcatorFinala($event)">Introdu</button>
+      <button id="introdu25" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
+      <br />
+      <select id="selectare13" class="selectare">
+        <option *ngFor="let key of ['bigFinalLeftTeam', 'bigFinalRightTeam']" [value]="ranking.finals.get(key)">
+          {{ ranking.finals.get(key) }}
+        </option>
+      </select>
+
+      <div #bigFinal class="match" id="finalaMare" appUpdateScore [attr.match-status]="matchStatus1">
+        <div class="match-info">
+          <div class="left-team-info">
+            <div class="team-name">
+              <div [class]="this.ranking.finals.get('bigFinalLeftTeam')">
+                {{this.ranking.finals.get('bigFinalLeftTeam')}}
+              </div>
+            </div>
+            <div formArrayName="leftTeam">
+              <ng-container *ngFor="let scorer of (leftTeamBF | async)?.controls; let i = index;">
+                <input type="text" [formControlName]="i" class="scorers" list="players" />
+                <i class="fas fa-trash-alt delete-button"
+                  (click)="form.removeScorer(i,form.getTeamArray('bigFinal','leftTeam'))"></i>
+              </ng-container>
+            </div>
+          </div>
+
+          <strong class="scor">0 - 0</strong>
+
+          <div class="right-team-info">
+            <div class="team-name">
+              <div [class]="this.ranking.finals.get('bigFinalRightTeam')">
+                {{this.ranking.finals.get('bigFinalRightTeam')}}
+              </div>
+            </div>
+            <div formArrayName="rightTeam">
+              <ng-container *ngFor="let scorer of (rightTeamBF | async)?.controls; let i = index;">
+                <input type="text" [formControlName]="i" class="scorers" list="players" />
+                <i class="fas fa-trash-alt delete-button"
+                  (click)="form.removeScorer(i,form.getTeamArray('bigFinal','rightTeam'))"></i>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="introdu23" type="button" (click)="triggerUpdate()">Update Clasament</button>
     <h1 class="headin">Clasament</h1>
     <table class="table table-striped">
       <tr class="bg info">

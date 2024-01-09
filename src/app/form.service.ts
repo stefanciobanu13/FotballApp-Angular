@@ -58,6 +58,14 @@ export class FormService {
         teamBlue: this.fb.array([]),
         teamGray: this.fb.array([]),
       }),
+      smallFinal: this.fb.group({
+        leftTeam: this.fb.array([]),
+        rightTeam: this.fb.array([]),
+      }),
+      bigFinal: this.fb.group({
+        leftTeam: this.fb.array([]),
+        rightTeam: this.fb.array([]),
+      }),
     });
   }
 
@@ -114,6 +122,50 @@ export class FormService {
     selectedScorers.push(this.fb.control(`${scorerName}`));
   }
 
+  adaugaMarcatorFinala(event: Event) {
+    const button = event.target as HTMLElement;
+    const selectElement = button.parentNode.querySelector(
+      '.selectare'
+    ) as HTMLSelectElement;
+    const inputListElement = button.parentNode.querySelector(
+      '.inputs'
+    ) as HTMLInputElement;
+    const scorerName = inputListElement.value;
+    const gameNr = button.parentNode.querySelector('h3').innerHTML;
+    const gamesElements = button.parentElement.querySelectorAll('.match');
+    this.addScorerToTheList(scorerName);
+    this.changeMatchStatus(gamesElements, selectElement.value);
+    const selectValue = selectElement.value;
+    let selectedScorers: FormArray;
+    const teamPosition = button.parentNode.querySelector(`.${selectValue}`);
+    switch (selectValue) {
+      case 'Verde':
+        selectedScorers = this.getTeamArray(`${this.convertFinalName(gameNr)}`, `${this.ranking.getTeamPosition(selectValue)}`);
+        break;
+      case 'Portocaliu':
+         selectedScorers = this.getTeamArray(`${this.convertFinalName(gameNr)}`, `${this.ranking.getTeamPosition(selectValue)}`);
+        break;
+      case 'Albastru':
+ selectedScorers = this.getTeamArray(`${this.convertFinalName(gameNr)}`, `${this.ranking.getTeamPosition(selectValue)}`); 
+        break;
+      case 'Gri':
+ selectedScorers = this.getTeamArray(`${this.convertFinalName(gameNr)}`, `${this.ranking.getTeamPosition(selectValue)}`); 
+        break;
+    }
+    selectedScorers.push(this.fb.control(`${scorerName}`));
+  }
+
+  convertFinalName(name: string){
+  let finalName:string;
+  switch(name){
+      case 'Finala mica' : finalName = 'smallFinal'
+      break;
+      case 'Finala mare': finalName =  'bigFinal'
+      break;
+  }
+  return finalName;
+  }
+
   addScorerToTheList(name: string) {
     const scorer = new Scorer(name);
     let scorerExists = false;
@@ -134,7 +186,7 @@ export class FormService {
       const scorer = this.scorersList[i];
       if (scorer.name === playerNameToRemove) {
         if (scorer.totalGoluri === 1) {
-          this.scorersList.splice(i, 1); 
+          this.scorersList.splice(i, 1);
         } else {
           scorer.totalGoluri--;
         }
@@ -148,7 +200,6 @@ export class FormService {
     } else if (scorer1.totalGoluri < scorer2.totalGoluri) {
       return 1;
     }
-
     if (scorer1.goluriFinala > scorer2.goluriFinala) {
       return -1;
     } else if (scorer1.goluriFinala < scorer2.goluriFinala) {
@@ -156,6 +207,7 @@ export class FormService {
     }
     return 0;
   }
+
   noGoalsDraw(event: Event) {
     const targetEl = event.target as HTMLElement;
     const selectElement = targetEl.parentNode.querySelector(
