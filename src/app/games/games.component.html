@@ -5,12 +5,11 @@
     <div class="editie etapa" id="etapa1">
       <h3>Etapa 1</h3>
 
-      <input type="text" id="searchInput1" class="inputs" placeholder="Introduceți o valoare" list="players" />
+      <input type="text" id="searchInput1" class="inputs" placeholder="Introduceți un jucator" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu1" type="button" (click)="form.adaugaMarcator($event)">Introdu</button>
-      <button id="introdu23" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari1" class="recomandari"></ul>
       <br>
       <select id="selectare8" class="selectare">
@@ -19,7 +18,7 @@
         <option value="Portocaliu">Portocaliu</option>
         <option value="Gri">Gri</option>
       </select>
-      <ul id="recomandari8" class="recomandari"></ul>
+      <button id="introdu23" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
 
       <div formGroupName="game1">
         <div #matchRef class="match" id="match1" appUpdateScore [attr.match-status]="matchStatus1">
@@ -97,12 +96,11 @@
     </div>
     <div class="etapa" id="etapa2">
       <h3>Etapa 2</h3>
-      <input type="text" id="searchInput2" class="inputs" placeholder="Introduceți o valoare" list="players" />
+      <input type="text" id="searchInput2" class="inputs" placeholder="Introduceți un jucator" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu2" type="button" (click)="form.adaugaMarcator($event)">Introdu</button>
-      <button id="introdu24" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari2" class="recomandari"></ul>
       <br />
       <select id="selectare9" class="selectare">
@@ -111,7 +109,7 @@
         <option value="Portocaliu">Portocaliu</option>
         <option value="Gri">Gri</option>
       </select>
-      <ul id="recomandari9" class="recomandari"></ul>
+      <button id="introdu24" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
       <div formGroupName="game2">
         <div #matchRef class="match" id="match3" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
@@ -178,12 +176,11 @@
     </div>
     <div class="etapa" id="etapa3">
       <h3>Etapa 3</h3>
-      <input type="text" id="searchInput3" class="inputs" placeholder="Introduceți o valoare" list="players" />
+      <input type="text" id="searchInput3" class="inputs" placeholder="Introduceți un jucator" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu3" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
-      <button id="introdu25" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari3" class="recomandari"></ul>
       <br />
       <select id="selectare10" class="selectare">
@@ -192,7 +189,7 @@
         <option value="Portocaliu">Portocaliu</option>
         <option value="Gri">Gri</option>
       </select>
-      <ul id="recomandari10" class="recomandari"></ul>
+      <button id="introdu25" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
       <div formGroupName="game3">
         <div #matchRef class="match" id="match5" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
@@ -263,12 +260,11 @@
     <h2>Retur</h2>
     <div class="etapa" id="etapa4">
       <h3>Etapa 4</h3>
-      <input type="text" id="searchInput4" class="inputs" placeholder="Introduceți o valoare" list="players" />
+      <input type="text" id="searchInput4" class="inputs" placeholder="Introduceți un jucator" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu4" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
-      <button id="introdu26" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari4" class="recomandari"></ul>
       <br />
       <select id="selectare11" class="selectare">
@@ -277,7 +273,7 @@
         <option value="Portocaliu">Portocaliu</option>
         <option value="Gri">Gri</option>
       </select>
-      <ul id="recomandari11" class="recomandari"></ul>
+      <button id="introdu26" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
       <div formGroupName="game4">
         <div #matchRef class="match" id="match7" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
@@ -346,12 +342,11 @@
     </div>
     <div class="etapa" id="etapa5">
       <h3>Etapa 5</h3>
-      <input type="text" id="searchInput5" placeholder="Introduceți o valoare" class="inputs" list="players" />
+      <input type="text" id="searchInput5" placeholder="Introduceți un jucator" class="inputs" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu5" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
-      <button id="introdu27" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari5" class="recomandari"></ul>
       <br />
       <select id="selectare12" class="selectare">
@@ -360,7 +355,7 @@
         <option value="Portocaliu">Portocaliu</option>
         <option value="Gri">Gri</option>
       </select>
-      <ul id="recomandari12" class="recomandari"></ul>
+      <button id="introdu27" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
       <div formGroupName="game5">
         <div #matchRef class="match" id="match9" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
@@ -429,12 +424,11 @@
     </div>
     <div class="etapa" id="etapa6">
       <h3>Etapa 6</h3>
-      <input type="text" id="searchInput6" placeholder="Introduceți o valoare" class="inputs" list="players" />
+      <input type="text" id="searchInput6" placeholder="Introduceți un jucator" class="inputs" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu6" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
-      <button id="introdu28" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <ul id="recomandari6" class="recomandari"></ul>
       <br />
       <select id="selectare13" class="selectare">
@@ -443,7 +437,7 @@
         <option value="Portocaliu">Portocaliu</option>
         <option value="Gri">Gri</option>
       </select>
-      <ul id="recomandari13" class="recomandari"></ul>
+      <button id="introdu28" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
       <div formGroupName="game6">
         <div #matchRef class="match" id="match11" appUpdateScore [attr.match-status]="matchStatus1">
           <div class="match-info">
@@ -515,22 +509,21 @@
   </div>
 
   <div class="finala" id="finale">
-      <div formGroupName="smallFinal">
-    <h3>Finala mica</h3>
-    <input type="text" id="searchInput2" class="inputs" placeholder="Introduceți o valoare" list="players" />
-    <datalist class="dropDown" id="players">
-      <option *ngFor="let player of players" [value]="player"></option>
-    </datalist>
-    <button id="introdu2" type="button" (click)="form.adaugaMarcatorFinala($event)">Introdu</button>
-    <button id="introdu24" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
-    <br />
-    <select id="selectare13" class="selectare">
-      <option *ngFor="let key of ['smallFinalLeftTeam', 'smallFinalRightTeam']" [value]="ranking.finals.get(key)">
-        {{ ranking.finals.get(key) }}
-      </option>
-    </select>
-    <ul id="recomandari9" class="recomandari"></ul>
- 
+    <div formGroupName="smallFinal">
+      <h3 class="finalsName">Finala mica</h3>
+      <input type="text" id="searchInput2" class="inputs" placeholder="Introduceți un jucator" list="players" />
+      <datalist class="dropDown" id="players">
+        <option *ngFor="let player of players" [value]="player"></option>
+      </datalist>
+      <button id="introdu2" type="button" (click)="form.adaugaMarcatorFinala($event)">Introdu</button>
+      <br />
+      <select id="selectare13" class="selectare">
+        <option *ngFor="let key of ['smallFinalLeftTeam', 'smallFinalRightTeam']" [value]="ranking.finals.get(key)">
+          {{ ranking.finals.get(key) }}
+        </option>
+      </select>
+      <button id="introdu24" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
+
       <div #smallFinal class="match" id="finalaMica" appUpdateScore [attr.match-status]="matchStatus1">
         <div class="match-info">
           <div class="left-team-info">
@@ -568,19 +561,19 @@
     </div>
 
     <div formGroupName="bigFinal">
-      <h3>Finala mare</h3>
-      <input type="text" id="searchInput2" class="inputs" placeholder="Introduceți o valoare" list="players" />
+      <h3 class="finalsName">Finala mare</h3>
+      <input type="text" id="searchInput2" class="inputs" placeholder="Introduceți un jucator" list="players" />
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
       <button id="introdu3" type="button" (click)="form.adaugaMarcatorFinala($event)">Introdu</button>
-      <button id="introdu25" type="button" (click)="form.noGoalsDraw($event)">0 - 0</button>
       <br />
       <select id="selectare13" class="selectare">
         <option *ngFor="let key of ['bigFinalLeftTeam', 'bigFinalRightTeam']" [value]="ranking.finals.get(key)">
           {{ ranking.finals.get(key) }}
         </option>
       </select>
+      <button id="introdu25" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
 
       <div #bigFinal class="match" id="finalaMare" appUpdateScore [attr.match-status]="matchStatus1">
         <div class="match-info">

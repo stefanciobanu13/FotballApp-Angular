@@ -151,11 +151,36 @@ export class RankingService {
     leftTeam.meciuri_jucate++;
     rightTeam.meciuri_jucate++;
     this.clasament = this.clasamentTemplate;
-    if (match.id == 'match12') {
+    if (
+      match.id == 'match12' &&
+      match.getAttribute('match-status') == 'played match'
+    ) {
       await this.setTheFinals(match);
     }
   }
 
+  noGoalsDraw(event: Event) {
+    const targetEl = event.target as HTMLElement;
+    const selectElement = targetEl.parentNode.querySelector(
+      '.selectare'
+    ) as HTMLSelectElement;
+    const gamesElements = targetEl.parentElement.querySelectorAll('.match');
+    this.changeMatchStatus(gamesElements, selectElement.value);
+  }
+
+  changeMatchStatus(games: NodeListOf<Element>, teamColor: string) {
+    games.forEach((game) => {
+      const divEl = game.querySelector(`.${teamColor}`);
+      if (divEl !== null) {
+        game.setAttribute('match-status', 'played match');
+        if (game.id == 'match12') {
+          const game12 = document.getElementById('match12');
+          this.setTheFinals(game12);
+          this.updateClasament(game12);
+        }
+      }
+    });
+  }
   setTheFinals(match: HTMLElement): Promise<void> {
     if (match.id == 'match12') {
       this.clasament.sort(this.teamComparator);

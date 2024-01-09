@@ -55,7 +55,9 @@ div#turneu h2 {
 div#turneu h3 {
  text-align: center;
  background: #283a55;
- color: #fff
+ color: #fff;
+padding-bottom: 1%;
+padding-top: 1%;
 }
 
 .etapa {
@@ -214,6 +216,8 @@ input[type="text"] {
  border: 1px solid #ccc;
  border-radius: 5px;
  width: 300px;
+margin-left: 4%;
+margin-right:2%
 }
 
 .scorers {
@@ -293,9 +297,16 @@ button:hover {
  border-radius: 5px;
  background-color: white;
  width: 100px;
+ margin-left: 4%;
+ margin-right:6%;
 }
-
 
 .selectare option {
  padding: 8px;
+}
+
+.finalsName{
+  text-align: center;
+  padding-top:3% ;
+  padding-bottom: 3%;
 }

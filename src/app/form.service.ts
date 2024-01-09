@@ -133,49 +133,70 @@ export class FormService {
     const scorerName = inputListElement.value;
     const gameNr = button.parentNode.querySelector('h3').innerHTML;
     const gamesElements = button.parentElement.querySelectorAll('.match');
-    this.addScorerToTheList(scorerName);
+    this.addScorerToTheList(scorerName, true);
     this.changeMatchStatus(gamesElements, selectElement.value);
     const selectValue = selectElement.value;
     let selectedScorers: FormArray;
     const teamPosition = button.parentNode.querySelector(`.${selectValue}`);
     switch (selectValue) {
       case 'Verde':
-        selectedScorers = this.getTeamArray(`${this.convertFinalName(gameNr)}`, `${this.ranking.getTeamPosition(selectValue)}`);
+        selectedScorers = this.getTeamArray(
+          `${this.convertFinalName(gameNr)}`,
+          `${this.ranking.getTeamPosition(selectValue)}`
+        );
         break;
       case 'Portocaliu':
-         selectedScorers = this.getTeamArray(`${this.convertFinalName(gameNr)}`, `${this.ranking.getTeamPosition(selectValue)}`);
+        selectedScorers = this.getTeamArray(
+          `${this.convertFinalName(gameNr)}`,
+          `${this.ranking.getTeamPosition(selectValue)}`
+        );
         break;
       case 'Albastru':
- selectedScorers = this.getTeamArray(`${this.convertFinalName(gameNr)}`, `${this.ranking.getTeamPosition(selectValue)}`); 
+        selectedScorers = this.getTeamArray(
+          `${this.convertFinalName(gameNr)}`,
+          `${this.ranking.getTeamPosition(selectValue)}`
+        );
         break;
       case 'Gri':
- selectedScorers = this.getTeamArray(`${this.convertFinalName(gameNr)}`, `${this.ranking.getTeamPosition(selectValue)}`); 
+        selectedScorers = this.getTeamArray(
+          `${this.convertFinalName(gameNr)}`,
+          `${this.ranking.getTeamPosition(selectValue)}`
+        );
         break;
     }
     selectedScorers.push(this.fb.control(`${scorerName}`));
   }
 
-  convertFinalName(name: string){
-  let finalName:string;
-  switch(name){
-      case 'Finala mica' : finalName = 'smallFinal'
-      break;
-      case 'Finala mare': finalName =  'bigFinal'
-      break;
-  }
-  return finalName;
+  convertFinalName(name: string) {
+    let finalName: string;
+    switch (name) {
+      case 'Finala mica':
+        finalName = 'smallFinal';
+        break;
+      case 'Finala mare':
+        finalName = 'bigFinal';
+        break;
+    }
+    return finalName;
   }
 
-  addScorerToTheList(name: string) {
+  addScorerToTheList(name: string, finalGame?: boolean) {
     const scorer = new Scorer(name);
+
     let scorerExists = false;
     this.scorersList.forEach((element) => {
       if (element.name === scorer.name) {
         scorerExists = true;
         element.totalGoluri++;
+        if (finalGame) {
+          scorer.goluriFinala++;
+        }
       }
     });
     if (!scorerExists) {
+      if (finalGame) {
+        scorer.goluriFinala++;
+      }
       this.scorersList.push(scorer);
     }
   }
@@ -199,22 +220,14 @@ export class FormService {
       return -1;
     } else if (scorer1.totalGoluri < scorer2.totalGoluri) {
       return 1;
-    }
-    if (scorer1.goluriFinala > scorer2.goluriFinala) {
-      return -1;
-    } else if (scorer1.goluriFinala < scorer2.goluriFinala) {
-      return 1;
+    } else if (scorer1.totalGoluri == scorer2.totalGoluri) {
+      if (scorer1.goluriFinala > scorer2.goluriFinala) {
+        return -1;
+      } else if (scorer1.goluriFinala < scorer2.goluriFinala) {
+        return 1;
+      }
     }
     return 0;
-  }
-
-  noGoalsDraw(event: Event) {
-    const targetEl = event.target as HTMLElement;
-    const selectElement = targetEl.parentNode.querySelector(
-      '.selectare'
-    ) as HTMLSelectElement;
-    const gamesElements = targetEl.parentElement.querySelectorAll('.match');
-    this.changeMatchStatus(gamesElements, selectElement.value);
   }
 
   changeMatchStatus(games: NodeListOf<Element>, teamColor: string) {
