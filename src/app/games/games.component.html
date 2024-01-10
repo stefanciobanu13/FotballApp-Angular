@@ -536,7 +536,7 @@
               <ng-container *ngFor="let scorer of (leftTeamSF | async)?.controls; let i = index;">
                 <input type="text" [formControlName]="i" class="scorers" list="players" />
                 <i class="fas fa-trash-alt delete-button"
-                  (click)="form.removeScorer(i,form.getTeamArray('smallFinal','leftTeam'))"></i>
+                  (click)="form.removeScorer(i,form.getTeamArray('smallFinal','leftTeam'),true)"></i>
               </ng-container>
             </div>
           </div>
@@ -552,7 +552,7 @@
               <ng-container *ngFor="let scorer of (righTeamSF | async)?.controls; let i = index;">
                 <input type="text" [formControlName]="i" class="scorers" list="players" />
                 <i class="fas fa-trash-alt delete-button"
-                  (click)="form.removeScorer(i,form.getTeamArray('smallFinal','rightTeam'))"></i>
+                  (click)="form.removeScorer(i,form.getTeamArray('smallFinal','rightTeam'),true)"></i>
               </ng-container>
             </div>
           </div>

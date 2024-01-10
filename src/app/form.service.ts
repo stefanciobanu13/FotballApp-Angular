@@ -87,39 +87,42 @@ export class FormService {
       '.inputs'
     ) as HTMLInputElement;
     const scorerName = inputListElement.value;
-    const gameNr = button.parentNode.querySelector('h3').innerHTML;
-    const gamesElements = button.parentElement.querySelectorAll('.match');
-    this.addScorerToTheList(scorerName);
-    this.changeMatchStatus(gamesElements, selectElement.value);
-    const selectValue = selectElement.value;
-    let selectedScorers: FormArray;
-    switch (selectValue) {
-      case 'Verde':
-        selectedScorers = this.getTeamArray(
-          `game${gameNr.charAt(gameNr.length - 1)}`,
-          'teamGreen'
-        );
-        break;
-      case 'Portocaliu':
-        selectedScorers = this.getTeamArray(
-          `game${gameNr.charAt(gameNr.length - 1)}`,
-          'teamOrange'
-        );
-        break;
-      case 'Albastru':
-        selectedScorers = this.getTeamArray(
-          `game${gameNr.charAt(gameNr.length - 1)}`,
-          'teamBlue'
-        );
-        break;
-      case 'Gri':
-        selectedScorers = selectedScorers = this.getTeamArray(
-          `game${gameNr.charAt(gameNr.length - 1)}`,
-          'teamGray'
-        );
-        break;
+    if (scorerName != '') {
+      inputListElement.value = '';
+      const gameNr = button.parentNode.querySelector('h3').innerHTML;
+      const gamesElements = button.parentElement.querySelectorAll('.match');
+      this.addScorerToTheList(scorerName);
+      this.changeMatchStatus(gamesElements, selectElement.value);
+      const selectValue = selectElement.value;
+      let selectedScorers: FormArray;
+      switch (selectValue) {
+        case 'Verde':
+          selectedScorers = this.getTeamArray(
+            `game${gameNr.charAt(gameNr.length - 1)}`,
+            'teamGreen'
+          );
+          break;
+        case 'Portocaliu':
+          selectedScorers = this.getTeamArray(
+            `game${gameNr.charAt(gameNr.length - 1)}`,
+            'teamOrange'
+          );
+          break;
+        case 'Albastru':
+          selectedScorers = this.getTeamArray(
+            `game${gameNr.charAt(gameNr.length - 1)}`,
+            'teamBlue'
+          );
+          break;
+        case 'Gri':
+          selectedScorers = selectedScorers = this.getTeamArray(
+            `game${gameNr.charAt(gameNr.length - 1)}`,
+            'teamGray'
+          );
+          break;
+      }
+      selectedScorers.push(this.fb.control(`${scorerName}`));
     }
-    selectedScorers.push(this.fb.control(`${scorerName}`));
   }
 
   adaugaMarcatorFinala(event: Event) {
@@ -131,40 +134,43 @@ export class FormService {
       '.inputs'
     ) as HTMLInputElement;
     const scorerName = inputListElement.value;
-    const gameNr = button.parentNode.querySelector('h3').innerHTML;
-    const gamesElements = button.parentElement.querySelectorAll('.match');
-    this.addScorerToTheList(scorerName, true);
-    this.changeMatchStatus(gamesElements, selectElement.value);
-    const selectValue = selectElement.value;
-    let selectedScorers: FormArray;
-    const teamPosition = button.parentNode.querySelector(`.${selectValue}`);
-    switch (selectValue) {
-      case 'Verde':
-        selectedScorers = this.getTeamArray(
-          `${this.convertFinalName(gameNr)}`,
-          `${this.ranking.getTeamPosition(selectValue)}`
-        );
-        break;
-      case 'Portocaliu':
-        selectedScorers = this.getTeamArray(
-          `${this.convertFinalName(gameNr)}`,
-          `${this.ranking.getTeamPosition(selectValue)}`
-        );
-        break;
-      case 'Albastru':
-        selectedScorers = this.getTeamArray(
-          `${this.convertFinalName(gameNr)}`,
-          `${this.ranking.getTeamPosition(selectValue)}`
-        );
-        break;
-      case 'Gri':
-        selectedScorers = this.getTeamArray(
-          `${this.convertFinalName(gameNr)}`,
-          `${this.ranking.getTeamPosition(selectValue)}`
-        );
-        break;
+    if (scorerName != '') {
+      inputListElement.value = '';
+      const gameNr = button.parentNode.querySelector('h3').innerHTML;
+      const gamesElements = button.parentElement.querySelectorAll('.match');
+      this.addScorerToTheList(scorerName, true);
+      this.changeMatchStatus(gamesElements, selectElement.value);
+      const selectValue = selectElement.value;
+      let selectedScorers: FormArray;
+      const teamPosition = button.parentNode.querySelector(`.${selectValue}`);
+      switch (selectValue) {
+        case 'Verde':
+          selectedScorers = this.getTeamArray(
+            `${this.convertFinalName(gameNr)}`,
+            `${this.ranking.getTeamPosition(selectValue)}`
+          );
+          break;
+        case 'Portocaliu':
+          selectedScorers = this.getTeamArray(
+            `${this.convertFinalName(gameNr)}`,
+            `${this.ranking.getTeamPosition(selectValue)}`
+          );
+          break;
+        case 'Albastru':
+          selectedScorers = this.getTeamArray(
+            `${this.convertFinalName(gameNr)}`,
+            `${this.ranking.getTeamPosition(selectValue)}`
+          );
+          break;
+        case 'Gri':
+          selectedScorers = this.getTeamArray(
+            `${this.convertFinalName(gameNr)}`,
+            `${this.ranking.getTeamPosition(selectValue)}`
+          );
+          break;
+      }
+      selectedScorers.push(this.fb.control(`${scorerName}`));
     }
-    selectedScorers.push(this.fb.control(`${scorerName}`));
   }
 
   convertFinalName(name: string) {
@@ -182,14 +188,13 @@ export class FormService {
 
   addScorerToTheList(name: string, finalGame?: boolean) {
     const scorer = new Scorer(name);
-
     let scorerExists = false;
     this.scorersList.forEach((element) => {
-      if (element.name === scorer.name) {
+      if (element.name == name) {
         scorerExists = true;
         element.totalGoluri++;
         if (finalGame) {
-          scorer.goluriFinala++;
+          element.goluriFinala++;
         }
       }
     });
@@ -201,7 +206,11 @@ export class FormService {
     }
   }
 
-  removeGoalFromScorer(index: number, formArray: FormArray) {
+  removeGoalFromScorer(
+    index: number,
+    formArray: FormArray,
+    finalMatch?: boolean
+  ) {
     const playerNameToRemove = formArray.at(index)?.value;
     for (let i = this.scorersList.length - 1; i >= 0; i--) {
       const scorer = this.scorersList[i];
@@ -210,6 +219,9 @@ export class FormService {
           this.scorersList.splice(i, 1);
         } else {
           scorer.totalGoluri--;
+          if (!finalMatch) {
+            scorer.goluriFinala--;
+          }
         }
       }
     }
@@ -239,9 +251,14 @@ export class FormService {
     });
   }
 
-  removeScorer(i: number, theFormArray: FormArray) {
-    this.removeGoalFromScorer(i, theFormArray);
-    theFormArray.removeAt(i);
+  removeScorer(i: number, theFormArray: FormArray, finalMatch?: boolean) {
+    if (!finalMatch) {
+      this.removeGoalFromScorer(i, theFormArray, true);
+      theFormArray.removeAt(i);
+    } else {
+      this.removeGoalFromScorer(i, theFormArray);
+      theFormArray.removeAt(i);
+    }
   }
 
   onSubmit() {
