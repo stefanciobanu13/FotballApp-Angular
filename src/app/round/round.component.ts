@@ -4,12 +4,11 @@ import {
   Renderer2,
   ElementRef,
   ViewChild,
-  ChangeDetectionStrategy,Output
+  ChangeDetectionStrategy,
+  Output,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {
-  NgModel
-} from '@angular/forms';
+import { Form, FormArray, FormBuilder, NgModel } from '@angular/forms';
 import { concat } from 'rxjs';
 import { FormService } from '../form.service';
 
@@ -29,6 +28,7 @@ export class RoundComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public form: FormService,
+    private fb: FormBuilder
   ) {}
 
   selectedPlayer: string = '';
@@ -40,6 +40,8 @@ export class RoundComponent implements OnInit {
   teamGray: string[] = [];
   scorer: string = '';
   table: any;
+  roundNr: string;
+  roundDate: string;
 
   ngOnInit(): void {
     this.http
@@ -108,15 +110,26 @@ export class RoundComponent implements OnInit {
           const cellContent = rows[i].cells[j].innerText;
           if (cellContent !== '') {
             this.players.push(cellContent);
-          } else {
-            alert('The number of players should be 24');
-            //   this.players = [];    DECOMMENT THIS IS THE FURURE
-            return;
-          }
+          } 
+          // else {
+          //   // alert('The number of players should be 24');
+          //   //   this.players = [];    DECOMMENT THIS IS THE FURURE
+          //   return;
+          // }
         }
       }
     }
     this.createTeams();
+    this.submitTeamsToForm(this.teamOrange, 'teamOrange');
+    this.submitTeamsToForm(this.teamGreen, 'teamGreen');
+    this.submitTeamsToForm(this.teamBlue, 'teamBlue');
+    this.submitTeamsToForm(this.teamGray, 'teamGray');
+    this.submitRoundInfo();
+  }
+
+  submitRoundInfo() {
+    this.form.footballForm.get('roundNumber').setValue(this.roundNr);
+    this.form.footballForm.get('roundDate').setValue(this.roundDate);
   }
 
   createTeams() {
@@ -153,5 +166,14 @@ export class RoundComponent implements OnInit {
         }
       }
     }
+  }
+
+  submitTeamsToForm(team: any[], teamName: string) {
+    const formArrayTeam = this.form.footballForm.get(
+      `${teamName}`
+    ) as FormArray;
+    team.forEach((scorer) => {
+      formArrayTeam.push(this.fb.control(`${scorer}`));
+    });
   }
 }

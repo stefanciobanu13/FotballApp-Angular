@@ -15,6 +15,7 @@ import { RankingService } from '../ranking.service';
 import { Observable } from 'rxjs';
 import { FormArray } from '@angular/forms';
 import { UpdateScoreDirective } from '../update-score.directive';
+import { SaveFormDataService } from '../save-form-data.service';
 
 @Component({
   selector: 'app-games',
@@ -64,7 +65,8 @@ export class GamesComponent implements OnInit, AfterViewInit {
   constructor(
     public form: FormService,
     public ranking: RankingService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private saveService: SaveFormDataService
   ) {}
 
   ngOnInit(): void {
@@ -136,5 +138,16 @@ export class GamesComponent implements OnInit, AfterViewInit {
         cell.remove;
       }
     }
+  }
+
+  saveRound() {
+    this.saveService.saveFormData(this.form.footballForm).subscribe(
+      (response) => {
+        console.log('POST request successful', response);
+      },
+      (error) => {
+        console.error('POST request failed', error);
+      }
+    );
   }
 }
