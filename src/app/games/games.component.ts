@@ -13,7 +13,7 @@ import {
 import { FormService } from '../form.service';
 import { RankingService } from '../ranking.service';
 import { Observable } from 'rxjs';
-import { FormArray } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { UpdateScoreDirective } from '../update-score.directive';
 import { SaveFormDataService } from '../save-form-data.service';
 
@@ -29,7 +29,6 @@ export class GamesComponent implements OnInit, AfterViewInit {
   @ViewChildren('matchRef') matchRefs: QueryList<ElementRef>;
   @ViewChildren(UpdateScoreDirective)
   updateScoreDirectives: QueryList<UpdateScoreDirective>;
-
   clasament: Observable<any[]>;
   teamOrangeG1: Observable<FormArray>;
   teamGreenG1: Observable<FormArray>;
@@ -66,7 +65,8 @@ export class GamesComponent implements OnInit, AfterViewInit {
     public form: FormService,
     public ranking: RankingService,
     private cdr: ChangeDetectorRef,
-    private saveService: SaveFormDataService
+    private saveService: SaveFormDataService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -141,13 +141,8 @@ export class GamesComponent implements OnInit, AfterViewInit {
   }
 
   saveRound() {
-    this.saveService.saveFormData(this.form.footballForm).subscribe(
-      (response) => {
-        console.log('POST request successful', response);
-      },
-      (error) => {
-        console.error('POST request failed', error);
-      }
-    );
+    const ranking = this.form.footballForm.get('teamsRanking');
+    ranking.setValue(this.ranking.clasament);
+    this.saveService.saveFormData(this.form.footballForm);
   }
 }

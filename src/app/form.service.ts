@@ -66,12 +66,13 @@ export class FormService {
         leftTeam: this.fb.array([]),
         rightTeam: this.fb.array([]),
       }),
-      teamOrange: this.fb.array([]),
-      teamGreen: this.fb.array([]),
-      teamBlue: this.fb.array([]),
-      teamGray: this.fb.array([]),
+      teamPortocaliu: this.fb.array([]),
+      teamVerde: this.fb.array([]),
+      teamAlbastru: this.fb.array([]),
+      teamGri: this.fb.array([]),
       roundNumber: this.fb.control(''),
-      roundDate:this.fb.control('')
+      roundDate: this.fb.control(''),
+      teamsRanking: this.fb.control([]),
     });
   }
 

@@ -100,7 +100,7 @@ export class RoundComponent implements OnInit {
     }
   }
 
-  submitTeams() {
+ async submitTeams() {
     this.removeDeleteButtons();
     const table = document.getElementById('teams');
     if (table) {
@@ -110,7 +110,7 @@ export class RoundComponent implements OnInit {
           const cellContent = rows[i].cells[j].innerText;
           if (cellContent !== '') {
             this.players.push(cellContent);
-          } 
+          }
           // else {
           //   // alert('The number of players should be 24');
           //   //   this.players = [];    DECOMMENT THIS IS THE FURURE
@@ -119,20 +119,20 @@ export class RoundComponent implements OnInit {
         }
       }
     }
-    this.createTeams();
-    this.submitTeamsToForm(this.teamOrange, 'teamOrange');
-    this.submitTeamsToForm(this.teamGreen, 'teamGreen');
-    this.submitTeamsToForm(this.teamBlue, 'teamBlue');
-    this.submitTeamsToForm(this.teamGray, 'teamGray');
-    this.submitRoundInfo();
+   await this.createTeams();
+   await  this.submitTeamsToForm(this.teamOrange, 'teamPortocaliu');
+   await this.submitTeamsToForm(this.teamGreen, 'teamVerde');
+   await this.submitTeamsToForm(this.teamBlue, 'teamAlbastru');
+   await this.submitTeamsToForm(this.teamGray, 'teamGri');
+   await this.submitRoundInfo();
   }
 
-  submitRoundInfo() {
+ async submitRoundInfo() {
     this.form.footballForm.get('roundNumber').setValue(this.roundNr);
     this.form.footballForm.get('roundDate').setValue(this.roundDate);
   }
 
-  createTeams() {
+ async createTeams() {
     const rows = this.table.getElementsByTagName('tr');
     let cellContent;
     for (let j = 0; j < rows[0].cells.length; j++) {
@@ -168,7 +168,7 @@ export class RoundComponent implements OnInit {
     }
   }
 
-  submitTeamsToForm(team: any[], teamName: string) {
+  async submitTeamsToForm(team: any[], teamName: string) {
     const formArrayTeam = this.form.footballForm.get(
       `${teamName}`
     ) as FormArray;
