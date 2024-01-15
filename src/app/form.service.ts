@@ -23,40 +23,40 @@ export class FormService {
   constructor(private fb: FormBuilder, private ranking: RankingService) {
     this.footballForm = this.fb.group({
       game1: this.fb.group({
-        teamOrange: this.fb.array([]),
         teamGreen: this.fb.array([]),
+        teamOrange: this.fb.array([]),
         teamBlue: this.fb.array([]),
         teamGray: this.fb.array([]),
       }),
       game2: this.fb.group({
         teamOrange: this.fb.array([]),
-        teamGreen: this.fb.array([]),
         teamBlue: this.fb.array([]),
         teamGray: this.fb.array([]),
+        teamGreen: this.fb.array([]),
       }),
       game3: this.fb.group({
-        teamOrange: this.fb.array([]),
         teamGreen: this.fb.array([]),
         teamBlue: this.fb.array([]),
+        teamOrange: this.fb.array([]),
         teamGray: this.fb.array([]),
       }),
       game4: this.fb.group({
-        teamOrange: this.fb.array([]),
-        teamGreen: this.fb.array([]),
         teamBlue: this.fb.array([]),
+        teamGreen: this.fb.array([]),
         teamGray: this.fb.array([]),
+        teamOrange: this.fb.array([]),
       }),
       game5: this.fb.group({
-        teamOrange: this.fb.array([]),
         teamGreen: this.fb.array([]),
-        teamBlue: this.fb.array([]),
         teamGray: this.fb.array([]),
+        teamBlue: this.fb.array([]),
+        teamOrange: this.fb.array([]),
       }),
       game6: this.fb.group({
         teamOrange: this.fb.array([]),
         teamGreen: this.fb.array([]),
-        teamBlue: this.fb.array([]),
         teamGray: this.fb.array([]),
+        teamBlue: this.fb.array([]),
       }),
       smallFinal: this.fb.group({
         leftTeam: this.fb.array([]),
