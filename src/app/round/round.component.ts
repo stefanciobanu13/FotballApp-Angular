@@ -1,15 +1,11 @@
 import {
   Component,
   OnInit,
-  Renderer2,
-  ElementRef,
-  ViewChild,
   ChangeDetectionStrategy,
   Output,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Form, FormArray, FormBuilder, NgModel } from '@angular/forms';
-import { concat } from 'rxjs';
+import {FormArray, FormBuilder} from '@angular/forms';
 import { FormService } from '../form.service';
 
 interface Player {

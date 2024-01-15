@@ -1,17 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  FormArray,
-  FormRecord,
-  AbstractControl,
+import {FormGroup,FormArray,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { forkJoin } from 'rxjs';
-import { catchError, find, map } from 'rxjs/operators';
-import { OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +33,7 @@ export class SaveFormDataService {
     await this.savePlayersAttendance(teamBlue, this.teamBlueId);
     const teamGray = this.form.get('teamGri').value;
     await this.savePlayersAttendance(teamGray, this.teamGrayId);
-    await this.saveGame(this.form.get('game1')as FormGroup, 1);
+    await this.saveGame(this.form.get('game1') as FormGroup, 1);
     await this.saveGame(this.form.get('game2') as FormGroup, 2);
     await this.saveGame(this.form.get('game3') as FormGroup, 3);
     await this.saveGame(this.form.get('game4') as FormGroup, 4);
@@ -56,7 +46,6 @@ export class SaveFormDataService {
     const newDateFormat = `${month}.${day}.${year}`;
     return newDateFormat;
   }
-
   async saveRound() {
     const roundNr = this.form.get('roundNumber').value;
     const roundDate = this.form.get('roundDate').value;
@@ -77,7 +66,6 @@ export class SaveFormDataService {
       throw error;
     }
   }
-
   async saveTeam(teamColor: string) {
     const teamJSON = {
       color: teamColor,
@@ -128,7 +116,6 @@ export class SaveFormDataService {
     });
     return golaveraj;
   }
-
   async savePlayersAttendance(team: any[], teamId: number) {
     for (const player of team) {
       const playersName = player;
@@ -154,7 +141,6 @@ export class SaveFormDataService {
       }
     }
   }
-
   async findPlayer(firstName: string, lastName: string) {
     const theParams = {
       lastName: lastName,
@@ -184,101 +170,169 @@ export class SaveFormDataService {
       lastName: lastName,
     };
   }
-
   async saveGame(game: FormGroup, gameNr: number) {
     let team1: FormArray;
     let team2: FormArray;
     let team3: FormArray;
     let team4: FormArray;
-
     switch (gameNr) {
       case 1:
-        team1 = game.get('teamGreen') as FormArray
+        team1 = game.get('teamGreen') as FormArray;
         team2 = game.get('teamOrange') as FormArray;
-        await this.postGame(
+        const game1Id = await this.postGame(
           team1,
           team2,
           1,
           this.teamGreenId,
           this.teamOrangeId
         );
+        await this.saveGoals(game1Id, team1, team2);
         team3 = game.get('teamBlue') as FormArray;
         team4 = game.get('teamGray') as FormArray;
-        await this.postGame(team3, team4, 2, this.teamBlueId, this.teamGrayId);
+        const game2Id = await this.postGame(
+          team3,
+          team4,
+          2,
+          this.teamBlueId,
+          this.teamGrayId
+        );
+        await this.saveGoals(game2Id, team3, team4);
+
         break;
       case 2:
         team1 = game.get('teamOrange') as FormArray;
         team2 = game.get('teamBlue') as FormArray;
-        await this.postGame(
+        const game3Id = await this.postGame(
           team1,
           team2,
           3,
           this.teamOrangeId,
           this.teamBlueId
         );
+        await this.saveGoals(game3Id, team1, team2);
         team3 = game.get('teamGray') as FormArray;
         team4 = game.get('teamGreen') as FormArray;
-        await this.postGame(team3, team4, 4, this.teamGrayId, this.teamGreenId);
+        const game4Id = await this.postGame(
+          team3,
+          team4,
+          4,
+          this.teamGrayId,
+          this.teamGreenId
+        );
+        await this.saveGoals(game4Id, team3, team4);
         break;
       case 3:
         team1 = game.get('teamGreen') as FormArray;
         team2 = game.get('teamBlue') as FormArray;
-        await this.postGame(team1, team2, 5, this.teamGreenId, this.teamBlueId);
+        const game5Id = await this.postGame(
+          team1,
+          team2,
+          5,
+          this.teamGreenId,
+          this.teamBlueId
+        );
+        await this.saveGoals(game5Id, team1, team2);
         team3 = game.get('teamOrange') as FormArray;
         team4 = game.get('teamGray') as FormArray;
-        await this.postGame(
+        const game6Id = await this.postGame(
           team3,
           team4,
           6,
           this.teamOrangeId,
           this.teamGrayId
         );
+        await this.saveGoals(game6Id, team3, team4);
         break;
       case 4:
         team1 = game.get('teamBlue') as FormArray;
         team2 = game.get('teamGreen') as FormArray;
-        await this.postGame(team1, team2, 7, this.teamBlueId, this.teamGreenId);
+        const game7Id = await this.postGame(
+          team1,
+          team2,
+          7,
+          this.teamBlueId,
+          this.teamGreenId
+        );
+        await this.saveGoals(game7Id, team1, team2);
         team3 = game.get('teamGray') as FormArray;
         team4 = game.get('teamOrange') as FormArray;
-        await this.postGame(
+        const game8Id = await this.postGame(
           team3,
           team4,
           8,
           this.teamGrayId,
           this.teamOrangeId
         );
+        await this.saveGoals(game8Id, team3, team4);
         break;
       case 5:
         team1 = game.get('teamGreen') as FormArray;
         team2 = game.get('teamGray') as FormArray;
-        await this.postGame(team1, team2, 9, this.teamGreenId, this.teamGrayId);
+        const game9Id = await this.postGame(
+          team1,
+          team2,
+          9,
+          this.teamGreenId,
+          this.teamGrayId
+        );
+        await this.saveGoals(game9Id, team1, team2);
         team3 = game.get('teamBlue') as FormArray;
         team4 = game.get('teamOrange') as FormArray;
-        await this.postGame(
+        const game10Id = await this.postGame(
           team3,
           team4,
           10,
           this.teamBlueId,
           this.teamOrangeId
         );
+         await this.saveGoals(game10Id, team3, team4);
         break;
       case 6:
         team1 = game.get('teamOrange') as FormArray;
         team2 = game.get('teamGreen') as FormArray;
-        await this.postGame(
+        const game11Id = await this.postGame(
           team1,
           team2,
           11,
           this.teamOrangeId,
           this.teamGreenId
         );
+        await this.saveGoals(game11Id, team1, team2);
         team3 = game.get('teamGray') as FormArray;
         team4 = game.get('teamBlue') as FormArray;
-        await this.postGame(team3, team4, 12, this.teamGrayId, this.teamBlueId);
+        const game12Id = await this.postGame(
+          team3,
+          team4,
+          12,
+          this.teamGrayId,
+          this.teamBlueId
+        );
+        await this.saveGoals(game12Id, team3, team4);
         break;
     }
   }
-
+  async saveGoals(gameId: number, team1: FormArray, team2: FormArray) {
+    for (let i = 0; i < team1.controls.length; i++) {
+      if (team1.controls[i].value != '') {
+        const names1 = this.extractNames(team1.controls[i].value);
+        const playerId1 = await this.findPlayer(
+          names1.firstName,
+          names1.lastName
+        );
+        await this.postGoal(playerId1, gameId);
+      }
+    }
+    for (let j = 0; j < team2.controls.length; j++) {
+      if (team2.controls[j].value != '') {
+        const names2 = this.extractNames(team2.controls[j].value);
+        const playerId2 = await this.findPlayer(
+          names2.firstName,
+          names2.lastName
+        );
+        await this.postGoal(playerId2, gameId);
+      }
+    }
+  }
   async postGame(
     team1: FormArray,
     team2: FormArray,
@@ -306,10 +360,32 @@ export class SaveFormDataService {
       const response: any = await this.http
         .post(`${this.url}games`, jsonData)
         .toPromise();
-      return Promise.resolve();
+      const gameId = response.id;
+      return Promise.resolve(gameId);
     } catch (error) {
       console.error('Error in save game:', error);
       throw error;
     }
+  }
+  async postGoal(playerId: number, gameId: number) {
+    const jsonData = {
+      playerId: playerId,
+      gameId: gameId,
+    };
+    try {
+      const response: any = await this.http
+        .post(`${this.url}goals`, jsonData, { responseType: 'text' })
+        .toPromise();
+      return Promise.resolve();
+    } catch (error) {
+      console.log('Error in saving goal', error);
+      throw error;
+    }
+  }
+  async saveSmallFinal(){
+      const game = this.form.get('smallFinal')as FormArray;
+      const team1 = game.get('team1') as FormArray
+      const team2 = game.get('team2') as FormArray
+
   }
 }
