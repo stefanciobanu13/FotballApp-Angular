@@ -309,6 +309,10 @@ export class SaveFormDataService {
         );
         await this.saveGoals(game12Id, team3, team4);
         break;
+        case 13:
+           team1 = game.get('leftTeam') as FormArray
+           team2 = game.get('rightTeam') as FormArray
+      //  const game13Id = await this.postGame(game13Id,team1,team2);
     }
   }
   async saveGoals(gameId: number, team1: FormArray, team2: FormArray) {

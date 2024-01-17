@@ -218,18 +218,19 @@ export class RankingService {
   sortClasament() {
     this.clasament.sort(function (team1, team2) {
       if (team1.punctaj == team2.punctaj) {
-        //console.log(team1,team2,getBetterTeamByDirectMatch(team1,team2));
+        this.updateClasamentSelectiv.bind(this)();
+        console.log(team1,team2,this.getBetterTeamByDirectMatch(team1,team2));
         if (this.getBetterTeamByDirectMatch(team1, team2) == 0) {
           if (team1.golaveraj == team2.golaveraj) {
             if (team1.goluri_date == team2.goluri_date) {
               // change table loc with the name PENALTY
-              var clasament1 = document.getElementById('clasamentBody');
-              var rows = clasament1.querySelectorAll('tr');
+              const clasament1 = document.getElementById('clasamentBody');
+              const rows = clasament1.querySelectorAll('tr');
               rows.forEach((row) => {
                 const teamName = row.children[1].textContent.trim();
                 if (teamName === team1.culoare) {
                   row.children[0].textContent = 'PENALTY';
-                  // row.children[0].style.color = 'red';
+                  //  row.children[0].style.color = 'red';
                 } else if (teamName === team2.culoare) {
                   row.children[0].textContent = 'PENALTY';
                   //  row.children[0].style.color = 'red';
@@ -259,16 +260,16 @@ export class RankingService {
 
   getBetterTeamByDirectMatch(team1, team2) {
     const leftTeam = this.clasamentSelectiv.find(
-      (team) => team.culoare === team1.color
+      (team) => team.culoare === team1.culoare
     );
     const rightTeam = this.clasamentSelectiv.find(
-      (team) => team.culoare === team2.color
+      (team) => team.culoare === team2.culoare
     );
     if (leftTeam && rightTeam) {
-      if (leftTeam[`vs_${team2.color}`] > rightTeam[`vs_${team1.color}`]) {
+      if (leftTeam[`vs_${team2.culoare}`] > rightTeam[`vs_${team1.culoare}`]) {
         return -1;
       } else if (
-        leftTeam[`vs_${team2.color}`] < rightTeam[`vs_${team1.color}`]
+        leftTeam[`vs_${team2.culoare}`] < rightTeam[`vs_${team1.culoare}`]
       ) {
         return 1;
       }
@@ -288,23 +289,21 @@ export class RankingService {
           return -1;
         } else if (team1.golaveraj < team2.golaveraj) {
           return 1;
+        } else if (team1.golaveraj == team2.golaveraj) {
+          if (team1.goluri_date > team2.goluri_date) {
+            return -1;
+          } else if (team1.goluri_date < team2.goluri_date) {
+            return 1;
+          }
         }
-        if (team1.goluri_date > team2.goluri_date) {
-          return -1;
-        } else if (team1.goluri_date < team2.goluri_date) {
-          return 1;
-        }
+      } else {
+        return this.getBetterTeamByDirectMatch(team1, team2);
       }
-      if (team1.golaveraj > team2.golaveraj) {
-        return -1;
-      } else if (team1.golaveraj < team2.golaveraj) {
-        return 1;
-      }
-      if (team1.goluri_date > team2.goluri_date) {
-        return -1;
-      } else if (team1.goluri_date < team2.goluri_date) {
-        return 1;
-      }
+      // if (team1.golaveraj > team2.golaveraj) {
+      //   return -1;
+      // } else if (team1.golaveraj < team2.golaveraj) {
+      //   return 1;
+      // }
     }
     return 0;
   };
