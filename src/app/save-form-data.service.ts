@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {FormGroup,FormArray,
-} from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +38,8 @@ export class SaveFormDataService {
     await this.saveGame(this.form.get('game4') as FormGroup, 4);
     await this.saveGame(this.form.get('game5') as FormGroup, 5);
     await this.saveGame(this.form.get('game6') as FormGroup, 6);
+    await this.saveGame(this.form.get('smallFinal') as FormGroup, 13);
+    await this.saveGame(this.form.get('bigFinal') as FormGroup, 14);
   }
 
   convertDateFormat(inputDate: string): string {
@@ -285,7 +286,7 @@ export class SaveFormDataService {
           this.teamBlueId,
           this.teamOrangeId
         );
-         await this.saveGoals(game10Id, team3, team4);
+        await this.saveGoals(game10Id, team3, team4);
         break;
       case 6:
         team1 = game.get('teamOrange') as FormArray;
@@ -309,11 +310,77 @@ export class SaveFormDataService {
         );
         await this.saveGoals(game12Id, team3, team4);
         break;
-        case 13:
-           team1 = game.get('leftTeam') as FormArray
-           team2 = game.get('rightTeam') as FormArray
-      //  const game13Id = await this.postGame(game13Id,team1,team2);
+      case 13:
+        team1 = game.get('leftTeam') as FormArray;
+        team2 = game.get('rightTeam') as FormArray;
+        const teamsRanking = this.form.get('teamsRanking').value;
+        let team1SfId;
+        let team2SfId;
+        for (let i = 0; i < teamsRanking.length; i++) {
+          if (i == 2) {
+            const team1Color = teamsRanking[i].culoare;
+            team1SfId = this.getTeamsId(team1Color);
+          } else {
+            if (i == 3) {
+              const team2Color = teamsRanking[i].culoare;
+              team2SfId = this.getTeamsId(team2Color);
+            }
+          }
+        }
+        const game13SfId = await this.postGame(
+          team1,
+          team2,
+          13,
+          team1SfId,
+          team2SfId
+        );
+        await this.saveGoals(game13SfId, team1, team2);
+        break;
+      case 14:
+        team1 = game.get('leftTeam') as FormArray;
+        team2 = game.get('rightTeam') as FormArray;
+        const teams2Ranking = this.form.get('teamsRanking').value;
+        let team1BfId;
+        let team2BfId;
+        for (let i = 0; i < teams2Ranking.length; i++) {
+          if (i == 1) {
+            const team1Color = teams2Ranking[i].culoare;
+            team1BfId = this.getTeamsId(team1Color);
+          } else {
+            if (i == 0) {
+              const team2Color = teams2Ranking[i].culoare;
+              team2BfId = this.getTeamsId(team2Color);
+            }
+          }
+        }
+        const game14BfId = await this.postGame(
+          team1,
+          team2,
+          14,
+          team1BfId,
+          team2BfId
+        );
+        await this.saveGoals(game14BfId, team1, team2);
     }
+  }
+
+  getTeamsId(teamColor: string) {
+    let teamId: number;
+    switch (teamColor) {
+      case 'Portocaliu':
+        teamId = this.teamOrangeId;
+        break;
+      case 'Verde':
+        teamId = this.teamGreenId;
+        break;
+      case 'Albastru':
+        teamId = this.teamBlueId;
+        break;
+      case 'Gri':
+        teamId = this.teamGrayId;
+        break;
+    }
+    return teamId;
   }
   async saveGoals(gameId: number, team1: FormArray, team2: FormArray) {
     for (let i = 0; i < team1.controls.length; i++) {
@@ -385,11 +452,5 @@ export class SaveFormDataService {
       console.log('Error in saving goal', error);
       throw error;
     }
-  }
-  async saveSmallFinal(){
-      const game = this.form.get('smallFinal')as FormArray;
-      const team1 = game.get('team1') as FormArray
-      const team2 = game.get('team2') as FormArray
-
   }
 }
