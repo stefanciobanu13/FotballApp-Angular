@@ -163,7 +163,7 @@ export class SaveFormDataService {
     }
   }
   extractNames(fullName: string) {
-    const parts = fullName.split(/(?=[A-Z])/); // Split on uppercase letters
+    const parts = fullName.split(/\s+/);
     const firstName = parts[0];
     const lastName = parts.slice(1).join(' ');
     return {

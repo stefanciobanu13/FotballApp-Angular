@@ -47,7 +47,7 @@ export class RoundComponent implements OnInit {
         if (playersListElement) {
           response.forEach((player) => {
             const option = document.createElement('option');
-            option.value = `${player.firstName}${player.lastName}`;
+            option.value = `${player.firstName} ${player.lastName}`;
             playersListElement.appendChild(option);
           });
         }
