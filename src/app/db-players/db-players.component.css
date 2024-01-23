@@ -1,0 +1,153 @@
+* {
+ font-family: Calibri Neue, Arial, sans-serif;
+ font-weight: bold
+}
+
+body {
+ background-image: linear-gradient(hsl(85, 43%, 88%) 25%, hsl);
+  font-width: bold;
+}
+
+h1,
+table {
+ text-align: center;
+}
+
+table {
+ border-collapse: collapse;
+ width: 50%;
+ margin: 0 auto 5rem;
+
+}
+
+th,
+td {
+ padding: 1.5rem;
+ font-size: 1.3rem;
+}
+
+tr {
+ background: #E5E5E5;
+ font-width: bold;
+ font-family: Calibri;
+}
+
+tr,
+td {
+ transition: .4s ease-in;
+ font-width: bold;
+ font-family: Calibri;
+
+}
+
+tr:first-child {
+ background: #E5E5E5;
+}
+
+tr:nth-child(even) {
+ background: hsla(60, 2%, 88%, 0.7);
+}
+
+td:empty {
+ background: #E5E5E5;
+}
+
+tr:hover:not(#firstrow),
+tr:hover td:empty {
+ background: #E5E5E5;
+ pointer-events: visible;
+}
+
+tr:hover:not(#firstrow) {
+ transform: scale(1.2);
+ font-weight: 700;
+ box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.5);
+}
+
+#title {
+ text-align: center;
+ color: white;
+ font-family: Calibri;
+ font-width: bold;
+ font-size: 30px;
+}
+
+input {
+
+ background-color: cornsilk;
+ color: black;
+ border-radius: 12px;
+ font-family: Calibri;
+ font-size: 24px;
+ font-weight: bold;
+ padding: 32px 40px;
+}
+
+input:hover {
+ box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+h3 {
+ text-align: center;
+ font-width: bold;
+ color: white;
+}
+
+h2 {
+ text-align: center;
+ font-width: bold;
+ color: white;
+}
+
+
+table {
+ size: A3;
+}
+
+
+.startButton {
+ text-align: center;
+}
+
+.backLink a {
+ color: white;
+ display: block;
+ font-size: 20px;
+ text-align: center;
+}
+
+#orangeName {
+ color: orange;
+}
+
+#greenName {
+ color: lawngreen;
+}
+
+#blueName {
+ color: dodgerblue;
+}
+
+
+#grayName {
+ color: lightgray;
+}
+
+
+.logout-link {
+ position: absolute;
+ top: 10px;
+ right: 10px;
+ font-size: medium;
+}
+
+th{
+  color: rgba(3, 10, 60, 0.681);
+}
+#delete{
+  color: rgb(134, 7, 7)!important;
+}
+#update{
+  color: rgb(6, 89, 6);
+}

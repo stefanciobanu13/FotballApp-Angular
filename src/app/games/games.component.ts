@@ -3,7 +3,6 @@ import {
   Input,
   OnInit,
   ChangeDetectionStrategy,
-  ViewChild,
   ViewChildren,
   ElementRef,
   AfterViewInit,
