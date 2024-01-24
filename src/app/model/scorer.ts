@@ -1,7 +1,25 @@
 export class Scorer {
-  name: string;
-  goluriFinala: number;
-  totalGoluri: number;
+  private _name: string;
+  public get name(): string {
+    return this._name;
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  private _goluriFinala: number;
+  public get goluriFinala(): number {
+    return this._goluriFinala;
+  }
+  public set goluriFinala(value: number) {
+    this._goluriFinala = value;
+  }
+  private _totalGoluri: number;
+  public get totalGoluri(): number {
+    return this._totalGoluri;
+  }
+  public set totalGoluri(value: number) {
+    this._totalGoluri = value;
+  }
 
   constructor(name: string) {
     this.name = name;

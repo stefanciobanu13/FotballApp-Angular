@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ElementRef, Renderer2, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
+import { Scorer } from '../model/scorer';
 
 interface GameInfo {
   gameNumber: number;
@@ -17,7 +18,7 @@ interface GameInfo {
   templateUrl: './display-rounds.component.html',
   styleUrl: './display-rounds.component.css',
 })
-export class DisplayRoundsComponent implements OnInit, AfterViewInit {
+export class DisplayRoundsComponent implements OnInit {
   games: any[];
   leftTeamSF: string;
   rightTeamSF: string;
@@ -79,6 +80,7 @@ export class DisplayRoundsComponent implements OnInit, AfterViewInit {
   table: any;
   teams = ['Portocaliu', 'Verde', 'Albastru', 'Gri'];
   scorersList: any[];
+  goalgetters: Scorer[];
   @ViewChildren('matchRef') matchRefs: QueryList<ElementRef>;
 
   constructor(
@@ -124,13 +126,10 @@ export class DisplayRoundsComponent implements OnInit, AfterViewInit {
     ]).then(() => {
       this.cdr.markForCheck();
       this.clasament.sort(this.teamComparator);
+      this.goalgetters = this.setGoalgettersList(this.scorersList);
+      this.goalgetters.sort(this.compareScorers);
     });
   }
-
-  ngAfterViewInit(): void {
-    // this.sortClasament();
-  }
-
   populateGames() {
     let index = 1;
     this.games.forEach((element) => {
@@ -223,52 +222,7 @@ export class DisplayRoundsComponent implements OnInit, AfterViewInit {
     }
     return null;
   }
-  async sortClasament() {
-    console.log('inside sort clasament');
-    this.clasament.sort((team1, team2) => {
-      if (team1.punctaj == team2.punctaj) {
-        console.log(
-          team1,
-          team2,
-          this.getBetterTeamByDirectMatch(team1, team2)
-        );
-        if (this.getBetterTeamByDirectMatch(team1, team2) == 0) {
-          if (team1.golaveraj == team2.golaveraj) {
-            if (team1.goluri_date == team2.goluri_date) {
-              // change table loc with the name PENALTY
-              const clasament1 = document.getElementById('clasamentBody');
-              const rows = clasament1.querySelectorAll('tr');
-              rows.forEach((row) => {
-                const teamName = row.children[1].textContent.trim();
-                if (teamName === team1.culoare) {
-                  row.children[0].textContent = 'PENALTY';
-                  //  row.children[0].style.color = 'red';
-                } else if (teamName === team2.culoare) {
-                  row.children[0].textContent = 'PENALTY';
-                  //  row.children[0].style.color = 'red';
-                }
-              }, this);
-              return 0;
-            } else if (team1.goluri_date > team2.goluri_date) {
-              return -1;
-            } else {
-              return 1;
-            }
-          } else if (team1.golaveraj > team2.golaveraj) {
-            return -1;
-          } else {
-            return 1;
-          }
-        } else {
-          return this.getBetterTeamByDirectMatch(team1, team2);
-        }
-      } else if (team1.punctaj > team2.punctaj) {
-        return -1;
-      } else {
-        return 1;
-      }
-    });
-  }
+
   getBetterTeamByDirectMatch(team1, team2) {
     const leftTeam = this.clasamentSelectiv.find(
       (team) => team.culoare === team1.culoare
@@ -288,8 +242,6 @@ export class DisplayRoundsComponent implements OnInit, AfterViewInit {
     return 0;
   }
   teamComparator = (team1, team2) => {
-    console.log('inside the sort function');
-    console.log(this.clasament);
     if (team1.punctaj > team2.punctaj) {
       return -1;
     } else if (team1.punctaj < team2.punctaj) {
@@ -337,6 +289,27 @@ export class DisplayRoundsComponent implements OnInit, AfterViewInit {
     });
   }
 
+  setGoalgettersList(scorerData: any[]): Scorer[] {
+    const scorerMap = new Map<string, Scorer>();
+    for (const scorerInfo of scorerData) {
+      const { playerName, numberOfGoals, matchNumber } = scorerInfo;
+      if (scorerMap.has(playerName)) {
+        const scorer = scorerMap.get(playerName)!;
+        scorer.totalGoluri += numberOfGoals;
+        if (matchNumber === 13 || matchNumber === 14) {
+          scorer.goluriFinala += numberOfGoals;
+        }
+      } else {
+        const newScorer = new Scorer(playerName);
+        newScorer.totalGoluri = numberOfGoals;
+        newScorer.goluriFinala =
+          matchNumber === 13 || matchNumber === 14 ? numberOfGoals : 0;
+        scorerMap.set(playerName, newScorer);
+      }
+    }
+    return Array.from(scorerMap.values());
+  }
+
   appendGoals() {
     this.scorersList.forEach((element) => {
       const matchNumber = element.matchNumber;
@@ -350,5 +323,20 @@ export class DisplayRoundsComponent implements OnInit, AfterViewInit {
         ulEl.appendChild(ilElement);
       }
     });
+  }
+
+  compareScorers(scorer1: Scorer, scorer2: Scorer): number {
+    if (scorer1.totalGoluri > scorer2.totalGoluri) {
+      return -1;
+    } else if (scorer1.totalGoluri < scorer2.totalGoluri) {
+      return 1;
+    } else if (scorer1.totalGoluri == scorer2.totalGoluri) {
+      if (scorer1.goluriFinala > scorer2.goluriFinala) {
+        return -1;
+      } else if (scorer1.goluriFinala < scorer2.goluriFinala) {
+        return 1;
+      }
+    }
+    return 0;
   }
 }

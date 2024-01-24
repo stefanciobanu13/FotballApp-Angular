@@ -467,3 +467,22 @@
       </div>
     </div>
   </div>
+
+  <div class="ptable">
+    <h1 class="headin">Golgheteri</h1>
+    <table class="table table-striped">
+      <tr class="bg info">
+        <th>Locul</th>
+        <th>Nume</th>
+        <th>Goluri Finala</th>
+        <th>Total</th>
+      </tr>
+      <tbody id="golgheteryBody">
+        <tr *ngFor="let scorer of goalgetters; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ scorer.name }}</td>
+          <td>{{ scorer.goluriFinala }}</td>
+          <td>{{ scorer.totalGoluri }}</td>
+      </tbody>
+    </table>
+  </div>
