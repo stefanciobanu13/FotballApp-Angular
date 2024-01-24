@@ -313,3 +313,45 @@ button:hover {
 strong {
  background-color: #283a55 !important
 }
+
+ul {
+  display: flex;
+   flex-wrap: wrap;
+   margin-left: 30%;
+  font-weight: bold;
+ list-style-type: none;
+ color: #000;
+ font-size: 110%!important
+}
+
+il{
+ display: block;
+}
+
+#smallFinalUl1{
+  display: flex;
+ font-size: 85%!important
+}
+#smallFinalUl2 {
+  display: flex;
+ font-size: 85% !important
+}
+#bigFinalUl1 {
+  display: flex;
+ font-size: 85% !important
+}
+#bigFinalUl2 {
+  display: flex;
+ font-size: 85% !important
+}
+
+ul#smallFinalUl1 li,
+ul#smallFinalUl2 li,
+ul#bigFinalUl1 li,
+ul#bigFinalUl2 li {
+ display: block;
+}
+
+.finalsName{
+  color: rgba(247, 250, 159, 0.87)!important
+}

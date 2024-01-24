@@ -5,6 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TeamSortPipe implements PipeTransform {
   transform(array: any[], comparator: (a: any, b: any) => number): any[] {
+    console.log('inside the pipe');
+
     if (!Array.isArray(array) || !comparator) {
       return array;
     }

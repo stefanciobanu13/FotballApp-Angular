@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Renderer2, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TeamSortPipe } from '../team-sort.pipe';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface GameInfo {
   gameNumber: number;
@@ -17,7 +17,7 @@ interface GameInfo {
   templateUrl: './display-rounds.component.html',
   styleUrl: './display-rounds.component.css',
 })
-export class DisplayRoundsComponent implements OnInit {
+export class DisplayRoundsComponent implements OnInit, AfterViewInit {
   games: any[];
   leftTeamSF: string;
   rightTeamSF: string;
@@ -78,36 +78,57 @@ export class DisplayRoundsComponent implements OnInit {
   attendanceList: any[];
   table: any;
   teams = ['Portocaliu', 'Verde', 'Albastru', 'Gri'];
+  scorersList: any[];
   @ViewChildren('matchRef') matchRefs: QueryList<ElementRef>;
 
   constructor(
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.http
-      .get<GameInfo[]>('http://localhost:8080/games/byRoundId/210')
-      .subscribe((response) => {
-        this.games = response;
-        this.populateGames();
-        this.leftTeamSF = response[12].team1Color;
-        this.rightTeamSF = response[12].team2Color;
-        this.leftTeamBF = response[13].team1Color;
-        this.rightTeamBF = response[13].team2Color;
-        this.matchRefs.forEach((element) => {
-          let matchElement = element.nativeElement;
-          this.updateClasament(matchElement);
-        });
-      });
+    Promise.all([
+      this.http
+        .get<GameInfo[]>('http://localhost:8080/games/byRoundId/214')
+        .toPromise()
+        .then((response) => {
+          this.games = response;
+          this.populateGames();
+          this.leftTeamSF = response[12].team1Color;
+          this.rightTeamSF = response[12].team2Color;
+          this.leftTeamBF = response[13].team1Color;
+          this.rightTeamBF = response[13].team2Color;
+          this.matchRefs.forEach((element) => {
+            let matchElement = element.nativeElement;
+            this.updateClasament(matchElement);
+          });
+        }),
 
-    this.http
-      .get<GameInfo[]>('http://localhost:8080/players/byRoundId/210')
-      .subscribe((response) => {
-        this.attendanceList = response;
-        this.attendPlayers();
-      });
+      this.http
+        .get<GameInfo[]>('http://localhost:8080/players/byRoundId/214')
+        .toPromise()
+        .then((response) => {
+          this.attendanceList = response;
+          this.attendPlayers();
+        }),
+
+      this.http
+        .get<GameInfo[]>('http://localhost:8080/players/scorersByRoundId/214')
+        .toPromise()
+        .then((response) => {
+          this.scorersList = response;
+          this.appendGoals();
+        }),
+    ]).then(() => {
+      this.cdr.markForCheck();
+      this.clasament.sort(this.teamComparator);
+    });
+  }
+
+  ngAfterViewInit(): void {
+    // this.sortClasament();
   }
 
   populateGames() {
@@ -124,7 +145,7 @@ export class DisplayRoundsComponent implements OnInit {
 
   attendPlayers() {
     this.attendanceList.forEach((element) => {
-       let emptyPosition = this.findFirstEmptyPosition();
+      let emptyPosition = this.findFirstEmptyPosition();
       this.table = document.getElementById('teams') as HTMLTableElement;
       if (emptyPosition && this.table) {
         const { row, column } = emptyPosition;
@@ -194,7 +215,6 @@ export class DisplayRoundsComponent implements OnInit {
     const score = match.children[0].children[1].textContent;
     return [leftTeamName, rightTeamName, score];
   }
-
   getTeamName(color: string) {
     for (var i = 0; i < this.clasament.length; i++) {
       if (this.clasament[i].culoare == color) {
@@ -203,8 +223,9 @@ export class DisplayRoundsComponent implements OnInit {
     }
     return null;
   }
-  sortClasament() {
-    this.clasament.sort(function (team1, team2) {
+  async sortClasament() {
+    console.log('inside sort clasament');
+    this.clasament.sort((team1, team2) => {
       if (team1.punctaj == team2.punctaj) {
         console.log(
           team1,
@@ -249,10 +270,10 @@ export class DisplayRoundsComponent implements OnInit {
     });
   }
   getBetterTeamByDirectMatch(team1, team2) {
-    const leftTeam = this.clasament.find(
+    const leftTeam = this.clasamentSelectiv.find(
       (team) => team.culoare === team1.culoare
     );
-    const rightTeam = this.clasament.find(
+    const rightTeam = this.clasamentSelectiv.find(
       (team) => team.culoare === team2.culoare
     );
     if (leftTeam && rightTeam) {
@@ -267,11 +288,14 @@ export class DisplayRoundsComponent implements OnInit {
     return 0;
   }
   teamComparator = (team1, team2) => {
+    console.log('inside the sort function');
+    console.log(this.clasament);
     if (team1.punctaj > team2.punctaj) {
       return -1;
     } else if (team1.punctaj < team2.punctaj) {
       return 1;
     } else if (team1.punctaj == team2.punctaj) {
+      this.updateClasamentSelectiv.bind(this)();
       if (this.getBetterTeamByDirectMatch(team1, team2) == 0) {
         if (team1.golaveraj > team2.golaveraj) {
           return -1;
@@ -290,4 +314,41 @@ export class DisplayRoundsComponent implements OnInit {
     }
     return 0;
   };
+  updateClasamentSelectiv() {
+    const matches = document.querySelectorAll('.match');
+    matches.forEach((match) => {
+      const matchInformations = this.getMatchInformations(match);
+      const leftTeamName = matchInformations[0];
+      const rightTeamName = matchInformations[1];
+      const score = matchInformations[2];
+      const scoreInt = score.split('-');
+      const leftTeamGoals = parseInt(scoreInt[0]);
+      const rightTeamGoals = parseInt(scoreInt[1]);
+      const leftTeam = this.clasamentSelectiv.find(
+        (team) => team.culoare === leftTeamName
+      );
+      const rightTeam = this.clasamentSelectiv.find(
+        (team) => team.culoare === rightTeamName
+      );
+      if (leftTeam && rightTeam) {
+        leftTeam[`vs_${rightTeamName}`] += leftTeamGoals - rightTeamGoals;
+        rightTeam[`vs_${leftTeamName}`] += rightTeamGoals - leftTeamGoals;
+      }
+    });
+  }
+
+  appendGoals() {
+    this.scorersList.forEach((element) => {
+      const matchNumber = element.matchNumber;
+      const game = document.getElementById(`match${matchNumber}`);
+      const teamColor = element.teamColor;
+      const goalsNr = element.numberOfGoals;
+      for (let i = 1; i <= goalsNr; i++) {
+        const ulEl = game.querySelector(`.list-${teamColor}`);
+        const ilElement = this.renderer.createElement('il');
+        ilElement.textContent = element.playerName;
+        ulEl.appendChild(ilElement);
+      }
+    });
+  }
 }

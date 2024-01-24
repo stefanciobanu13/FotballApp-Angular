@@ -94,6 +94,34 @@
 </table>
 <br /> <br />
 
+<h1 class="headin">Clasament</h1>
+<table class="table table-striped">
+  <tr class="bg info">
+    <th>Locul</th>
+    <th>Echipa</th>
+    <th>V</th>
+    <th>E</th>
+    <th>I</th>
+    <th>GP</th>
+    <th>GD</th>
+    <th>G+/-</th>
+    <th>Punctaj</th>
+  </tr>
+
+  <tbody id="clasamentBody"></tbody>
+  <tr *ngFor="let echipa of this.clasament; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ echipa.culoare }}</td>
+    <td>{{ echipa.victorii }}</td>
+    <td>{{ echipa.egaluri }}</td>
+    <td>{{ echipa.infrangeri }}</td>
+    <td>{{ echipa.goluri_primite }}</td>
+    <td>{{ echipa.goluri_date }}</td>
+    <td>{{ echipa.golaveraj }}</td>
+    <td>{{ echipa.punctaj }}</td>
+  </tr>
+</table>
+
 <div id="turneu">
   <h2>Tur</h2>
 
@@ -388,43 +416,18 @@
       </div>
     </div>
   </div>
-  <h1 class="headin">Clasament</h1>
-  <table class="table table-striped">
-    <tr class="bg info">
-      <th>Locul</th>
-      <th>Echipa</th>
-      <th>V</th>
-      <th>E</th>
-      <th>I</th>
-      <th>GP</th>
-      <th>GD</th>
-      <th>G+/-</th>
-      <th>Punctaj</th>
-    </tr>
 
-    <tbody id="clasamentBody"></tbody>
-    <tr *ngFor="let echipa of this.clasament | teamSort:this.teamComparator; let i = index">
-      <td>{{ i + 1 }}</td>
-      <td>{{ echipa.culoare }}</td>
-      <td>{{ echipa.victorii }}</td>
-      <td>{{ echipa.egaluri }}</td>
-      <td>{{ echipa.infrangeri }}</td>
-      <td>{{ echipa.goluri_primite }}</td>
-      <td>{{ echipa.goluri_date }}</td>
-      <td>{{ echipa.golaveraj }}</td>
-      <td>{{ echipa.punctaj }}</td>
-    </tr>
-  </table>
 
   <h3 class="finalsName">Finala mica</h3>
 
-  <div #smallFinal class="match" id="match13">
+  <div #smallFinal class="final" id="match13">
     <div class="match-info">
       <div class="left-team-info">
         <div class="team-name">
           <div class={{leftTeamSF}}>
             {{leftTeamSF}}
           </div>
+          <ul id="smallFinalUl1" [class]="'left-scorers list-' + leftTeamSF"></ul>
         </div>
       </div>
       <strong id="scorG13">0 - 0 </strong>
@@ -434,19 +437,21 @@
           <div class={{rightTeamSF}}>
             {{rightTeamSF}}
           </div>
+          <ul id="smallFinalUl2" [class]="'right-scorers list-' + rightTeamSF"></ul>
         </div>
       </div>
     </div>
   </div>
 
   <h3 class="finalsName">Finala mare</h3>
-  <div #bigFinal class="match" id="match14">
+  <div #bigFinal class="final" id="match14">
     <div class="match-info">
       <div class="left-team-info">
         <div class="team-name">
           <div class={{leftTeamBF}}>
             {{leftTeamBF}}
           </div>
+          <ul id="bigFinalUl1" [class]="'left-scorers list-' + leftTeamBF"></ul>
         </div>
       </div>
 
@@ -457,6 +462,7 @@
           <div class={{rightTeamBF}}>
             {{rightTeamBF}}
           </div>
+          <ul id="bigFinalUl2" [class]="'right-scorers list-' + rightTeamBF"></ul>
         </div>
       </div>
     </div>
