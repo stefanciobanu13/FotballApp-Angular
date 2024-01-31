@@ -508,6 +508,35 @@
     </div>
   </div>
 
+  <button id="introdu23" type="button" (click)="triggerUpdate()">Update Clasament</button>
+  <h1 class="headin">Clasament</h1>
+  <table class="table table-striped">
+    <tr class="bg info">
+      <th>Locul</th>
+      <th>Echipa</th>
+      <th>V</th>
+      <th>E</th>
+      <th>I</th>
+      <th>GP</th>
+      <th>GD</th>
+      <th>G+/-</th>
+      <th>Punctaj</th>
+    </tr>
+
+    <tbody id="clasamentBody"></tbody>
+    <tr *ngFor="let echipa of this.ranking.clasament | teamSort:this.ranking.teamComparator; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ echipa.culoare }}</td>
+      <td>{{ echipa.victorii }}</td>
+      <td>{{ echipa.egaluri }}</td>
+      <td>{{ echipa.infrangeri }}</td>
+      <td>{{ echipa.goluri_primite }}</td>
+      <td>{{ echipa.goluri_date }}</td>
+      <td>{{ echipa.golaveraj }}</td>
+      <td>{{ echipa.punctaj }}</td>
+    </tr>
+  </table>
+
   <div class="finala" id="finale">
     <div formGroupName="smallFinal">
       <h3 class="finalsName">Finala mica</h3>
@@ -524,7 +553,7 @@
       </select>
       <button id="introdu24" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
 
-      <div #smallFinal class="match" id="finalaMica" appUpdateScore [attr.match-status]="matchStatus1">
+      <div #smallFinal class="match" id="finalaMica" appUpdateFinalScore>
         <div class="match-info">
           <div class="left-team-info">
             <div class="team-name">
@@ -566,7 +595,7 @@
       <datalist class="dropDown" id="players">
         <option *ngFor="let player of players" [value]="player"></option>
       </datalist>
-      <button id="introdu3" type="button" (click)="form.adaugaMarcatorFinala($event)">Introdu</button>
+      <button id="introdu4" type="button" (click)="form.adaugaMarcatorFinala($event)">Introdu</button>
       <br />
       <select id="selectare13" class="selectare">
         <option *ngFor="let key of ['bigFinalLeftTeam', 'bigFinalRightTeam']" [value]="ranking.finals.get(key)">
@@ -575,7 +604,7 @@
       </select>
       <button id="introdu25" type="button" (click)="this.ranking.noGoalsDraw($event)">0 - 0</button>
 
-      <div #bigFinal class="match" id="finalaMare" appUpdateScore [attr.match-status]="matchStatus1">
+      <div #bigFinal class="match" id="finalaMare" appUpdateFinalScore>
         <div class="match-info">
           <div class="left-team-info">
             <div class="team-name">
@@ -611,35 +640,6 @@
         </div>
       </div>
     </div>
-
-    <button id="introdu23" type="button" (click)="triggerUpdate()">Update Clasament</button>
-    <h1 class="headin">Clasament</h1>
-    <table class="table table-striped">
-      <tr class="bg info">
-        <th>Locul</th>
-        <th>Echipa</th>
-        <th>V</th>
-        <th>E</th>
-        <th>I</th>
-        <th>GP</th>
-        <th>GD</th>
-        <th>G+/-</th>
-        <th>Punctaj</th>
-      </tr>
-
-      <tbody id="clasamentBody"></tbody>
-      <tr *ngFor="let echipa of this.ranking.clasament | teamSort:this.ranking.teamComparator; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ echipa.culoare }}</td>
-        <td>{{ echipa.victorii }}</td>
-        <td>{{ echipa.egaluri }}</td>
-        <td>{{ echipa.infrangeri }}</td>
-        <td>{{ echipa.goluri_primite }}</td>
-        <td>{{ echipa.goluri_date }}</td>
-        <td>{{ echipa.golaveraj }}</td>
-        <td>{{ echipa.punctaj }}</td>
-      </tr>
-    </table>
   </div>
 
   <div class="ptable">

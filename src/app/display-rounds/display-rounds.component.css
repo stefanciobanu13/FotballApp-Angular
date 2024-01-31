@@ -1,357 +1,273 @@
+
 body {
- background-color: #f1f1f1;
- font-family: Arial, Helvetica, sans-serif;
+  background-color: #f1f1f1;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+
 h1 {
- text-align: center;
- padding: 10px;
- background: #532855;
- color: #fff
+  text-align: center;
+  padding: 10px;
+  background: #532855;
+  color: #fff
 }
 
 table {
- width: 100%;
+  width: 100%;
 }
 
 tr {
- text-align: center;
+  text-align: center;
 }
 
 td {
- border: 5px solid transparent;
- background-color: #f1f1f1;
- padding: 10px;
- text-align: center;
- display: center;
- color: black;
- width: 25%;
- height: 40px;
+  border: 5px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  display: center;
+  color: black;
+  width: 25%;
+  height: 40px;
 }
 
-td[class="grey"] {
- background-color: lightgrey;
+.grey {
+  background-color: lightgrey;
+
 }
 
-td[class="blue"] {
- background-color: DodgerBlue;
+a.grey,
+a.blue,
+a.green,
+a.orange {
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
 }
 
-td[class="orange"] {
- background-color: orange;
+
+.blue {
+  background-color: DodgerBlue;
 }
 
-td[class="green"] {
- background-color: lightgreen;
+.orange {
+  background-color: orange;
+}
+
+.green {
+  background-color: lightgreen;
 }
 
 div#turneu h2 {
- text-align: center;
- padding: 10px;
- background: #532855;
- color: #fff
+  text-align: center;
+  padding: 10px;
+  background: #532855;
+  color: #fff
 }
 
 div#turneu h3 {
- text-align: center;
- background: #283a55;
- color: #fff;
- padding-bottom: 1%;
- padding-top: 1%;
+  text-align: center;
+  background: #283a55;
+  color: #fff
 }
 
 .etapa {
- background: #283a55;
+  background: #283a55;
 }
 
 .match {
- box-shadow: rgba(0, 0, 0, 0.57) 0px 25px 20px -21px;
- border-radius: 10px;
- margin: 12px auto;
- background: #c8dfed;
+  box-shadow: rgba(0, 0, 0, 0.57) 0px 25px 20px -21px;
+  border-radius: 10px;
+  margin: 12px auto;
+  background: #c8dfed;
 }
 
 .finala {
- box-shadow: rgba(0, 0, 0, 0.57) 0px 25px 20px -21px;
- border-radius: 10px;
- margin: 12px auto;
- background: #8ccdf5;
-}
-
-.clickable-element {
- padding: 10px;
- background-color: #3498db;
- color: #fff;
- text-decoration: none;
- display: inline-block;
- border-radius: 5px;
- transition: background-color 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.57) 0px 25px 20px -21px;
+  border-radius: 10px;
+  margin: 12px auto;
+  background: #8ccdf5;
 }
 
 .match-info strong {
- color: #fff;
- position: absolute;
- right: 50%;
- text-align: center;
- z-index: 1;
- border-radius: 5px;
- height: 36px;
- line-height: 36px;
- top: 30px;
- width: 60px;
- margin-right: -30px
+  color: #fff;
+  position: absolute;
+  right: 50%;
+  text-align: center;
+  z-index: 1;
+  border-radius: 5px;
+  min-height: 36px;
+  line-height: 36px;
+  top: 30px;
+  width: 60px;
+  margin-right: -30px
 }
 
 .match-info {
- position: relative;
- height: 250px;
- line-height: 50px;
+  position: relative;
+  min-height: 100px;
+  display: flex;
+  line-height: 50px;
 }
 
 .right-team-info {
- float: right;
- padding-left: 30px;
- width: 50%;
- position: relative;
- z-index: 2
+  float: right;
+  padding-left: 30px;
+  width: 50%;
+  z-index: 2
 }
 
 .left-team-info {
- float: left;
- padding-right: 0px;
- width: 50%;
- position: absolute;
- z-index: 2;
+  padding-right: 0px;
+  width: 50%;
+  z-index: 2
 }
 
 .team-name {
- text-align: center;
- color: transparent;
- font-size: 20px;
- font-family: "Arial", sans-serif;
- font-weight: bold;
+  text-align: center;
+  color: transparent;
+  font-size: 20px;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
 }
 
-li {
- list-style-type: none;
- height: 20px;
- line-height: 20px;
- font-size: 14px;
- font-family: "Arial", sans-serif;
- font-weight: bold;
- text-align: center;
- padding-right: 30px;
-}
+/* li {
+  list-style-type: none;
+  height: 20%;
+  line-height: 20px;
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  padding-right: 30px;
+} */
 
 .Verde {
- background-color: rgb(10, 145, 28);
- -webkit-background-clip: text;
- margin-bottom: 20px;
+  color: rgb(10, 145, 28);
 }
 
 .Portocaliu {
- background-color: rgb(207, 105, 8);
- -webkit-background-clip: text;
- margin-bottom: 20px;
+  color: rgb(207, 105, 8);
 }
 
 .Albastru {
- background-color: DodgerBlue;
- -webkit-background-clip: text;
- margin-bottom: 20px;
+  color: DodgerBlue;
 }
 
 .Gri {
- background-color: rgb(102, 90, 90);
- -webkit-background-clip: text;
- margin-bottom: 20px;
+  color: rgb(102, 90, 90);
 }
 
 .scor {
- background-color: #283a55;
+  background-color: #283a55;
 }
 
-.autocomplete-items {
- position: absolute;
- border: 1px solid #d4d4d4;
- border-bottom: none;
- border-top: none;
- z-index: 99;
- /*position the autocomplete items to be the same width as the container:*/
- top: 100%;
- left: 0;
- right: 0;
-}
 
-.autocomplete-items div {
- padding: 10px;
- cursor: pointer;
- background-color: #fff;
- border-bottom: 1px solid #d4d4d4;
-}
-
-/*when hovering an item:*/
-.autocomplete-items div:hover {
- background-color: #e9e9e9;
-}
-
-/*when navigating through the items using the arrow keys:*/
-.autocomplete-active {
- background-color: DodgerBlue !important;
- color: #ffffff;
-}
 
 .delete-button {
- display: flex;
- font-size: 110%;
- padding: 0%;
- color: red;
- margin-left: 72%;
- cursor: pointer;
+  font-size: 14px;
+  color: red;
+  margin-left: 5px;
+  cursor: pointer;
 }
+
 
 input[type="text"] {
- padding: 5px;
- font-size: 16px;
- border: 1px solid #ccc;
- border-radius: 5px;
- width: 300px;
- margin-left: 4%;
- margin-right: 2%
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
 }
 
-.scorers {
- display: flex !important;
- margin-left: 30%;
- height: 21%;
- padding: 0 !important;
- width: 40% !important;
- background-color: #ffffff !important;
- margin-top: -10px !important;
- margin-bottom: -4px !important;
- font-weight: bolder
-}
-
-.block-element {
- display: block;
- margin-bottom: 10px;
-}
-
-.recomandari {
- list-style: none;
- padding: 0;
- margin: 0;
- border: 1px solid #ccc;
- border-radius: 5px;
- background-color: #fff;
- max-height: 200px;
- overflow-y: auto;
- width: 298px;
- position: absolute;
- z-index: 6;
- opacity: 0;
-}
-
-.recomandari li {
- padding: 5px 10px;
- cursor: pointer;
-}
-
-.recomandari li:hover {
- background-color: #f9f9f9;
-}
-
-.recomandari:not(:empty) {
- opacity: 1;
- background-color: rgba(255, 255, 255, 1);
-}
-
-.recomandari:empty {
- opacity: 0;
- background-color: transparent;
-}
 
 button {
- padding: 8px 16px;
- font-size: 16px;
- border: none;
- border-radius: 5px;
- background-color: #007BFF;
- color: #fff;
- cursor: pointer;
- margin-right: 3%;
+  padding: 8px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
 }
 
 button:hover {
- background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .finala ul li {
- color: black;
+  color: red;
+  display: block;
 }
 
 .selectare {
- padding: 8px;
- font-size: 16px;
- border: 1px solid #ccc;
- border-radius: 5px;
- background-color: white;
- width: 100px;
- margin-left: 4%;
- margin-right: 6%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  width: 100px;
 }
 
 .selectare option {
- padding: 8px;
+  padding: 8px;
 }
 
-.finalsName {
- text-align: center;
- padding-top: 3%;
- padding-bottom: 3%;
-}
 strong {
- background-color: #283a55 !important
+  background-color: #283a55 !important
 }
 
 ul {
-  display: flex;
-   flex-wrap: wrap;
-   margin-left: 30%;
+  color: #000!important;
+  font-size: 80% !important;
+  margin-right: 5%;
+  display: block;
+}
+
+il {
+display: block;
+  color: black;
+  height: 20%;
+  line-height: 20px;
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
   font-weight: bold;
- list-style-type: none;
- color: #000;
- font-size: 110%!important
+  text-align: center;
+  padding-right: 30px;
 }
 
-il{
- display: block;
+.finalsName {
+  color: rgb(239, 227, 114)!important;
 }
+ 
 
-#smallFinalUl1{
-  display: flex;
- font-size: 85%!important
-}
-#smallFinalUl2 {
-  display: flex;
- font-size: 85% !important
-}
-#bigFinalUl1 {
-  display: flex;
- font-size: 85% !important
-}
-#bigFinalUl2 {
-  display: flex;
- font-size: 85% !important
-}
 
-ul#smallFinalUl1 li,
-ul#smallFinalUl2 li,
-ul#bigFinalUl1 li,
-ul#bigFinalUl2 li {
- display: block;
-}
 
-.finalsName{
-  color: rgba(247, 250, 159, 0.87)!important
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

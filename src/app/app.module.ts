@@ -13,6 +13,7 @@ import { TeamSortPipe } from './team-sort.pipe';
 import { RouterModule, Routes } from '@angular/router';
 import { DisplayRoundsComponent } from './display-rounds/display-rounds.component';
 import { DbPlayersComponent } from './db-players/db-players.component';
+import { UpdateFinalScoreDirective } from './update-final-score.directive';
 
 const appRoute: Routes = [
   { path: 'dd', component: RoundComponent },
@@ -31,6 +32,7 @@ const appRoute: Routes = [
     TeamSortPipe,
     DisplayRoundsComponent,
     DbPlayersComponent,
+    UpdateFinalScoreDirective,
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,8 @@
-<script src="/assets/scripts/script.js" type="module"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     inteGrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
-<script src="/assets/scripts/app2.js" type="module"></script>
-<script src="/assets/scripts/postRequests.js" type="module"></script>
+
 
 <nav class="navbar bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
     <div class="container-fluid">
@@ -30,7 +28,6 @@
 </nav>
 
 <form [formGroup]="form.footballForm" (ngSubmit)="form.onSubmit()">
-
     <div class="informatii-editie">
         <h1>Informatii editie</h1>
         <div class="row">
@@ -48,10 +45,7 @@
             </div>
         </div>
     </div>
-
     <br /><br />
-    <br /><br />
-
     <h1>Prezenta</h1>
     <div class="autocomplete">
         <input id="input_selectPlayer" name="myCountry" placeholder="Player Name" [ngModelOptions]="{standalone: true}"
@@ -61,11 +55,7 @@
             Introdu
         </button>
     </div>
-
     <br /><br />
-    <br /><br />
-    <br /><br />
-
     <button id="getDataButton" type="button" (click)="submitTeams()">Submit</button>
     <table id="teams" (click)="trashIconDelete($event)">
         <tr *ngFor="let player of selectedPlayers">
@@ -112,10 +102,7 @@
         </tr>
     </table>
     <br /><br />
-    <br /><br />
-    <br /><br />
     <app-games [players]="players" [selectedPlayers]="selectedPlayers"></app-games>
-
 </form>
 
 <router-outlet></router-outlet>

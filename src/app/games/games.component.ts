@@ -65,7 +65,6 @@ export class GamesComponent implements OnInit, AfterViewInit {
     public ranking: RankingService,
     private cdr: ChangeDetectorRef,
     private saveService: SaveFormDataService,
-    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {

@@ -155,6 +155,8 @@ export class RankingService {
       match.id == 'match12' &&
       match.getAttribute('match-status') == 'played match'
     ) {
+      console.log("inside update clasament",match);
+      
       await this.setTheFinals(match);
     }
   }
@@ -182,6 +184,8 @@ export class RankingService {
     });
   }
   setTheFinals(match: HTMLElement): Promise<void> {
+    console.log("inside set the finals",match);
+    
     if (match.id == 'match12') {
       this.clasament.sort(this.teamComparator);
       this.finals.set('smallFinalLeftTeam', this.clasament.at(2).culoare);
@@ -189,6 +193,8 @@ export class RankingService {
       this.finals.set('bigFinalLeftTeam', this.clasament.at(0).culoare);
       this.finals.set('bigFinalRightTeam', this.clasament.at(1).culoare);
     }
+    console.log(this.finals);
+    
     return Promise.resolve();
   }
 

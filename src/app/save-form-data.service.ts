@@ -154,11 +154,7 @@ export class SaveFormDataService {
       const playerId = response.id;
       return Promise.resolve(playerId);
     } catch (error) {
-      console.log(
-        'there has been an error in finding player:',
-        lastName,
-        firstName
-      );
+      console.log('there has been an error in finding player:', firstName,lastName);
       throw error;
     }
   }
@@ -187,7 +183,7 @@ export class SaveFormDataService {
           this.teamGreenId,
           this.teamOrangeId
         );
-        await this.saveGoals(game1Id, team1, team2);
+        await this.saveGoals(game1Id, team1, team2, this.teamGreenId,this.teamOrangeId);
         team3 = game.get('teamBlue') as FormArray;
         team4 = game.get('teamGray') as FormArray;
         const game2Id = await this.postGame(
@@ -197,7 +193,7 @@ export class SaveFormDataService {
           this.teamBlueId,
           this.teamGrayId
         );
-        await this.saveGoals(game2Id, team3, team4);
+        await this.saveGoals(game2Id, team3, team4,this.teamBlueId,this.teamGrayId);
 
         break;
       case 2:
@@ -210,7 +206,7 @@ export class SaveFormDataService {
           this.teamOrangeId,
           this.teamBlueId
         );
-        await this.saveGoals(game3Id, team1, team2);
+        await this.saveGoals(game3Id, team1, team2,this.teamOrangeId,this.teamBlueId);
         team3 = game.get('teamGray') as FormArray;
         team4 = game.get('teamGreen') as FormArray;
         const game4Id = await this.postGame(
@@ -220,7 +216,7 @@ export class SaveFormDataService {
           this.teamGrayId,
           this.teamGreenId
         );
-        await this.saveGoals(game4Id, team3, team4);
+        await this.saveGoals(game4Id, team3, team4,this.teamGrayId,this.teamGreenId);
         break;
       case 3:
         team1 = game.get('teamGreen') as FormArray;
@@ -232,7 +228,7 @@ export class SaveFormDataService {
           this.teamGreenId,
           this.teamBlueId
         );
-        await this.saveGoals(game5Id, team1, team2);
+        await this.saveGoals(game5Id, team1, team2,this.teamGreenId,this.teamBlueId);
         team3 = game.get('teamOrange') as FormArray;
         team4 = game.get('teamGray') as FormArray;
         const game6Id = await this.postGame(
@@ -242,7 +238,7 @@ export class SaveFormDataService {
           this.teamOrangeId,
           this.teamGrayId
         );
-        await this.saveGoals(game6Id, team3, team4);
+        await this.saveGoals(game6Id, team3, team4,this.teamOrangeId,this.teamGrayId);
         break;
       case 4:
         team1 = game.get('teamBlue') as FormArray;
@@ -254,7 +250,7 @@ export class SaveFormDataService {
           this.teamBlueId,
           this.teamGreenId
         );
-        await this.saveGoals(game7Id, team1, team2);
+        await this.saveGoals(game7Id, team1, team2,this.teamBlueId,this.teamGreenId);
         team3 = game.get('teamGray') as FormArray;
         team4 = game.get('teamOrange') as FormArray;
         const game8Id = await this.postGame(
@@ -264,7 +260,7 @@ export class SaveFormDataService {
           this.teamGrayId,
           this.teamOrangeId
         );
-        await this.saveGoals(game8Id, team3, team4);
+        await this.saveGoals(game8Id, team3, team4,this.teamGrayId,this.teamOrangeId);
         break;
       case 5:
         team1 = game.get('teamGreen') as FormArray;
@@ -276,7 +272,7 @@ export class SaveFormDataService {
           this.teamGreenId,
           this.teamGrayId
         );
-        await this.saveGoals(game9Id, team1, team2);
+        await this.saveGoals(game9Id, team1, team2,this.teamGreenId,this.teamGrayId);
         team3 = game.get('teamBlue') as FormArray;
         team4 = game.get('teamOrange') as FormArray;
         const game10Id = await this.postGame(
@@ -286,7 +282,7 @@ export class SaveFormDataService {
           this.teamBlueId,
           this.teamOrangeId
         );
-        await this.saveGoals(game10Id, team3, team4);
+        await this.saveGoals(game10Id, team3, team4,this.teamBlueId,this.teamOrangeId);
         break;
       case 6:
         team1 = game.get('teamOrange') as FormArray;
@@ -298,7 +294,7 @@ export class SaveFormDataService {
           this.teamOrangeId,
           this.teamGreenId
         );
-        await this.saveGoals(game11Id, team1, team2);
+        await this.saveGoals(game11Id, team1, team2,this.teamOrangeId,this.teamGreenId);
         team3 = game.get('teamGray') as FormArray;
         team4 = game.get('teamBlue') as FormArray;
         const game12Id = await this.postGame(
@@ -308,7 +304,7 @@ export class SaveFormDataService {
           this.teamGrayId,
           this.teamBlueId
         );
-        await this.saveGoals(game12Id, team3, team4);
+        await this.saveGoals(game12Id, team3, team4,this.teamGrayId,this.teamBlueId);
         break;
       case 13:
         team1 = game.get('leftTeam') as FormArray;
@@ -334,7 +330,7 @@ export class SaveFormDataService {
           team1SfId,
           team2SfId
         );
-        await this.saveGoals(game13SfId, team1, team2);
+        await this.saveGoals(game13SfId, team1, team2,team1SfId,team2SfId);
         break;
       case 14:
         team1 = game.get('leftTeam') as FormArray;
@@ -360,7 +356,7 @@ export class SaveFormDataService {
           team1BfId,
           team2BfId
         );
-        await this.saveGoals(game14BfId, team1, team2);
+        await this.saveGoals(game14BfId, team1, team2,team1BfId,team2BfId);
     }
   }
 
@@ -382,7 +378,7 @@ export class SaveFormDataService {
     }
     return teamId;
   }
-  async saveGoals(gameId: number, team1: FormArray, team2: FormArray) {
+  async saveGoals(gameId: number, team1: FormArray, team2: FormArray, team1Id:number,team2Id:number) {
     for (let i = 0; i < team1.controls.length; i++) {
       if (team1.controls[i].value != '') {
         const names1 = this.extractNames(team1.controls[i].value);
@@ -390,7 +386,7 @@ export class SaveFormDataService {
           names1.firstName,
           names1.lastName
         );
-        await this.postGoal(playerId1, gameId);
+        await this.postGoal(playerId1, gameId,team1Id);
       }
     }
     for (let j = 0; j < team2.controls.length; j++) {
@@ -400,7 +396,7 @@ export class SaveFormDataService {
           names2.firstName,
           names2.lastName
         );
-        await this.postGoal(playerId2, gameId);
+        await this.postGoal(playerId2, gameId,team2Id);
       }
     }
   }
@@ -438,10 +434,11 @@ export class SaveFormDataService {
       throw error;
     }
   }
-  async postGoal(playerId: number, gameId: number) {
+  async postGoal(playerId: number, gameId: number, teamId:number) {
     const jsonData = {
       playerId: playerId,
       gameId: gameId,
+      teamId:teamId
     };
     try {
       const response: any = await this.http

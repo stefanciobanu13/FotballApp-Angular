@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Renderer2, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
 import { Scorer } from '../model/scorer';
 
 interface GameInfo {
@@ -86,14 +85,13 @@ export class DisplayRoundsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private renderer: Renderer2,
-    private cdr: ChangeDetectorRef
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
     Promise.all([
       this.http
-        .get<GameInfo[]>('http://localhost:8080/games/byRoundId/214')
+        .get<GameInfo[]>('http://localhost:8080/games/byRoundId/5')
         .toPromise()
         .then((response) => {
           this.games = response;
@@ -106,25 +104,28 @@ export class DisplayRoundsComponent implements OnInit {
             let matchElement = element.nativeElement;
             this.updateClasament(matchElement);
           });
+          console.log(this.games);
         }),
 
       this.http
-        .get<GameInfo[]>('http://localhost:8080/players/byRoundId/214')
+        .get<GameInfo[]>('http://localhost:8080/players/byRoundId/5')
         .toPromise()
         .then((response) => {
           this.attendanceList = response;
           this.attendPlayers();
+          console.log(this.attendanceList);
         }),
 
       this.http
-        .get<GameInfo[]>('http://localhost:8080/players/scorersByRoundId/214')
+        .get<GameInfo[]>('http://localhost:8080/players/scorersByRoundId/5')
         .toPromise()
         .then((response) => {
           this.scorersList = response;
+          console.log(this.scorersList);
+
           this.appendGoals();
         }),
     ]).then(() => {
-      this.cdr.markForCheck();
       this.clasament.sort(this.teamComparator);
       this.goalgetters = this.setGoalgettersList(this.scorersList);
       this.goalgetters.sort(this.compareScorers);

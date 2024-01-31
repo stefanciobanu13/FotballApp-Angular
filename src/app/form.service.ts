@@ -142,7 +142,7 @@ export class FormService {
       const gameNr = button.parentNode.querySelector('h3').innerHTML;
       const gamesElements = button.parentElement.querySelectorAll('.match');
       this.addScorerToTheList(scorerName, true);
-      this.changeMatchStatus(gamesElements, selectElement.value);
+     // this.changeMatchStatus(gamesElements, selectElement.value);
       const selectValue = selectElement.value;
       let selectedScorers: FormArray;
       const teamPosition = button.parentNode.querySelector(`.${selectValue}`);
@@ -222,7 +222,7 @@ export class FormService {
           this.scorersList.splice(i, 1);
         } else {
           scorer.totalGoluri--;
-          if (!finalMatch) {
+          if (finalMatch == true ) {
             scorer.goluriFinala--;
           }
         }
