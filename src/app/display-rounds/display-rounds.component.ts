@@ -91,7 +91,7 @@ export class DisplayRoundsComponent implements OnInit {
   ngOnInit(): void {
     Promise.all([
       this.http
-        .get<GameInfo[]>('http://localhost:8080/games/byRoundId/5')
+        .get<GameInfo[]>('http://localhost:8080/games/byRoundId/8')
         .toPromise()
         .then((response) => {
           this.games = response;
@@ -108,7 +108,7 @@ export class DisplayRoundsComponent implements OnInit {
         }),
 
       this.http
-        .get<GameInfo[]>('http://localhost:8080/players/byRoundId/5')
+        .get<GameInfo[]>('http://localhost:8080/players/byRoundId/8')
         .toPromise()
         .then((response) => {
           this.attendanceList = response;
@@ -117,7 +117,7 @@ export class DisplayRoundsComponent implements OnInit {
         }),
 
       this.http
-        .get<GameInfo[]>('http://localhost:8080/players/scorersByRoundId/5')
+        .get<GameInfo[]>('http://localhost:8080/players/scorersByRoundId/8')
         .toPromise()
         .then((response) => {
           this.scorersList = response;

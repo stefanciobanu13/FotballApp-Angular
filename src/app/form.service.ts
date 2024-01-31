@@ -1,6 +1,4 @@
-import {
-  Injectable,
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Form } from '@angular/forms';
 import { Observable, of, shareReplay } from 'rxjs';
 import { RankingService } from './ranking.service';
@@ -142,7 +140,7 @@ export class FormService {
       const gameNr = button.parentNode.querySelector('h3').innerHTML;
       const gamesElements = button.parentElement.querySelectorAll('.match');
       this.addScorerToTheList(scorerName, true);
-     // this.changeMatchStatus(gamesElements, selectElement.value);
+      // this.changeMatchStatus(gamesElements, selectElement.value);
       const selectValue = selectElement.value;
       let selectedScorers: FormArray;
       const teamPosition = button.parentNode.querySelector(`.${selectValue}`);
@@ -222,7 +220,7 @@ export class FormService {
           this.scorersList.splice(i, 1);
         } else {
           scorer.totalGoluri--;
-          if (finalMatch == true ) {
+          if (finalMatch == true) {
             scorer.goluriFinala--;
           }
         }
@@ -255,7 +253,7 @@ export class FormService {
   }
 
   removeScorer(i: number, theFormArray: FormArray, finalMatch?: boolean) {
-    if (!finalMatch) {
+    if (finalMatch == true) {
       this.removeGoalFromScorer(i, theFormArray, true);
       theFormArray.removeAt(i);
     } else {
