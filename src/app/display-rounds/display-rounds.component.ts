@@ -79,6 +79,7 @@ export class DisplayRoundsComponent implements OnInit {
   table: any;
   teams = ['Portocaliu', 'Verde', 'Albastru', 'Gri'];
   scorersList: any[];
+  ownGoalScorers: any[];
   goalgetters: Scorer[];
   @ViewChildren('matchRef') matchRefs: QueryList<ElementRef>;
 
@@ -91,7 +92,7 @@ export class DisplayRoundsComponent implements OnInit {
   ngOnInit(): void {
     Promise.all([
       this.http
-        .get<GameInfo[]>('http://localhost:8080/games/byRoundId/8')
+        .get<GameInfo[]>('http://localhost:8080/games/byRoundId/11')
         .toPromise()
         .then((response) => {
           this.games = response;
@@ -108,7 +109,7 @@ export class DisplayRoundsComponent implements OnInit {
         }),
 
       this.http
-        .get<GameInfo[]>('http://localhost:8080/players/byRoundId/8')
+        .get<GameInfo[]>('http://localhost:8080/players/byRoundId/11')
         .toPromise()
         .then((response) => {
           this.attendanceList = response;
@@ -117,13 +118,22 @@ export class DisplayRoundsComponent implements OnInit {
         }),
 
       this.http
-        .get<GameInfo[]>('http://localhost:8080/players/scorersByRoundId/8')
+        .get<GameInfo[]>('http://localhost:8080/players/scorersByRoundId/11')
         .toPromise()
         .then((response) => {
           this.scorersList = response;
           console.log(this.scorersList);
-
           this.appendGoals();
+        }),
+      this.http
+        .get<GameInfo[]>(
+          'http://localhost:8080/players/ownGoalscorersByRoundId/11'
+        )
+        .toPromise()
+        .then((response) => {
+          this.ownGoalScorers = response;
+          console.log(this.ownGoalScorers);
+          this.appendOwnGoals();
         }),
     ]).then(() => {
       this.clasament.sort(this.teamComparator);
@@ -321,6 +331,22 @@ export class DisplayRoundsComponent implements OnInit {
         const ulEl = game.querySelector(`.list-${teamColor}`);
         const ilElement = this.renderer.createElement('il');
         ilElement.textContent = element.playerName;
+        ulEl.appendChild(ilElement);
+      }
+    });
+  }
+
+  appendOwnGoals() {
+    this.ownGoalScorers.forEach((element) => {
+      const matchNumber = element.matchNumber;
+      const game = document.getElementById(`match${matchNumber}`);
+      const teamColor = element.teamColor;
+      const goalsNr = element.numberOfGoals;
+      for (let i = 1; i <= goalsNr; i++) {
+        const ulEl = game.querySelector(`.list-${teamColor}`);
+        const ilElement = this.renderer.createElement('il');
+        ilElement.textContent = element.playerName + "(autogol)";
+        ilElement.style.color = 'red';
         ulEl.appendChild(ilElement);
       }
     });

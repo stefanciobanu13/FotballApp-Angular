@@ -159,13 +159,21 @@ export class SaveFormDataService {
     }
   }
   extractNames(fullName: string) {
-    const parts = fullName.split(/\s+/);
-    const firstName = parts[0];
-    const lastName = parts.slice(1).join(' ');
-    return {
-      firstName: firstName,
-      lastName: lastName,
-    };
+const ownGoalPattern = /\([^)]*\)/; 
+let ownGoal = false;
+const match = fullName.match(ownGoalPattern);
+if (match) {
+  ownGoal = true;
+  fullName = fullName.replace(ownGoalPattern, '').trim();
+}
+const parts = fullName.split(/\s+/);
+const firstName = parts[0];
+const lastName = parts.slice(1).join(' ');
+return {
+  firstName: firstName,
+  lastName: lastName,
+  ownGoal: ownGoal,
+};
   }
   async saveGame(game: FormGroup, gameNr: number) {
     let team1: FormArray;
@@ -339,11 +347,11 @@ export class SaveFormDataService {
         let team1BfId;
         let team2BfId;
         for (let i = 0; i < teams2Ranking.length; i++) {
-          if (i == 1) {
+          if (i == 0) {
             const team1Color = teams2Ranking[i].culoare;
             team1BfId = this.getTeamsId(team1Color);
           } else {
-            if (i == 0) {
+            if (i == 1) {
               const team2Color = teams2Ranking[i].culoare;
               team2BfId = this.getTeamsId(team2Color);
             }
@@ -382,21 +390,23 @@ export class SaveFormDataService {
     for (let i = 0; i < team1.controls.length; i++) {
       if (team1.controls[i].value != '') {
         const names1 = this.extractNames(team1.controls[i].value);
+        const ownGoal1 = names1.ownGoal;
         const playerId1 = await this.findPlayer(
           names1.firstName,
           names1.lastName
         );
-        await this.postGoal(playerId1, gameId,team1Id);
+        await this.postGoal(playerId1, gameId,team1Id,ownGoal1);
       }
     }
     for (let j = 0; j < team2.controls.length; j++) {
       if (team2.controls[j].value != '') {
         const names2 = this.extractNames(team2.controls[j].value);
+        const ownGoal2 = names2.ownGoal;
         const playerId2 = await this.findPlayer(
           names2.firstName,
           names2.lastName
         );
-        await this.postGoal(playerId2, gameId,team2Id);
+        await this.postGoal(playerId2, gameId,team2Id,ownGoal2);
       }
     }
   }
@@ -434,11 +444,12 @@ export class SaveFormDataService {
       throw error;
     }
   }
-  async postGoal(playerId: number, gameId: number, teamId:number) {
+  async postGoal(playerId: number, gameId: number, teamId:number,ownGoal:boolean) {
     const jsonData = {
       playerId: playerId,
       gameId: gameId,
-      teamId:teamId
+      teamId:teamId,
+      ownGoal:ownGoal
     };
     try {
       const response: any = await this.http

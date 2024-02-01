@@ -11,7 +11,7 @@
 
 <nav class="navbar bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
   <div class="container-fluid">
-    <a id = "titleA" class="navbar-brand" href="#">Adauga etapa</a>
+    <a id="titleA" class="navbar-brand" href="#">Adauga etapa</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -483,6 +483,23 @@
           <td>{{ scorer.name }}</td>
           <td>{{ scorer.goluriFinala }}</td>
           <td>{{ scorer.totalGoluri }}</td>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ptable">
+    <h1 class="headin">Autogoluri</h1>
+    <table class="table table-striped">
+      <tr class="bg info">
+
+        <th>Nume</th>
+
+      </tr>
+      <tbody id="golgheteryBody">
+        <tr *ngFor="let scorer of ownGoalScorers; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{scorer.playerName}}</td>
+          <td></td>
       </tbody>
     </table>
   </div>

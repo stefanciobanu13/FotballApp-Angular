@@ -64,7 +64,7 @@ export class GamesComponent implements OnInit, AfterViewInit {
     public form: FormService,
     public ranking: RankingService,
     private cdr: ChangeDetectorRef,
-    private saveService: SaveFormDataService,
+    private saveService: SaveFormDataService
   ) {}
 
   ngOnInit(): void {
@@ -139,6 +139,8 @@ export class GamesComponent implements OnInit, AfterViewInit {
   }
 
   saveRound() {
+    console.log('big final is', this.form.footballForm.get('bigFinal'));
+    console.log('the form before saving', this.form);
     const ranking = this.form.footballForm.get('teamsRanking');
     ranking.setValue(this.ranking.clasament);
     this.saveService.saveFormData(this.form.footballForm);
