@@ -14,11 +14,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { DisplayRoundsComponent } from './display-rounds/display-rounds.component';
 import { DbPlayersComponent } from './db-players/db-players.component';
 import { UpdateFinalScoreDirective } from './update-final-score.directive';
+import { ShowRoundComponent } from './show-round/show-round.component';
 
 const appRoute: Routes = [
   { path: 'dd', component: RoundComponent },
-  { path: 'Rounds', component: DisplayRoundsComponent },
-  { path:'Players',component:DbPlayersComponent},
+  { path: 'Rounds/:id', component: ShowRoundComponent },
+ // { path: 'Rounds', component: ShowRoundComponent },
+  { path: 'Editii', component: DisplayRoundsComponent },
+  { path: 'Players', component: DbPlayersComponent },
   { path: '', component: RoundComponent },
 ];
 
@@ -33,6 +36,7 @@ const appRoute: Routes = [
     DisplayRoundsComponent,
     DbPlayersComponent,
     UpdateFinalScoreDirective,
+    ShowRoundComponent,
   ],
   imports: [
     BrowserModule,
