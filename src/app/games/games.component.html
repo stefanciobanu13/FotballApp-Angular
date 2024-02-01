@@ -660,6 +660,22 @@
       </tbody>
     </table>
   </div>
+<br>
+
+  <div class="ptable">
+    <h1 class="headin">Autogoluri</h1>
+    <table class="table table-striped">
+      <tr class="bg info">
+        <th>Nume</th>
+      </tr>
+      <tbody id="golgheteryBody">
+        <tr  *ngFor="let scorer of this.form.ownGoalScorers let i = index" >
+        <td>{{i+1}}</td>
+        <td>{{scorer.name}}</td>
+        <td></td>
+      </tbody>
+    </table>
+  </div>
   <br />
   <br />
   <br />

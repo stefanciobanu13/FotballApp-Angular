@@ -10,6 +10,10 @@ import { Scorer } from './model/scorer';
 export class FormService {
   public footballForm: FormGroup;
   private _scorersList: Array<Scorer> = [];
+  private _ownGoalScorers: Array<Scorer> = [];
+  public get ownGoalScorers(): Array<Scorer> {
+    return this._ownGoalScorers;
+  }
   public get scorersList() {
     return this._scorersList;
   }
@@ -189,6 +193,13 @@ export class FormService {
 
   addScorerToTheList(name: string, finalGame?: boolean) {
     const scorer = new Scorer(name);
+    const ownGoalPattern = /\([^)]*\)/;
+    const match = name.match(ownGoalPattern);
+    if (match) {
+      scorer.name = name.replace(ownGoalPattern, '').trim();
+      this.ownGoalScorers.push(scorer)
+      return;
+    }
     let scorerExists = false;
     this.scorersList.forEach((element) => {
       if (element.name == name) {
@@ -212,7 +223,19 @@ export class FormService {
     formArray: FormArray,
     finalMatch?: boolean
   ) {
-    const playerNameToRemove = formArray.at(index)?.value;
+    let playerNameToRemove = formArray.at(index)?.value;
+
+    const ownGoalPattern = /\([^)]*\)/; 
+    if (playerNameToRemove.match(ownGoalPattern)) {
+      playerNameToRemove = playerNameToRemove.replace(ownGoalPattern, '').trim();
+      for (let j = 0; j < this.ownGoalScorers.length; j++) {
+        if (this.ownGoalScorers[j].name == playerNameToRemove) {
+          this.ownGoalScorers.splice(j, 1);
+          return;
+        }
+      }
+    }
+    
     for (let i = this.scorersList.length - 1; i >= 0; i--) {
       const scorer = this.scorersList[i];
       if (scorer.name === playerNameToRemove) {
