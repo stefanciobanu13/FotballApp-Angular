@@ -55,10 +55,11 @@
       <td>{{player.firstName}}</td>
       <td>{{player.grade}}</td>
       <td>
-        <a id="update" a class="nav-link"  [routerLink]="['/UpdatePlayer', player.id, player.firstName, player.lastName, player.grade]" >Update</a>
+        <a id="update" a class="nav-link"
+          [routerLink]="['/UpdatePlayer', player.id, player.firstName, player.lastName, player.grade]">Update</a>
       </td>
       <td>
-        <a id="delete">Delete</a>
+        <a id="delete" (click)="deletePlayer(player.id)">Delete</a>
       </td>
 
     </tr>
