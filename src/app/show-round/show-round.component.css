@@ -3,7 +3,6 @@ body {
  font-family: Arial, Helvetica, sans-serif;
 }
 
-
 h1 {
  text-align: center;
  padding: 10px;
@@ -242,4 +241,27 @@ il {
 
 .finalsName {
  color: rgb(239, 227, 114) !important;
+}
+
+label{
+  font-weight: bold;
+}
+
+.roundDetails{
+  font-weight: bold;
+  width: 44%!important;
+  margin-left: 3%;
+}
+.informatii-editie{
+margin-bottom: 2%;
+}
+
+.row{
+  margin-top: 2%;
+}
+.col-auto{
+  margin-left: 3%;
+  margin-right: 0;
+  padding-right: 0;
+  width: 18%;
 }

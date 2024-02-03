@@ -15,13 +15,17 @@ import { DisplayRoundsComponent } from './display-rounds/display-rounds.componen
 import { DbPlayersComponent } from './db-players/db-players.component';
 import { UpdateFinalScoreDirective } from './update-final-score.directive';
 import { ShowRoundComponent } from './show-round/show-round.component';
+import { HomeComponent } from './home/home.component';
+import { AddPlayerComponent } from './add-player/add-player.component';
 
 const appRoute: Routes = [
   { path: 'dd', component: RoundComponent },
   { path: 'Rounds/:id', component: ShowRoundComponent },
- // { path: 'Rounds', component: ShowRoundComponent },
+  { path: 'Home', component: HomeComponent },
   { path: 'Editii', component: DisplayRoundsComponent },
   { path: 'Players', component: DbPlayersComponent },
+  { path: 'AddPlayer', component: AddPlayerComponent },
+
   { path: '', component: RoundComponent },
 ];
 
@@ -37,6 +41,8 @@ const appRoute: Routes = [
     DbPlayersComponent,
     UpdateFinalScoreDirective,
     ShowRoundComponent,
+    HomeComponent,
+    AddPlayerComponent,
   ],
   imports: [
     BrowserModule,

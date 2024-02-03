@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ElementRef, Renderer2, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Scorer } from '../model/scorer';
+import { Round } from '../model/round';
 
 interface GameInfo {
   gameNumber: number;
@@ -19,6 +20,7 @@ interface GameInfo {
 })
 export class ShowRoundComponent implements OnInit {
   roundId: number;
+  theRound:Round;
   games: any[];
   leftTeamSF: string;
   rightTeamSF: string;
@@ -93,7 +95,17 @@ export class ShowRoundComponent implements OnInit {
   ngOnInit(): void {
     const roundIdString = this.activatedRoute.snapshot.paramMap.get('id');
     this.roundId = parseInt(roundIdString, 10);
+
     Promise.all([
+      this.http
+        .get<Round>(
+          `http://localhost:8080/rounds/${this.roundId}`
+        )
+        .toPromise()
+        .then((response) => {
+          this.theRound = response;
+        }),
+
       this.http
         .get<GameInfo[]>(
           `http://localhost:8080/games/byRoundId/${this.roundId}`
@@ -131,7 +143,7 @@ export class ShowRoundComponent implements OnInit {
         .toPromise()
         .then((response) => {
           this.scorersList = response;
-          console.log(this.scorersList);         
+          console.log(this.scorersList);
           this.appendGoals();
         }),
       this.http

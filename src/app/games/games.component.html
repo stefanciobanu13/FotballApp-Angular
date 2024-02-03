@@ -11,8 +11,7 @@
       </datalist>
       <button id="introdu1" type="button" (click)="form.adaugaMarcator($event)">Introdu</button>
       <ul id="recomandari1" class="recomandari"></ul>
-      <br>
-      <select id="selectare8" class="selectare">
+     <select id="selectare8" class="selectare">
         <option value="Verde">Verde</option>
         <option value="Albastru">Albastru</option>
         <option value="Portocaliu">Portocaliu</option>
@@ -102,7 +101,7 @@
       </datalist>
       <button id="introdu2" type="button" (click)="form.adaugaMarcator($event)">Introdu</button>
       <ul id="recomandari2" class="recomandari"></ul>
-      <br />
+ 
       <select id="selectare9" class="selectare">
         <option value="Verde">Verde</option>
         <option value="Albastru">Albastru</option>
@@ -182,7 +181,7 @@
       </datalist>
       <button id="introdu3" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
       <ul id="recomandari3" class="recomandari"></ul>
-      <br />
+
       <select id="selectare10" class="selectare">
         <option value="Verde">Verde</option>
         <option value="Albastru">Albastru</option>
@@ -266,7 +265,7 @@
       </datalist>
       <button id="introdu4" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
       <ul id="recomandari4" class="recomandari"></ul>
-      <br />
+
       <select id="selectare11" class="selectare">
         <option value="Verde">Verde</option>
         <option value="Albastru">Albastru</option>
@@ -348,7 +347,7 @@
       </datalist>
       <button id="introdu5" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
       <ul id="recomandari5" class="recomandari"></ul>
-      <br />
+
       <select id="selectare12" class="selectare">
         <option value="Verde">Verde</option>
         <option value="Albastru">Albastru</option>
@@ -430,7 +429,7 @@
       </datalist>
       <button id="introdu6" type="button" (click)="form.adaugaMarcator($event);">Introdu</button>
       <ul id="recomandari6" class="recomandari"></ul>
-      <br />
+
       <select id="selectare13" class="selectare">
         <option value="Verde">Verde</option>
         <option value="Albastru">Albastru</option>
@@ -660,7 +659,7 @@
       </tbody>
     </table>
   </div>
-<br>
+  <br>
 
   <div class="ptable">
     <h1 class="headin">Autogoluri</h1>
@@ -669,10 +668,10 @@
         <th>Nume</th>
       </tr>
       <tbody id="golgheteryBody">
-        <tr  *ngFor="let scorer of this.form.ownGoalScorers let i = index" >
-        <td>{{i+1}}</td>
-        <td>{{scorer.name}}</td>
-        <td></td>
+        <tr *ngFor="let scorer of this.form.ownGoalScorers let i = index">
+          <td>{{i+1}}</td>
+          <td>{{scorer.name}}</td>
+          <td></td>
       </tbody>
     </table>
   </div>

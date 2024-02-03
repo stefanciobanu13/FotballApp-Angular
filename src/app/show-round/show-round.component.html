@@ -11,7 +11,7 @@
 
 <nav class="navbar bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Adauga etapa</a>
+    <a class="navbar-brand" href="#">Detalii Etapa</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -31,23 +31,21 @@
     </div>
   </div>
 </nav>
-
 <div class="informatii-editie">
   <h1>Informatii editie</h1>
   <div class="row">
     <div class="col-auto">
       <label for="data_editie">Data editie</label>
+      <input class="roundDetails" type="text" value={{theRound?.date}}>
     </div>
     <div class="col-auto">
       <label for="numar_editie">Numarul editie</label>
+      <input class="roundDetails" type="text" value={{theRound?.number}}>
     </div>
     <div class="col-auto">
     </div>
   </div>
 </div>
-
-<br /><br />
-<br /><br />
 
 <h1>Prezenta</h1>
 <br>
