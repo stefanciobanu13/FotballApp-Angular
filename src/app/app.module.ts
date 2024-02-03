@@ -17,6 +17,7 @@ import { UpdateFinalScoreDirective } from './update-final-score.directive';
 import { ShowRoundComponent } from './show-round/show-round.component';
 import { HomeComponent } from './home/home.component';
 import { AddPlayerComponent } from './add-player/add-player.component';
+import { UpdatePlayerComponent } from './update-player/update-player.component';
 
 const appRoute: Routes = [
   { path: 'dd', component: RoundComponent },
@@ -25,7 +26,7 @@ const appRoute: Routes = [
   { path: 'Editii', component: DisplayRoundsComponent },
   { path: 'Players', component: DbPlayersComponent },
   { path: 'AddPlayer', component: AddPlayerComponent },
-
+  { path: 'UpdatePlayer/:id/:firstName/:lastName/:grade', component: UpdatePlayerComponent },
   { path: '', component: RoundComponent },
 ];
 
@@ -43,6 +44,7 @@ const appRoute: Routes = [
     ShowRoundComponent,
     HomeComponent,
     AddPlayerComponent,
+    UpdatePlayerComponent,
   ],
   imports: [
     BrowserModule,
