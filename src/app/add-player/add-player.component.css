@@ -66,5 +66,12 @@ button:hover {
  height: 50px;
 }
 
+a.nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
 
 

@@ -244,7 +244,16 @@ display: block;
 .finalsName {
   color: rgb(239, 227, 114)!important;
 }
+
+a.nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold!important;
+}
  
+
 
 
 

@@ -305,3 +305,10 @@ margin-bottom: 1%;
 .roundDetails{
   font-weight: bold;
 }
+
+a.nav-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}

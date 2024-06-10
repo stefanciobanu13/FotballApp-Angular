@@ -27,7 +27,7 @@ const appRoute: Routes = [
   { path: 'Players', component: DbPlayersComponent },
   { path: 'AddPlayer', component: AddPlayerComponent },
   { path: 'UpdatePlayer/:id/:firstName/:lastName/:grade', component: UpdatePlayerComponent },
-  { path: '', component: RoundComponent },
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({
