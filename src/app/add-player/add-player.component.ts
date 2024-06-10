@@ -28,7 +28,7 @@ export class AddPlayerComponent {
       };
 
       this.http
-        .post('http://localhost:8080/players', dataJSON, {
+        .post('http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players', dataJSON, {
           responseType: 'text',
         })
         .subscribe(

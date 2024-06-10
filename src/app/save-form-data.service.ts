@@ -8,7 +8,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 export class SaveFormDataService {
   constructor(private http: HttpClient) {}
   form: FormGroup;
-  url: string = 'http://localhost:8080/';
+  url: string = 'http://football-backend.eu-central-1.elasticbeanstalk.com:5000/';
   roundId: number;
   teamOrangeId: number;
   teamGreenId: number;
@@ -159,7 +159,7 @@ export class SaveFormDataService {
     }
   }
   extractNames(fullName: string) {
-const ownGoalPattern = /\([^)]*\)/; 
+const ownGoalPattern = /\([^)]*\)/;
 let ownGoal = false;
 const match = fullName.match(ownGoalPattern);
 if (match) {

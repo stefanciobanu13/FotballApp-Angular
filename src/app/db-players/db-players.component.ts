@@ -28,7 +28,7 @@ export class DbPlayersComponent implements OnInit {
   }
 
   fetchPlayers() {
-    this.http.get<Player[]>('http://localhost:8080/players').subscribe(
+    this.http.get<Player[]>('http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players').subscribe(
       (response) => {
         this.players = response;
       },
@@ -44,11 +44,11 @@ export class DbPlayersComponent implements OnInit {
     );
 
     if (confirmDelete) {
-      this.http.get<Player>(`http://localhost:8080/players/${id}`).subscribe(
+      this.http.get<Player>(`http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players/${id}`).subscribe(
         (response) => {
           if (response) {
             this.http
-              .delete(`http://localhost:8080/players/${id}`, {
+              .delete(`http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players/${id}`, {
                 responseType: 'text',
               })
               .subscribe(

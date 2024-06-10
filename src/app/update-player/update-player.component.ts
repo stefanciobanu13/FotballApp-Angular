@@ -44,11 +44,11 @@ export class UpdatePlayerComponent implements OnInit {
         grade: this.grade,
       };
 
-      this.http.get(`http://localhost:8080/players/${this.playerId}`).subscribe(
+      this.http.get(`http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players/${this.playerId}`).subscribe(
         (player) => {
           if (player) {
             this.http
-              .put(`http://localhost:8080/players`, dataJSON, {
+              .put(`http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players`, dataJSON, {
                 responseType: 'text',
               })
               .subscribe(
