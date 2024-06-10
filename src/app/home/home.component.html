@@ -1,0 +1,129 @@
+<nav class="navbar bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+ <div class="container-fluid">
+  <a id="titleA" class="navbar-brand" href="#">Home</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+   <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+     <a class="nav-link" routerLink="/dd">Adauga editie</a>
+    </li>
+    <li class="nav-item">
+     <a class="nav-link" routerLink="/Editii">Editii</a>
+    </li>
+    <li class="nav-item">
+     <a class="nav-link" routerLink="/Players">Jucatori</a>
+    </li>
+   </ul>
+  </div>
+ </div>
+</nav>
+
+<body>
+
+ <header class="masthead">
+  <div class="container px-4 px-lg-5 h-100">
+   <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+    <div class="col-lg-8 align-self-end">
+     <h1 class="text-white font-weight-bold">Cea mai organizata competitie de minifotbal</h1>
+     <hr class="divider" />
+    </div>
+    <div class="col-lg-8 align-self-baseline">
+     <p class="text-white-75 mb-5">Bine ați venit pe pagina oficială Takeaway Soccer! <br> <br>Suntem un grup dedicat
+      pasiunii pentru fotbal și pentru creșterea performanțelor sportive în comunitatea noastră.<br> <br> Fondat în
+      2021,
+      <br> Takeaway Soccer reprezintă o combinație de talent, dăruire și spirit de echipă.
+     </p>
+     <a class="btn btn-primary btn-xl"  id="moreInfo" href="#about">Afla mai multe</a>
+    </div>
+   </div>
+  </div>
+ </header>
+
+ <section class="page-section bg-primary" id="about">
+  <div class="container px-4 px-lg-5">
+   <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-lg-8 text-center">
+     <h2 class="text-white mt-0">Toate informatiile salvate si digitalizate</h2>
+     <hr class="divider divider-light" />
+     <p class="text-white-75 mb-4">Takeaway Soccer pastreaza, digitalizeaza si trage concluzii dupa fiecare editi,
+      informatii cum ar fi rezultate, marcatori si statisticile acestora.</p>
+     <a class="btn btn-light btn-xl" href="#services">Vezi statistici</a>
+    </div>
+   </div>
+  </div>
+ </section>
+
+
+ <section class="page-section" id="contact">
+  <div class="container px-4 px-lg-5">
+   <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-lg-8 col-xl-6 text-center">
+     <h2 class="mt-0">Hai si tu in grup</h2>
+     <hr class="divider" />
+     <p class="text-muted mb-5">Completeza formularul sa stim cate ceva despre tine</p>
+    </div>
+   </div>
+   <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+    <div class="col-lg-6">
+
+     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+
+      <div class="form-floating mb-3">
+       <input class="form-control" id="name" type="text" placeholder="Enter your name..."
+        data-sb-validations="required" />
+       <label for="name">Nume Complet</label>
+       <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+      </div>
+
+      <div class="form-floating mb-3">
+       <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+       <label for="phone">Numar de telefon</label>
+       <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+      </div>
+
+      <div class="form-floating mb-3">
+       <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..."
+        style="height: 10rem" data-sb-validations="required"></textarea>
+       <label for="message">Mesaj</label>
+       <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+      </div>
+      <div class="d-none" id="submitSuccessMessage">
+       <div class="text-center mb-3">
+        <div class="fw-bolder">Inca nu este implementat!</div>
+        Da mesaj la 0774 005 451 pe Whatsapp pentru mai multe info
+        <br />
+        <a href="https://wa.me/+40774005451">Click to chat</a>
+       </div>
+      </div>
+      <div class="d-none" id="submitErrorMessage">
+       <div class="text-center text-danger mb-3">Error sending message!</div>
+      </div>
+      <div class="d-grid"><button class="btn btn-primary btn-xl disabled" id="submitButton"
+        type="submit">Submit</button>
+      </div>
+     </form>
+    </div>
+   </div>
+
+   <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-lg-4 text-center mb-5 mb-lg-0">
+     <i class="bi-phone fs-2 mb-3 text-muted"></i>
+     <div>+40 (774) 005-451</div>
+    </div>
+   </div>
+  </div>
+ </section>
+ <footer class="bg-light py-5">
+  <div class="container px-4 px-lg-5">
+   <div class="small text-center text-muted">Copyright &copy; 2024 - Takeaway Soccer</div>
+  </div>
+ </footer>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+ <script src="landing/js/scripts.js"></script>
+
+ <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
