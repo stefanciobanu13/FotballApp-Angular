@@ -41,7 +41,7 @@ export class RoundComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get<Player[]>('http://localhost:8080/players')
+      .get<Player[]>('http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players')
       .subscribe((response) => {
         const playersListElement = document.getElementById('playersList');
         if (playersListElement) {

@@ -19,7 +19,7 @@ export class DisplayRoundsComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get<Round[]>('http://localhost:8080/rounds')
+      .get<Round[]>('http://football-backend.eu-central-1.elasticbeanstalk.com:5000/rounds')
       .toPromise()
       .then((response) => {
         this.rounds = response;

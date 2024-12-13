@@ -99,7 +99,7 @@ export class ShowRoundComponent implements OnInit {
     Promise.all([
       this.http
         .get<Round>(
-          `http://localhost:8080/rounds/${this.roundId}`
+          `http://football-backend.eu-central-1.elasticbeanstalk.com:5000/rounds/${this.roundId}`
         )
         .toPromise()
         .then((response) => {
@@ -108,7 +108,7 @@ export class ShowRoundComponent implements OnInit {
 
       this.http
         .get<GameInfo[]>(
-          `http://localhost:8080/games/byRoundId/${this.roundId}`
+          `http://football-backend.eu-central-1.elasticbeanstalk.com:5000/games/byRoundId/${this.roundId}`
         )
         .toPromise()
         .then((response) => {
@@ -127,7 +127,7 @@ export class ShowRoundComponent implements OnInit {
 
       this.http
         .get<GameInfo[]>(
-          `http://localhost:8080/players/byRoundId/${this.roundId}`
+          `http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players/byRoundId/${this.roundId}`
         )
         .toPromise()
         .then((response) => {
@@ -138,7 +138,7 @@ export class ShowRoundComponent implements OnInit {
 
       this.http
         .get<GameInfo[]>(
-          `http://localhost:8080/players/scorersByRoundId/${this.roundId}`
+          `http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players/scorersByRoundId/${this.roundId}`
         )
         .toPromise()
         .then((response) => {
@@ -148,7 +148,7 @@ export class ShowRoundComponent implements OnInit {
         }),
       this.http
         .get<GameInfo[]>(
-          `http://localhost:8080/players/ownGoalscorersByRoundId/${this.roundId}`
+          `http://football-backend.eu-central-1.elasticbeanstalk.com:5000/players/ownGoalscorersByRoundId/${this.roundId}`
         )
         .toPromise()
         .then((response) => {
